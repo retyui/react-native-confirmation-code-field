@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, TextInput as TextInputNative } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { getClassStyle, getInputSpaceStyle, isMatchingCode } from '../../utils';
@@ -213,6 +213,7 @@ export default class ConfirmationCodeInput extends PureComponent<
       variant,
       activeColor,
       getInputProps,
+      keyboardType,
     } = this.props;
     const { currentIndex } = this.state;
 
@@ -228,7 +229,7 @@ export default class ConfirmationCodeInput extends PureComponent<
         id={index}
         forwardRef={this.setInputRef}
         underlineColorAndroid="transparent"
-        keyboardType="name-phone-pad"
+        keyboardType={keyboardType}
         returnKeyType="done"
         selectionColor={activeColor}
         autoFocus={autoFocus && index === 0}
@@ -294,6 +295,7 @@ export default class ConfirmationCodeInput extends PureComponent<
       'border-l-r',
       'clear',
     ]),
+    keyboardType: TextInputNative.propTypes.keyboardType,
   };
 
   static defaultProps = {
@@ -312,5 +314,6 @@ export default class ConfirmationCodeInput extends PureComponent<
     size: 40,
     space: 8,
     variant: 'border-box',
+    keyboardType: 'default',
   };
 }

@@ -1,4 +1,5 @@
 // @flow
+import type { KeyboardType } from 'react-native/Libraries/Components/TextInput/TextInput';
 import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
 import type { VariantNames, INDEX, InputPositions } from '../../types';
 
@@ -15,6 +16,7 @@ export type Props = $ReadOnly<{|
   size?: number,
   space?: number,
   variant?: VariantNames,
+  keyboardType?: KeyboardType,
 
   autoFocus?: boolean,
   // isMatching will be true|false when "compareWithCode" prop isn't empty string

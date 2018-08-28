@@ -12,6 +12,7 @@
     - [`compareWithCode?: string`](#comparewithcode-string)
     - [`ignoreCaseWhenCompareCode?: boolean`](#ignorecasewhencomparecode-boolean)
   - [Style props](#style-props)
+    - [`keyboardType:? KeyboardType` - Determines which keyboard to open.](#keyboardtype-keyboardtype---determines-which-keyboard-to-open)
     - [`activeColor?: string`](#activecolor-string)
     - [`inactiveColor?: string`](#inactivecolor-string)
     - [`cellBorderWidth?: number`](#cellborderwidth-number)
@@ -21,7 +22,7 @@
     - [`variant?: 'border-box' | 'border-circle' | 'border-b' | 'border-b-t' | 'border-l-r' | 'clear'`](#variant-border-box--border-circle--border-b--border-b-t--border-l-r--clear)
   - [Customize props](#customize-props)
     - [`containerProps?: Object`](#containerprops-object)
-    - [`getInputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#getInputStyle-index-number-isfocused-boolean-hasvalue-boolean--object)
+    - [`getInputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#getinputstyle-index-number-isfocused-boolean-hasvalue-boolean--object)
     - [`getInputProps?: (index: number) => Object`](#getinputprops-index-number--object)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
@@ -67,6 +68,12 @@ Code to compare. if `null`, `onFulfill` callback return inputted code to check l
 Ignore case when checking code. Default `false`
 
 ## Style props
+
+### `keyboardType:? KeyboardType` - Determines which keyboard to open. 
+
+[All values: KeyboardType](https://github.com/facebook/react-native/blob/master/Libraries/Components/TextInput/TextInput.js#L82-L98). 
+
+Default value: `"default"`
 
 ### `activeColor?: string`
 
