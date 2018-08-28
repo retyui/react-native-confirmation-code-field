@@ -12,7 +12,7 @@
     - [`compareWithCode?: string`](#comparewithcode-string)
     - [`ignoreCaseWhenCompareCode?: boolean`](#ignorecasewhencomparecode-boolean)
   - [Style props](#style-props)
-    - [`keyboardType:? KeyboardType` - Determines which keyboard to open.](#keyboardtype-keyboardtype---determines-which-keyboard-to-open)
+    - [`keyboardType:? KeyboardType`](#keyboardtype-keyboardtype)
     - [`activeColor?: string`](#activecolor-string)
     - [`inactiveColor?: string`](#inactivecolor-string)
     - [`cellBorderWidth?: number`](#cellborderwidth-number)
@@ -69,9 +69,11 @@ Ignore case when checking code. Default `false`
 
 ## Style props
 
-### `keyboardType:? KeyboardType` - Determines which keyboard to open. 
+### `keyboardType:? KeyboardType`
 
-[All values: KeyboardType](https://github.com/facebook/react-native/blob/master/Libraries/Components/TextInput/TextInput.js#L82-L98). 
+Determines which keyboard to open.
+
+[All values: KeyboardType](https://github.com/facebook/react-native/blob/master/Libraries/Components/TextInput/TextInput.js#L82-L98).
 
 Default value: `"default"`
 

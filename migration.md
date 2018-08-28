@@ -36,7 +36,7 @@ _used to be so:_
 
 | Deprecated Prop  | Description                                                                                                      |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `codeInputStyle` | Use `getInputStyle(index,isFocused,hasValue)` to set custom style, (example)[https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L36-L41] |
-| `containerStyle` | Use `containerProps` to set style, (example)[https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L48]                                       |
+| `codeInputStyle` | Use `getInputStyle(index,isFocused,hasValue)` to set custom style, [example](https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L36-L41) |
+| `containerStyle` | Use `containerProps` to set style, [example](https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L48)                                       |
 | `ignoreCase`     | Renamed, use `ignoreCaseWhenCompareCode`                                                                             |
 | `className`      | Renamed, use `variant`                                                                                           |
