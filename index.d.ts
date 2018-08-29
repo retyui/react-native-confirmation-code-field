@@ -26,6 +26,7 @@ declare module 'react-native-confirmation-code-field' {
     space?: number;
     variant?: VariantNames;
     keyboardType?: ReactNative.KeyboardTypeOptions,
+    maskSymbol?: string,
 
     autoFocus?: boolean;
     // isMatching will be true|false when "compareWithCode" prop isn't empty string

@@ -23,7 +23,6 @@ export const validateCompareCode: PropsTypeCustomValidatorFn = (
 
 const notOverwrittenProps = [
   'maxLength',
-  'value',
   'onChangeText',
   'onFocus',
   'onKeyPress',

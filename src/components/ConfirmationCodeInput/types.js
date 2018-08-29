@@ -17,6 +17,7 @@ export type Props = $ReadOnly<{|
   space?: number,
   variant?: VariantNames,
   keyboardType?: KeyboardType,
+  maskSymbol?: string,
 
   autoFocus?: boolean,
   // isMatching will be true|false when "compareWithCode" prop isn't empty string

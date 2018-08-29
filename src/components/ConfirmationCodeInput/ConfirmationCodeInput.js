@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { View, TextInput as TextInputNative } from 'react-native';
+import { View, TextInput as TextInputNative, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { getClassStyle, getInputSpaceStyle, isMatchingCode } from '../../utils';
@@ -22,7 +22,7 @@ export default class ConfirmationCodeInput extends PureComponent<
   $Diff<Props, DP> & $Shape<DP>,
   State,
 > {
-  initialCodeInputStyle: Object;
+  styles: Object;
 
   constructor(...args: any) {
     super(...args);
@@ -37,10 +37,13 @@ export default class ConfirmationCodeInput extends PureComponent<
       currentIndex: 0,
     };
 
-    this.initialCodeInputStyle = {
-      width: size,
-      height: size,
-    };
+    this.styles = StyleSheet.create({
+      input: {
+        width: size,
+        height: size,
+      },
+      container: { height: size },
+    });
   }
 
   onChangeCb = () => {
@@ -206,6 +209,12 @@ export default class ConfirmationCodeInput extends PureComponent<
     this.codeInputRefs[idx] = ref;
   };
 
+  getValue(value: string): string {
+    const { maskSymbol } = this.props;
+
+    return value ? maskSymbol || value.toString() : '';
+  }
+
   renderInput(value: string, index: INDEX) {
     const {
       getInputStyle,
@@ -223,6 +232,8 @@ export default class ConfirmationCodeInput extends PureComponent<
       validateInputProps(customInputProps);
     }
 
+    const finalValue = this.getValue(value);
+
     return (
       <TextInput
         key={index}
@@ -233,18 +244,19 @@ export default class ConfirmationCodeInput extends PureComponent<
         returnKeyType="done"
         selectionColor={activeColor}
         autoFocus={autoFocus && index === 0}
+        value={finalValue}
         {...customInputProps}
         style={[
           styles.codeInput,
-          this.initialCodeInputStyle,
+          this.styles.input,
           this.getClassStyle(variant, currentIndex === index),
           customInputProps && customInputProps.style,
           getInputStyle
             ? getInputStyle(index, currentIndex === index, Boolean(value))
             : null,
         ]}
-        maxLength={1}
-        value={value ? value.toString() : ''}
+        // fix for emoji  '😂'.length // 2
+        maxLength={finalValue ? finalValue.length : 1}
         onChangeText={this.onInputCode}
         onFocus={this.handlerOnFocus}
         onKeyPress={this.onKeyPress}
@@ -253,7 +265,7 @@ export default class ConfirmationCodeInput extends PureComponent<
   }
 
   render() {
-    const { inputPosition, size, containerProps } = this.props;
+    const { inputPosition, containerProps } = this.props;
     const { codeSymbols } = this.state;
 
     return (
@@ -262,7 +274,7 @@ export default class ConfirmationCodeInput extends PureComponent<
         style={[
           styles.container,
           getContainerStyle(inputPosition),
-          { height: size },
+          this.styles.container,
           containerProps.style,
         ]}
       >
@@ -296,6 +308,7 @@ export default class ConfirmationCodeInput extends PureComponent<
       'clear',
     ]),
     keyboardType: TextInputNative.propTypes.keyboardType,
+    maskSymbol: PropTypes.string,
   };
 
   static defaultProps = {
@@ -308,12 +321,13 @@ export default class ConfirmationCodeInput extends PureComponent<
     defaultCode: null,
     getInputProps: null,
     ignoreCaseWhenCompareCode: false,
-    inactiveColor: '#ffffff35',
+    inactiveColor: '#ffffff40',
     inputPosition: 'center',
     onChangeCode: null,
     size: 40,
     space: 8,
     variant: 'border-box',
     keyboardType: 'default',
+    maskSymbol: null,
   };
 }
