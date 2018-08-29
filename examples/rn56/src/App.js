@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import ActiveColorDemo from './propsDemos/ActiveColor';
-import InactiveColorDemo from './propsDemos/InactiveColor';
 import CellBorderWidthDemo from './propsDemos/CellBorderWidth';
-import SpaceDemo from './propsDemos/Space';
-import SizeDemo from './propsDemos/Size';
-import VariantDemo from './propsDemos/Variant';
+import InactiveColorDemo from './propsDemos/InactiveColor';
+import MaskSymbol from './propsDemos/MaskSymbol';
 import PositionDemo from './propsDemos/InputPosition';
+import SizeDemo from './propsDemos/Size';
+import SpaceDemo from './propsDemos/Space';
+import VariantDemo from './propsDemos/Variant';
 
 import RedExample from './realDemo/RedExample';
 import DarkExample from './realDemo/DarkExample';
@@ -19,6 +20,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
+          <MaskSymbol />
           <ActiveColorDemo />
           <InactiveColorDemo />
           <CellBorderWidthDemo />
