@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.0
+ 
+* Add new prop `maskSymbol?: string` [#5](https://github.com/retyui/react-native-confirmation-code-field/pull/5)
+
 ## 1.1.0
 * Add `keyboardType` prop [#4](https://github.com/retyui/react-native-confirmation-code-field/pull/4)
 * Fix typescript module name [#3](https://github.com/retyui/react-native-confirmation-code-field/pull/3)

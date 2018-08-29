@@ -12,6 +12,7 @@
     - [`compareWithCode?: string`](#comparewithcode-string)
     - [`ignoreCaseWhenCompareCode?: boolean`](#ignorecasewhencomparecode-boolean)
   - [Style props](#style-props)
+    - [`maskSymbol:? string`](#masksymbol-string)
     - [`keyboardType:? KeyboardType`](#keyboardtype-keyboardtype)
     - [`activeColor?: string`](#activecolor-string)
     - [`inactiveColor?: string`](#inactivecolor-string)
@@ -69,6 +70,14 @@ Ignore case when checking code. Default `false`
 
 ## Style props
 
+
+### `maskSymbol:? string`
+
+A symbol that will be displayed when the field is filled. Supports emoji.
+
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/maskSymbol.jpg"/>
+
+
 ### `keyboardType:? KeyboardType`
 
 Determines which keyboard to open.
@@ -81,43 +90,43 @@ Default value: `"default"`
 
 Color of cells when active. Default `#fff`. [Demo `activeColor`:](examples/rn56/src/propsDemos/ActiveColor.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/activeColor.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/activeColor.jpg"/>
 
 ### `inactiveColor?: string`
 
 Color of cells when inactive. Default `#ffffff35`. [Demo `inactiveColor`:](examples/rn56/src/propsDemos/InactiveColor.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/inactiveColor.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/inactiveColor.jpg"/>
 
 ### `cellBorderWidth?: number`
 
 Width of cell borders. Default `1`. [Demo `cellBorderWidth`:](examples/rn56/src/propsDemos/CellBorderWidth.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/cellBorderWidth.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/cellBorderWidth.jpg"/>
 
 ### `space?: number`
 
 Space between 2 cells. Default `8`. [Demo `space`:](examples/rn56/src/propsDemos/Space.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/space.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/space.jpg"/>
 
 ### `size?: number`
 
 Size of input cells. Default `40`. [Demo `size`:](examples/rn56/src/propsDemos/Size.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/size.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/size.jpg"/>
 
 ### `inputPosition?: 'left' | 'right' | 'center' | 'full-width'`
 
 The position of code input in its container. Default `center`. [Demo `inputPosition`:](examples/rn56/src/propsDemos/InputPosition.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/inputPosition.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/inputPosition.jpg"/>
 
 ### `variant?: 'border-box' | 'border-circle' | 'border-b' | 'border-b-t' | 'border-l-r' | 'clear'`
 
 Some built-in variants. Default `border-box`. [Demo `variant`:](examples/rn56/src/propsDemos/Variant.js)
 
-<img width="360" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/variant.jpg"/>
+<img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/variant.jpg"/>
 
 ## Customize props
 
