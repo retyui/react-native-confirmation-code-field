@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactNative from 'react-native';
 
 declare module 'react-native-confirmation-code-field' {
-  type INDEX = number;
-  type InputPositions = 'left' | 'right' | 'center' | 'full-width';
-  type VariantNames =
+  export type INDEX = number;
+  export type InputPositions = 'left' | 'right' | 'center' | 'full-width';
+  export type VariantNames =
     | 'border-box'
     | 'border-circle'
     | 'border-b'
@@ -12,7 +12,7 @@ declare module 'react-native-confirmation-code-field' {
     | 'border-l-r'
     | 'clear';
 
-  interface ConfirmationCodeInputProps {
+  export interface ConfirmationCodeInputProps {
     codeLength?: number;
     defaultCode?: string;
     compareWithCode?: string;
