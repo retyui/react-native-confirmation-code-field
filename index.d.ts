@@ -33,14 +33,14 @@ declare module 'react-native-confirmation-code-field' {
     onFulfill: (code: string, isMatching?: boolean) => void;
     onChangeCode?: (code: string) => void;
 
-    getInputProps?: (index: INDEX) => ReactNative.TextInputProps;
+    getInputProps?: (index: INDEX) => ReactNative.TextInputProperties;
     // help set custom style to any inputs
     getInputStyle?: (
       index: INDEX,
       isFocused: boolean,
       hasValue: boolean,
     ) => Object;
-    containerProps?: ReactNative.ViewProps;
+    containerProps?: ReactNative.ViewProperties;
 
     testID?: any;
   }
