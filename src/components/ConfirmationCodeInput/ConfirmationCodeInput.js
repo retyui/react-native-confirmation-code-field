@@ -153,8 +153,9 @@ export default class ConfirmationCodeInput extends PureComponent<
 
   onInputCode = (character: string, index: INDEX) => {
     // on Android: text code is filled very slowly
+    let requestFocus = false;
     if (!this.isLastIndex(index)) {
-      this.setFocus(this.state.currentIndex + 1);
+      requestFocus = true;
     }
 
     const {
@@ -192,7 +193,11 @@ export default class ConfirmationCodeInput extends PureComponent<
     this.setState(prevState => ({
       codeSymbols: newCodeSymbols,
       currentIndex: prevState.currentIndex + 1,
-    }));
+    }), () => {
+      if(requestFocus) {
+        this.setFocus(this.state.currentIndex));
+      }
+    }
   };
 
   codeInputRefs: Array<{ blur: () => void, focus: () => void }> = [];
