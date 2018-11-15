@@ -195,9 +195,9 @@ export default class ConfirmationCodeInput extends PureComponent<
       currentIndex: prevState.currentIndex + 1,
     }), () => {
       if(requestFocus) {
-        this.setFocus(this.state.currentIndex));
+        this.setFocus(this.state.currentIndex);
       }
-    }
+    })
   };
 
   codeInputRefs: Array<{ blur: () => void, focus: () => void }> = [];
