@@ -10,8 +10,8 @@ import SizeDemo from './propsDemos/Size';
 import SpaceDemo from './propsDemos/Space';
 import VariantDemo from './propsDemos/Variant';
 
-import RedExample from './realDemo/RedExample/index';
-import DarkExample from './realDemo/DarkExample/index';
+import RedExample from './realDemo/RedExample';
+import DarkExample from './realDemo/DarkExample';
 
 import styles from './styles';
 
