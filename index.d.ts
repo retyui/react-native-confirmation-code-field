@@ -37,7 +37,7 @@ declare module 'react-native-confirmation-code-field' {
       index: number,
       isFocused: boolean,
       hasValue: boolean,
-    ) => Object;
+    ) => ReactNative.StyleProp<ReactNative.TextStyle>;
     containerProps?: ReactNative.ViewProps;
 
     testID?: any;
@@ -45,7 +45,7 @@ declare module 'react-native-confirmation-code-field' {
 
   export default class ConfirmationCodeInput extends React.Component<
     ConfirmationCodeInputProps,
-    any
+    void
   > {
     clear(): void;
   }
