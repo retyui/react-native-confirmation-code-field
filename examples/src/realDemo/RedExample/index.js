@@ -7,9 +7,8 @@ import CodeFiled from 'react-native-confirmation-code-field';
 import styles from './styles';
 
 export default class RedExample extends Component {
-  onFinishCheckingCode = (code, isValid) => {
-    // "isValid" prop will be "true|false" when you set "compareWithCode" prop
-    if (!isValid) {
+  onFinishCheckingCode = code => {
+    if (code === '123456') {
       return Alert.alert(
         'Confirmation Code',
         'Code not match!',

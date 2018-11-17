@@ -17,9 +17,8 @@ const upToDownGradient = {
 };
 
 export default class DarkExample extends Component {
-  // TODO: dispatch check action here
   onFinishCheckingCode = code => {
-    if (code === 'MUR AMUR') {
+    if (code === '1234') {
       return Alert.alert('Confirmation Code', 'Successful!', [{ text: 'OK' }], {
         cancelable: false,
       });
