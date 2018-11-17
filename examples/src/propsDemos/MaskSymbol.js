@@ -10,15 +10,15 @@ export default function MaskSymbol() {
       <Text style={styles.typing}>maskSymbol?: string</Text>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'maskSymbol="*"'}</Text>
-        <CodeFiled maskSymbol="*" />
+        <CodeFiled onFulfill={console.log} maskSymbol="*" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'maskSymbol="👌"'}</Text>
-        <CodeFiled maskSymbol="👌" />
+        <CodeFiled onFulfill={console.log} maskSymbol="👌" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`maskSymbol="😇"`}</Text>
-        <CodeFiled maskSymbol="😇" />
+        <CodeFiled onFulfill={console.log} maskSymbol="😇" />
       </View>
     </View>
   );

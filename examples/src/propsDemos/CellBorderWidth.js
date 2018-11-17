@@ -12,17 +12,17 @@ export default function ActiveColor() {
         <Text style={styles.preText}>
           {`cellBorderWidthCellBorderWidthDemo={0.5}`}
         </Text>
-        <CodeFiled cellBorderWidth={0.5} />
+        <CodeFiled onFulfill={console.log} cellBorderWidth={0.5} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`cellBorderWidth={${
           CodeFiled.defaultProps.cellBorderWidth
         }} (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`cellBorderWidth={4}`}</Text>
-        <CodeFiled cellBorderWidth={4} />
+        <CodeFiled onFulfill={console.log} cellBorderWidth={4} />
       </View>
     </View>
   );

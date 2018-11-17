@@ -10,17 +10,17 @@ export default function Space() {
       <Text style={styles.typing}>space?: number</Text>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`space={1}`}</Text>
-        <CodeFiled space={1} />
+        <CodeFiled onFulfill={console.log} space={1} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`space={${
           CodeFiled.defaultProps.space
         }} (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`space={32}`}</Text>
-        <CodeFiled space={32} />
+        <CodeFiled onFulfill={console.log} space={32} />
       </View>
     </View>
   );

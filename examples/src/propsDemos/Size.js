@@ -10,17 +10,17 @@ export default function Size() {
       <Text style={styles.typing}>size?: number</Text>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`size={20}`}</Text>
-        <CodeFiled size={20} />
+        <CodeFiled onFulfill={console.log} size={20} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`size={${
           CodeFiled.defaultProps.size
         } (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`size={60}`}</Text>
-        <CodeFiled size={60} />
+        <CodeFiled onFulfill={console.log} size={60} />
       </View>
     </View>
   );

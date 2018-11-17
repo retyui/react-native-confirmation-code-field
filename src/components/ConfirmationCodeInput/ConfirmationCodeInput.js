@@ -21,7 +21,55 @@ export default class ConfirmationCodeInput extends PureComponent<
   $Diff<Props, DP> & $Shape<DP>,
   State,
 > {
+  static propTypes = {
+    activeColor: PropTypes.string,
+    autoFocus: PropTypes.bool,
+    cellBorderWidth: PropTypes.number,
+    codeLength: PropTypes.number,
+    containerProps: PropTypes.object,
+    defaultCode: validateCompareCode,
+    inputProps: PropTypes.func,
+    inputStyle: PropTypes.func,
+    inactiveColor: PropTypes.string,
+    inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
+    onChangeCode: PropTypes.func,
+    onFulfill: PropTypes.func.isRequired,
+    size: PropTypes.number,
+    space: PropTypes.number,
+    variant: PropTypes.oneOf([
+      'border-box',
+      'border-circle',
+      'border-b',
+      'border-b-t',
+      'border-l-r',
+      'clear',
+    ]),
+    keyboardType: TextInputNative.propTypes.keyboardType,
+    maskSymbol: PropTypes.string,
+  };
+
+  static defaultProps = {
+    activeColor: '#fff',
+    autoFocus: false,
+    cellBorderWidth: 1,
+    codeLength: 5,
+    containerProps: {},
+    defaultCode: null,
+    inputProps: null,
+    inputStyle: null,
+    inactiveColor: '#ffffff40',
+    inputPosition: 'center',
+    onChangeCode: null,
+    size: 40,
+    space: 8,
+    variant: 'border-box',
+    keyboardType: 'default',
+    maskSymbol: null,
+    canPasteCode: false,
+  };
+
   styles: Object;
+
   ignoreOnFocusHandler: boolean = false;
 
   constructor(...args: any) {
@@ -268,7 +316,7 @@ export default class ConfirmationCodeInput extends PureComponent<
       return this.props.codeLength;
     }
 
-    // Fix for emoji  'ð'.length // 2
+    // Fix for emoji '👲'.length === 2
     return value ? value.length : 1;
   }
 
@@ -290,51 +338,4 @@ export default class ConfirmationCodeInput extends PureComponent<
       </View>
     );
   }
-
-  static propTypes = {
-    activeColor: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    cellBorderWidth: PropTypes.number,
-    codeLength: PropTypes.number,
-    containerProps: PropTypes.object,
-    defaultCode: validateCompareCode,
-    inputProps: PropTypes.func,
-    inputStyle: PropTypes.func,
-    inactiveColor: PropTypes.string,
-    inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
-    onChangeCode: PropTypes.func,
-    onFulfill: PropTypes.func.isRequired,
-    size: PropTypes.number,
-    space: PropTypes.number,
-    variant: PropTypes.oneOf([
-      'border-box',
-      'border-circle',
-      'border-b',
-      'border-b-t',
-      'border-l-r',
-      'clear',
-    ]),
-    keyboardType: TextInputNative.propTypes.keyboardType,
-    maskSymbol: PropTypes.string,
-  };
-
-  static defaultProps = {
-    activeColor: '#fff',
-    autoFocus: false,
-    cellBorderWidth: 1,
-    codeLength: 5,
-    containerProps: {},
-    defaultCode: null,
-    inputProps: null,
-    inputStyle: null,
-    inactiveColor: '#ffffff40',
-    inputPosition: 'center',
-    onChangeCode: null,
-    size: 40,
-    space: 8,
-    variant: 'border-box',
-    keyboardType: 'default',
-    maskSymbol: null,
-    canPasteCode: false,
-  };
 }

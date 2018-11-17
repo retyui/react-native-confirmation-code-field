@@ -10,21 +10,21 @@ export default function InputPosition() {
       <Text style={styles.typing}>inputPosition?: ENUM()</Text>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'inputPosition="left"'}</Text>
-        <CodeFiled inputPosition="left" />
+        <CodeFiled onFulfill={console.log} inputPosition="left" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'inputPosition="right"'}</Text>
-        <CodeFiled inputPosition="right" />
+        <CodeFiled onFulfill={console.log} inputPosition="right" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`inputPosition="${
           CodeFiled.defaultProps.inputPosition
         }" (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'inputPosition="full-width"'}</Text>
-        <CodeFiled inputPosition="full-width" />
+        <CodeFiled onFulfill={console.log} inputPosition="full-width" />
       </View>
     </View>
   );

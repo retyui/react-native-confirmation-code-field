@@ -10,17 +10,17 @@ export default function ActiveColor() {
       <Text style={styles.typing}>activeColor?: string</Text>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'activeColor="gold"'}</Text>
-        <CodeFiled activeColor="gold" />
+        <CodeFiled onFulfill={console.log} activeColor="gold" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{`activeColor="${
           CodeFiled.defaultProps.activeColor
         }" (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'activeColor="pink"'}</Text>
-        <CodeFiled activeColor="pink" />
+        <CodeFiled onFulfill={console.log} activeColor="pink" />
       </View>
     </View>
   );

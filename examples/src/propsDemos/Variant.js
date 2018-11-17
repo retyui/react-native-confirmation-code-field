@@ -12,27 +12,27 @@ export default function Variant() {
         <Text style={styles.preText}>{`variant="${
           CodeFiled.defaultProps.variant
         }" (default)`}</Text>
-        <CodeFiled />
+        <CodeFiled onFulfill={console.log} />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="border-circle"'}</Text>
-        <CodeFiled variant="border-circle" />
+        <CodeFiled onFulfill={console.log} variant="border-circle" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="border-b"'}</Text>
-        <CodeFiled variant="border-b" />
+        <CodeFiled onFulfill={console.log} variant="border-b" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="border-b-t"'}</Text>
-        <CodeFiled variant="border-b-t" />
+        <CodeFiled onFulfill={console.log} variant="border-b-t" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="border-l-r"'}</Text>
-        <CodeFiled variant="border-l-r" />
+        <CodeFiled onFulfill={console.log} variant="border-l-r" />
       </View>
       <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="clear"'}</Text>
-        <CodeFiled variant="clear" />
+        <CodeFiled onFulfill={console.log} variant="clear" />
       </View>
     </View>
   );
