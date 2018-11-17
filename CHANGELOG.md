@@ -2,19 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.0.0-beta.4
-
-- Fix desynchronization `onFocus` and `setState`
-  [#16](https://github.com/retyui/react-native-confirmation-code-field/issues/16)
-
-## 2.0.0-beta.3
-
-- Rename property `getInputProps` => `inputProps`
-- Rename property `getInputStyle` => `inputStyle`
-- Remove IOS hack for `onKeyPress` (use latest RN version)
-- Remove `INDEX` typing
-
-## 2.0.0-beta.1
+## 2.0.0
 
 - New example for RN 0.57 version
 - Merged cnages from `1.2.1` version
@@ -22,6 +10,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   > RN@0.57 - Fixed extreme `<TextInput>` slowness ([5017b86](https://github.com/facebook/react-native/commit/5017b86) by [@gnprice](https://github.com/gnprice))
 - Remove `ignoreCaseWhenCompareCode` and `compareWithCode` props.
 - Add paste support. By default it's disabled. That would enable set `canPasteCode={true}`
+- Rename property `getInputProps` => `inputProps`
+- Rename property `getInputStyle` => `inputStyle`
+- Remove IOS hack for `onKeyPress` (use latest RN version)
+- Remove `INDEX` typing
+- Fix desynchronization `onFocus` and `setState`
+  [#16](https://github.com/retyui/react-native-confirmation-code-field/issues/16)
 
 ## 1.2.3
 

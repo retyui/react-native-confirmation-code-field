@@ -9,7 +9,8 @@ A react-native confirmation code field for both IOS and Android (base on [this](
 
 - [API](docs/API.md)
 - [Real Example](examples/rn56)
-- [Live demo](https://snack.expo.io/@retyui/demo-for-react-native-confirmation-code-field)
+- [Live demo IOS\Android](https://snack.expo.io/@retyui/demo-for-react-native-confirmation-code-field)
+- [Live demo `react-native-web`](https://retyui.github.io/react-native-confirmation-code-field/)
 
 ## Screenshots
 
@@ -21,14 +22,6 @@ A react-native confirmation code field for both IOS and Android (base on [this](
 yarn add react-native-confirmation-code-field
 # or
 npm install react-native-confirmation-code-field
-```
-
-### Also you can try the [beta version](https://github.com/retyui/react-native-confirmation-code-field/tree/beta). [What new in next version?](https://github.com/retyui/react-native-confirmation-code-field/blob/beta/CHANGELOG.md)
-
-```sh
-yarn add react-native-confirmation-code-field@beta
-# or
-npm install react-native-confirmation-code-field@beta
 ```
 
 ## Usage

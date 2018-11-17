@@ -1,6 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [API](#api)
   - [Base props](#base-props)
     - [`onFulfill: (code: string) => void`](#onfulfill-code-string--void)
@@ -22,7 +23,7 @@
   - [Customize props](#customize-props)
     - [`containerProps?: Object`](#containerprops-object)
     - [`getInputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#getinputstyle-index-number-isfocused-boolean-hasvalue-boolean--object)
-    - [`inputProps?: (index: number) => Object`](#inputProps-index-number--object)
+    - [`inputProps?: (index: number) => Object`](#inputprops-index-number--object)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
   - [Functions](#functions)
