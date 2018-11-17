@@ -22,7 +22,7 @@
     - [`variant?: 'border-box' | 'border-circle' | 'border-b' | 'border-b-t' | 'border-l-r' | 'clear'`](#variant-border-box--border-circle--border-b--border-b-t--border-l-r--clear)
   - [Customize props](#customize-props)
     - [`containerProps?: Object`](#containerprops-object)
-    - [`getInputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#getinputstyle-index-number-isfocused-boolean-hasvalue-boolean--object)
+    - [`inputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#inputstyle-index-number-isfocused-boolean-hasvalue-boolean--object)
     - [`inputProps?: (index: number) => Object`](#inputprops-index-number--object)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
@@ -125,7 +125,7 @@ Some built-in variants. Default `border-box`. [Demo `variant`:](examples/rn56/sr
 
 [`<View/>` component props](https://facebook.github.io/react-native/docs/view#props)
 
-### `getInputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`
+### `inputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`
 
 Help customize any input, must return [Style Object](https://facebook.github.io/react-native/docs/textinput#style) or `null`. [example](https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L36-L41)
 
