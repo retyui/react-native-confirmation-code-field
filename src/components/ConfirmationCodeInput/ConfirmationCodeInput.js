@@ -213,7 +213,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
       text = text[0];
     }
 
-    const newCodeSymbols = this.normalizeNewCode([...codeSymbols, ...text]);
+    const newCodeSymbols = this.normalizeNewCode([...codeSymbols, ...text.split()]);
     const currentIndex = this.getCurrentIndex(newCodeSymbols);
 
     this.setState({
