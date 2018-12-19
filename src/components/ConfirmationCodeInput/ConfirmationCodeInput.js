@@ -25,7 +25,8 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     codeLength: PropTypes.number,
     containerProps: PropTypes.object,
     defaultCode: validateCompareCode,
-    inputProps: PropTypes.func,
+    cellProps: PropTypes.func,
+    inputProps: PropTypes.object,
     inactiveColor: PropTypes.string,
     inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
     onChangeCode: PropTypes.func,
@@ -43,6 +44,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
   };
 
   static defaultProps = {
+    cellProps: null,
     activeColor: '#fff',
     autoFocus: false,
     cellBorderWidth: 1,
@@ -113,7 +115,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
           customProps && customProps.style,
         )}
       >
-        {codeSymbol ? maskSymbol || codeSymbol : ''}
+        {(codeSymbol && maskSymbol) || codeSymbol}
       </Text>
     );
   };

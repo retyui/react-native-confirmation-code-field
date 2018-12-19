@@ -8,7 +8,7 @@ import styles from './styles';
 
 export default class RedExample extends Component {
   onFinishCheckingCode = code => {
-    if (code === '123456') {
+    if (code !== '123456') {
       return Alert.alert(
         'Confirmation Code',
         'Code not match!',
@@ -24,20 +24,21 @@ export default class RedExample extends Component {
     });
   };
 
-  inputStyle = (index, isActive, hasValue) => {
+  cellProps = ({ /*index, isFocused,*/ hasValue }) => {
     if (hasValue) {
-      return styles.inputNotEmpty;
+      return {
+        style: [styles.input, styles.inputNotEmpty],
+      };
     }
-    return null;
+    return {
+      style: styles.input,
+    };
   };
 
-  inputProps = () => ({
-    keyboardType: 'numeric',
-    style: styles.input,
-  });
-
   containerProps = { style: styles.inputWrapStyle };
+
   colors = ['#ff595f', '#e42959'];
+
   render() {
     /*concept : https://dribbble.com/shots/3246445-OTP-Screen-2-0*/
     return (
@@ -52,8 +53,8 @@ export default class RedExample extends Component {
             variant="clear"
             codeLength={6}
             compareWithCode="123456"
-            inputProps={this.inputProps}
-            inputStyle={this.inputStyle}
+            keyboardType="numeric"
+            cellProps={this.cellProps}
             containerProps={this.containerProps}
             onFulfill={this.onFinishCheckingCode}
           />

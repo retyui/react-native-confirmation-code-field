@@ -32,18 +32,17 @@ export default class DarkExample extends Component {
     this.codeInputRef.current.clear();
   };
 
-  inputStyle = (index, isActive, hasValue) => {
+  cellProps = ({ /*index, isFocused,*/ hasValue }) => {
     if (hasValue) {
-      return styles.inputNotEmpty;
+      return {
+        style: [styles.input, styles.inputNotEmpty],
+      };
     }
-    return null;
+
+    return {
+      style: styles.input,
+    };
   };
-
-  inputProps = () => ({
-    keyboardType: 'numeric',
-    style: styles.input,
-  });
-
   static containerProps = { style: styles.inputWrapStyle };
 
   static buttonColors = ['#8096ee', '#a571ff'];
@@ -71,8 +70,9 @@ export default class DarkExample extends Component {
             inputPosition="full-width"
             variant="clear"
             codeLength={4}
-            inputProps={this.inputProps}
-            inputStyle={this.inputStyle}
+            size={60}
+            keyboardType="numeric"
+            cellProps={this.cellProps}
             containerProps={DarkExample.containerProps}
             onFulfill={this.onFinishCheckingCode}
           />

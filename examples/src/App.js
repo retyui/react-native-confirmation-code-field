@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import ActiveColorDemo from './propsDemos/ActiveColor';
-import CanPasteCode from './propsDemos/CanPasteCode';
 import CellBorderWidthDemo from './propsDemos/CellBorderWidth';
 import InactiveColorDemo from './propsDemos/InactiveColor';
 import MaskSymbol from './propsDemos/MaskSymbol';
@@ -24,7 +23,6 @@ export default class App extends Component {
           <RedExample />
           <DarkExample />
 
-          <CanPasteCode />
           <MaskSymbol />
           <ActiveColorDemo />
           <InactiveColorDemo />

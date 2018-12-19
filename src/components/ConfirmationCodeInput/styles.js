@@ -71,13 +71,16 @@ export const getCellStyle = (props: Props, { isActive }: Object) => {
 
   return {
     color: activeColor,
-    borderColor: isActive ? activeColor : inactiveColor,
-    borderRadius: variant === 'border-circle' ? size : 0,
-    width: size,
-    height: size,
-    lineHeight: size,
     fontSize: Math.max(14, 0.4 * size),
     textAlign: 'center',
+    textAlignVertical: 'center',
+
+    borderColor: isActive ? activeColor : inactiveColor,
+    borderRadius: variant === 'border-circle' ? size : 0,
+
+    width: size,
+    height: size,
+
     ...getBorderWidthStyle(props),
     ...getInputSpaceStyle(props),
   };

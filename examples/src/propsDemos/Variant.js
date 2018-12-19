@@ -23,14 +23,6 @@ export default function Variant() {
         <CodeFiled onFulfill={console.log} variant="border-b" />
       </View>
       <View style={styles.sectionDemo}>
-        <Text style={styles.preText}>{'variant="border-b-t"'}</Text>
-        <CodeFiled onFulfill={console.log} variant="border-b-t" />
-      </View>
-      <View style={styles.sectionDemo}>
-        <Text style={styles.preText}>{'variant="border-l-r"'}</Text>
-        <CodeFiled onFulfill={console.log} variant="border-l-r" />
-      </View>
-      <View style={styles.sectionDemo}>
         <Text style={styles.preText}>{'variant="clear"'}</Text>
         <CodeFiled onFulfill={console.log} variant="clear" />
       </View>
