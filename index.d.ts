@@ -45,7 +45,7 @@ declare module 'react-native-confirmation-code-field' {
 
   export default class ConfirmationCodeInput extends React.Component<
     ConfirmationCodeInputProps,
-    void
+    {}
   > {
     clear(): void;
   }
