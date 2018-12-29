@@ -6,10 +6,10 @@ import { Text } from 'react-native';
 import { omit } from '../../omit';
 
 type TextProps = ElementConfig<typeof Text>;
-type TextPropsWithoutOnLayot = $Diff<TextProps, { onLayout: any }>;
+type TextPropsWithoutOnLayout = $Diff<TextProps, { onLayout: any }>;
 
 type Props = $ReadOnly<{|
-  ...$Exact<TextPropsWithoutOnLayot>,
+  ...$Exact<TextPropsWithoutOnLayout>,
   onLayout?: (index: number, event: LayoutEvent) => void,
   index: number,
 |}>;

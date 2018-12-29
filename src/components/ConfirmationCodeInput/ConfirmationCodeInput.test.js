@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import ConfirmationCodeInput from './ConfirmationCodeInput';
 import TextInput from '../TextInput';
+import Text from '../Text';
 
 const defaultProps = { onFulfill: () => {} };
 
@@ -22,137 +23,108 @@ export const spy = (component, methodName) => {
 const render = props =>
   shallow(<ConfirmationCodeInput {...defaultProps} {...props} />);
 
-describe('onKeyPress', () => {
-  test("must do nothing when key code isn't Backspace", () => {
-    const wrap = render();
-    const event = {
-      nativeEvent: {
-        key: 'AnyKey',
-      },
-    };
-
-    const setFocus = spy(wrap, 'setFocus');
-
-    wrap
-      .find(TextInput)
-      .first()
-      .prop('onKeyPress')(event);
-    expect(setFocus).toHaveBeenCalledTimes(0);
-  });
-
-  test('must call setFocus with 0 when keyPress Backspace', () => {
-    const wrap = render();
-    const event = {
-      nativeEvent: {
-        key: 'Backspace',
-      },
-    };
-
-    const setFocus = spy(wrap, 'setFocus');
-
-    wrap
-      .find(TextInput)
-      .first()
-      .prop('onKeyPress')(event);
-
-    expect(setFocus).toHaveBeenCalledTimes(1);
-    expect(setFocus).toHaveBeenCalledWith(0);
-  });
-
-  test('must call setFocus with 1+ when keyPress Backspace and currentIndex is greater than one', () => {
-    const wrap = render();
-    const currentIndex = 2;
-
-    wrap.setState({
-      currentIndex,
-    });
-    const event = {
-      nativeEvent: {
-        key: 'Backspace',
-      },
-    };
-
-    const setFocus = spy(wrap, 'setFocus');
-
-    wrap
-      .find(TextInput)
-      .first()
-      .prop('onKeyPress')(event);
-
-    expect(setFocus).toHaveBeenCalledTimes(1);
-    expect(setFocus).toHaveBeenCalledWith(currentIndex - 1);
-  });
-});
-
-test('TextInput count must be equal codeLength', () => {
+test('Text count must be equal codeLength', () => {
   const codeLength = 12;
   const wrap = render({
     codeLength,
   });
 
-  expect(wrap.find(TextInput).length).toBe(codeLength);
+  expect(wrap.find(Text).length).toBe(codeLength);
 });
 
-test('must assign custom props to TextInput', () => {
+describe('cellProps', () => {
   const overWrittenProps = {
-    maxLength: 99,
-    value: '11',
-    onChangeText: () => {},
-    onFocus: () => {},
-    onKeyPress: () => {},
+    index: 123,
+    onLayout: () => {},
+    style: { color: 'gold' },
   };
+
   const willBeAssigned = {
     a: 'b',
     b: 'a',
   };
-  const inputProps = jest.fn(() => ({
-    ...overWrittenProps,
-    ...willBeAssigned,
-  }));
 
-  const codeLength = 3;
-  const wrap = render({
-    codeLength,
-    inputProps,
+  describe('cellProps: () => TextProps', () => {
+    test('must assign custom props to first Cell', () => {
+      const cellProps = jest.fn(({ index }) =>
+        index === 0
+          ? {
+              ...overWrittenProps,
+              ...willBeAssigned,
+            }
+          : null,
+      );
+      const codeLength = 3;
+      const wrap = render({
+        codeLength,
+        cellProps,
+      });
+
+      expect(cellProps).toHaveBeenCalledTimes(codeLength);
+
+      const props = wrap
+        .find(Text)
+        .first()
+        .props();
+
+      expect(props).toEqual(expect.objectContaining(willBeAssigned));
+      expect(props).not.toEqual(expect.objectContaining(overWrittenProps));
+
+      const lastProps = wrap
+        .find(Text)
+        .last()
+        .props();
+
+      expect(lastProps).not.toEqual(expect.objectContaining(willBeAssigned));
+    });
   });
 
-  expect(inputProps).toHaveBeenCalledTimes(codeLength);
+  describe('cellProps: TextProps', () => {
+    test('must assign custom props to all Cells', () => {
+      const cellProps = {
+        ...overWrittenProps,
+        ...willBeAssigned,
+      };
+      const codeLength = 5;
+      const wrap = render({
+        codeLength,
+        cellProps,
+      });
 
-  const props = wrap
-    .find(TextInput)
-    .first()
-    .props();
+      const props = wrap
+        .find(Text)
+        .first()
+        .props();
 
-  expect(props).toEqual(expect.objectContaining(willBeAssigned));
-  expect(props).not.toEqual(expect.objectContaining(overWrittenProps));
+      expect(props).toEqual(expect.objectContaining(willBeAssigned));
+      expect(props).not.toEqual(expect.objectContaining(overWrittenProps));
+    });
+  });
 });
 
 test('must change index and set value when text change', () => {
   const wrap = render();
 
-  const setFocus = spy(wrap, 'setFocus');
+  const [index, text] = [0, '12'];
 
-  const [index, text] = [0, '1'];
-
-  expect(wrap.state()).toEqual({
-    codeSymbols: ['', '', '', '', ''],
-    currentIndex: 0,
-  });
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: '',
+    }),
+  );
 
   wrap
     .find(TextInput)
     .first()
     .prop('onChangeText')(text, index);
 
-  expect(setFocus).toHaveBeenCalledTimes(1);
-  expect(setFocus).toHaveBeenCalledWith(index + 1);
-
   wrap.update();
 
-  expect(wrap.state()).toEqual({
-    codeSymbols: [text, '', '', '', ''],
-    currentIndex: 1,
-  });
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: text,
+    }),
+  );
 });
 
 test('must call onFulfill and blur from last input when the code is full', () => {
@@ -164,208 +136,111 @@ test('must call onFulfill and blur from last input when the code is full', () =>
 
   const blur = spy(wrap, 'blur');
 
-  // fix undefined ref
-  spy(wrap, 'setFocus');
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: '',
+    }),
+  );
 
-  expect(wrap.state()).toEqual({
-    codeSymbols: ['', ''],
-    currentIndex: 0,
-  });
-
-  const [index, text] = [0, '1'];
+  const text = '12';
 
   wrap
     .find(TextInput)
-    .get(index)
-    .props.onChangeText(text, index);
+    .first()
+    .props()
+    .onChangeText(text);
 
-  const [index2, text2] = [1, '2'];
-
-  wrap
-    .update()
-    .find(TextInput)
-    .get(index2)
-    .props.onChangeText(text2, index2);
+  wrap.update();
 
   expect(onFulfill).toHaveBeenCalledTimes(1);
-  expect(onFulfill).toHaveBeenCalledWith(`${text}${text2}`);
+  expect(onFulfill).toHaveBeenCalledWith(text);
 
   expect(blur).toHaveBeenCalledTimes(1);
-  expect(blur).toHaveBeenCalledWith(index2);
 });
 
-test('must call inputStyle', () => {
-  const inputStyle = jest.fn();
-  const codeLength = 4;
-
-  render({
-    inputStyle,
-    codeLength,
+test('must clear code starting from clicked cell', () => {
+  const wrap = render({
+    codeLength: 7,
   });
 
-  expect(inputStyle).toHaveBeenCalledTimes(codeLength);
-  expect(inputStyle).toHaveBeenCalledWith(1, false, false);
-  expect(inputStyle).toHaveBeenCalledWith(2, false, false);
-  expect(inputStyle).toHaveBeenCalledWith(3, false, false);
-});
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: '',
+    }),
+  );
 
-describe('onFocus', () => {
-  test('must call onChangeCode when current index changed', () => {
-    const onChangeCode = jest.fn();
-    const wrap = render({
-      codeLength: 3,
-      onChangeCode,
+  const text = '123456';
+
+  wrap
+    .find(TextInput)
+    .first()
+    .props()
+    .onChangeText(text);
+
+  wrap.update();
+
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: text,
+    }),
+  );
+
+  // simulate onLayout fourth cell
+  const cellIndex = 3;
+  const layout = {
+    x: 500,
+    y: 500,
+    width: 100,
+    height: 100,
+  };
+
+  wrap
+    .find(Text)
+    .get(cellIndex)
+    .props.onLayout(cellIndex, {
+      nativeEvent: {
+        layout,
+      },
     });
 
-    wrap
-      .find(TextInput)
-      .get(0)
-      .props.onFocus(0);
-
-    const index = 2;
-    const codeSymbols = ['1', '2', ''];
-
-    wrap
-      .setState({
-        codeSymbols,
-        currentIndex: index - 1,
-      })
-      .find(TextInput)
-      .get(index)
-      .props.onFocus(index);
-
-    expect(onChangeCode).toHaveBeenCalledTimes(1);
-    expect(onChangeCode).toHaveBeenCalledWith(codeSymbols.join(''));
-  });
-
-  test('must skip to call onChangeCode when onChangeCode is falsy', () => {
-    const wrap = render({
-      codeLength: 3,
-      onChangeCode: undefined,
+  // simulate onPress outside the cell
+  wrap
+    .find(TextInput)
+    .first()
+    .props()
+    .onPress({
+      nativeEvent: {
+        locationX: layout.x - 1,
+        locationY: layout.y - 1,
+      },
     });
 
-    wrap
-      .find(TextInput)
-      .get(0)
-      .props.onFocus(0);
+  wrap.update();
 
-    wrap
-      .find(TextInput)
-      .get(0)
-      .props.onFocus(0);
-  });
+  // nothing changed
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: text,
+    }),
+  );
 
-  test('must clear all values after the focused element', () => {
-    const wrap = render({
-      codeLength: 5,
+  // simulate onPress inside the cell
+  wrap
+    .find(TextInput)
+    .first()
+    .props()
+    .onPress({
+      nativeEvent: {
+        locationX: layout.x + 1,
+        locationY: layout.y + 1,
+      },
     });
 
-    const codeSymbols = ['1', '2', '3', '4', ''];
-    const focusElIndex = 1;
+  wrap.update();
 
-    wrap
-      .setState({
-        codeSymbols,
-        currentIndex: 3,
-      })
-      .find(TextInput)
-      .get(focusElIndex)
-      .props.onFocus(focusElIndex);
-
-    expect(wrap.state()).toEqual({
-      codeSymbols: ['1', '', '', '', ''],
-      currentIndex: 1,
-    });
-  });
-
-  test("must call setFocus when focused element isn't last empty element", () => {
-    const wrap = render({
-      codeLength: 5,
-    });
-    const testResult = 'test';
-    const setFocus = spy(wrap, 'setFocus').mockReturnValue(testResult);
-
-    const codeSymbols = ['1', '2', '', '', ''];
-    const focusElIndex = 4;
-
-    expect(
-      wrap
-        .setState({
-          codeSymbols,
-          currentIndex: 2,
-        })
-        .find(TextInput)
-        .get(focusElIndex)
-        .props.onFocus(focusElIndex),
-    ).toBe(testResult);
-
-    expect(setFocus).toHaveBeenCalledWith(2);
-  });
-});
-
-describe('canPasteCode', () => {
-  test('must fill all code when the user inserted the text equal or greater than the codeLength', () => {
-    const onFulfill = jest.fn();
-    const wrap = render({
-      codeLength: 4,
-      onFulfill,
-      canPasteCode: true,
-    });
-
-    const blur = spy(wrap, 'blur');
-
-    // fix undefined ref
-    spy(wrap, 'setFocus');
-
-    expect(wrap.state()).toEqual({
-      codeSymbols: ['', '', '', ''],
-      currentIndex: 0,
-    });
-
-    const [index, text] = [0, '123456'];
-
-    wrap
-      .find(TextInput)
-      .get(index)
-      .props.onChangeText(text, index);
-
-    expect(onFulfill).toHaveBeenCalledTimes(1);
-    expect(onFulfill).toHaveBeenCalledWith(`${text.slice(0, 4)}`);
-
-    expect(blur).toHaveBeenCalledTimes(1);
-    expect(blur).toHaveBeenCalledWith(index);
-  });
-  test('must fill one section of code input when canPasteCode=false and user inserted the text equal or greater than the codeLength', () => {
-    const onFulfill = jest.fn();
-    const wrap = render({
-      codeLength: 4,
-      onFulfill,
-      canPasteCode: false,
-    });
-
-    const blur = spy(wrap, 'blur');
-
-    // fix undefined ref
-    spy(wrap, 'setFocus');
-
-    expect(wrap.state()).toEqual({
-      codeSymbols: ['', '', '', ''],
-      currentIndex: 0,
-    });
-
-    const [index, text] = [0, '123456'];
-
-    wrap
-      .find(TextInput)
-      .get(index)
-      .props.onChangeText(text, index);
-
-    expect(onFulfill).toHaveBeenCalledTimes(0);
-    expect(blur).toHaveBeenCalledTimes(0);
-
-    expect(wrap.state()).toEqual({
-      codeSymbols: [text[0], '', '', ''],
-      currentIndex: 1,
-    });
-  });
+  expect(wrap.state()).toEqual(
+    expect.objectContaining({
+      codeValue: text.slice(0, cellIndex),
+    }),
+  );
 });

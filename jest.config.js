@@ -16,6 +16,8 @@ module.exports = {
     '(.*)/styles.js',
     '<rootDir>/src/components/ConfirmationCodeInput/validation.js',
   ],
+  modulePathIgnorePatterns: ['/examples/'],
+  testPathIgnorePatterns: ['/node_modules/', '/examples/'],
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
   },
