@@ -5,12 +5,19 @@
 
 A react-native confirmation code field for both IOS and Android (base on [this](https://github.com/ttdung11t2/react-native-confirmation-code-input) project [Migration Guide](migration.md))
 
+### Component features:
+
+- 🔮 Simple. Easy to use.
+- 🍎 IOS "fast paste SMS-code" support.
+- 🚮 Clearing part of the code by clicking on the cell
+- 🛠 Extendable and hackable.
+- 🤓 Readable [changelog](CHANGELOG.md).
+
 ## Links
 
-- [API](docs/API.md)
-- [Real Example](examples/rn56)
-- [Live demo IOS\Android](https://snack.expo.io/@retyui/demo-for-react-native-confirmation-code-field)
-- [Live demo `react-native-web`](https://retyui.github.io/react-native-confirmation-code-field/)
+- [API documentation](docs/API.md)
+- [Example](examples/rn57)
+- Live demo [IOS / Android](https://snack.expo.io/@retyui/demo-for-react-native-confirmation-code-field), [react-native-web](https://retyui.github.io/react-native-confirmation-code-field/)
 
 ## Screenshots
 
@@ -38,3 +45,12 @@ class App extends Component {
   }
 }
 ```
+
+## How it works?
+
+This component consists of:
+
+1. Container `<View  {...containerProps}/>`;
+2. Render the "Cells" for the text code inside the container ("Cells" is `<Text {...cellProps} />`);
+3. And over this render invisible `<TextInput {...inputProps}/>`;
+4. "Cursor" inside cell is [simulated component](src/components/Cursor.js)
