@@ -2,22 +2,26 @@
 import { TextInput } from 'react-native';
 
 // $FlowFixMe
-if (!TextInput._onPress) {
-  throw new Error('This version React Native not support hack for TextInput!');
+if (!new TextInput()._onPress) {
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[react-native-confirmation-code-field]: This version React Native not support hack for TextInput!',
+  );
 }
 
 class TextInputCustom extends TextInput {
+  // This hack needs to get click position
+  // and then calculate what cell on clicked
   _onPress = event => {
     // $FlowFixMe
-    const { onPress, editable } = this.props;
+    const { onPress } = this.props;
 
     if (onPress) {
       onPress(event);
     }
 
-    if (editable || editable === undefined) {
-      this.focus();
-    }
+    // $FlowFixMe
+    super._onPress(event);
   };
 }
 
