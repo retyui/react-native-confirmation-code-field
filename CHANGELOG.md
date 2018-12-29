@@ -2,6 +2,22 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.0-beta-1
+
+- Remove base implementation based on `One code cell` === `One TextInput`
+- Fix IOS fast paste SMS code
+- Update `inputProps: Function` prop, now is `inputProps: ?Object`
+- Remove `canPasteCode`, now it is works always by default
+- Remove `inputStyle: Function` use `cellProps`
+- Remove `onChangeText` use `inputProps={{onChangeText: (text) => {}}}`
+- Remove some `variant` values: `border-b-t` and `border-l-r`
+- Add new component `focus()` and `blur()` methods
+- Fix typescript definition [#27](https://github.com/retyui/react-native-confirmation-code-field/pull/27/files)
+
+## 2.0.5
+
+- Fix typescript definition [#27](https://github.com/retyui/react-native-confirmation-code-field/pull/27/files)
+
 ## 2.0.4
 
 - Fix Flow.js types
