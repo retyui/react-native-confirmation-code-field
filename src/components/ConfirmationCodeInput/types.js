@@ -1,16 +1,31 @@
 // @flow
-import type { KeyboardType } from 'react-native/Libraries/Components/TextInput/TextInput';
-import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
+import { View, Text, TextInput } from 'react-native';
+
+import type { ElementConfig } from 'react';
+
+export type TextInputProp = ElementConfig<typeof TextInput>;
+export type TextProps = ElementConfig<typeof Text>;
+export type ViewProps = ElementConfig<typeof View>;
+export type KeyboardType = $PropertyType<TextInputProp, 'keyboardType'>;
 
 import type { VariantNames, InputPositions } from '../../types';
+
+export type CellPropsOptions = {|
+  index: number,
+  isFocused: boolean,
+  hasValue: boolean,
+|};
+
+export type CellPropsFn = CellPropsOptions => ?TextProps;
 
 export type Props = $ReadOnly<{|
   // Required props
   onFulfill: (code: string) => void,
 
   // Not required props (rewritten in defaultProps)
+  autoFocus: boolean,
   codeLength: number,
-  defaultCode: ?string,
+  defaultCode: string,
 
   activeColor: string,
   cellBorderWidth: number,
@@ -20,19 +35,11 @@ export type Props = $ReadOnly<{|
   space: number,
   variant: VariantNames,
   keyboardType: KeyboardType,
-  maskSymbol: ?string,
+  maskSymbol: string,
 
-  autoFocus: boolean,
-
-  onChangeCode: ?(code: string) => void,
-
-  inputProps: Object,
-  cellProps: ({
-    index: number,
-    isFocused: boolean,
-    hasValue: boolean,
-  }) => ?Object,
+  cellProps: TextProps | CellPropsFn,
   containerProps: ViewProps,
+  inputProps: TextInputProp,
   testID?: any,
 |}>;
 

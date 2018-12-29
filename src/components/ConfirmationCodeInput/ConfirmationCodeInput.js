@@ -1,11 +1,11 @@
 // @flow
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, TextInput as TextInputNative } from 'react-native';
 
-import Text from '../Text';
+import TextCustom from '../Text';
 import Cursor from '../Cursor';
-import TextInput from '../TextInput';
+import TextInputCustom from '../TextInput';
 import createRef from '../../createRef';
 import { concatStyles } from '../../styles';
 
@@ -26,11 +26,10 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     codeLength: PropTypes.number,
     containerProps: PropTypes.object,
     defaultCode: validateCompareCode,
-    cellProps: PropTypes.func,
+    cellProps: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     inputProps: PropTypes.object,
     inactiveColor: PropTypes.string,
     inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
-    onChangeCode: PropTypes.func,
     onFulfill: PropTypes.func.isRequired,
     size: PropTypes.number,
     space: PropTypes.number,
@@ -40,7 +39,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
       'border-b',
       'clear',
     ]),
-    keyboardType: TextInput.propTypes.keyboardType,
+    keyboardType: TextInputNative.propTypes.keyboardType,
     maskSymbol: PropTypes.string,
   };
 
@@ -53,15 +52,13 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     containerProps: {},
     defaultCode: '',
     inputProps: {},
-    inputStyle: null,
     inactiveColor: '#ffffff40',
     inputPosition: 'center',
-    onChangeCode: null,
     size: 40,
     space: 8,
     variant: 'border-box',
     keyboardType: 'default',
-    maskSymbol: null,
+    maskSymbol: '',
   };
 
   input = createRef();
@@ -99,15 +96,19 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     let customProps = null;
 
     if (cellProps) {
-      customProps = cellProps({
-        index,
-        isFocused: isActive,
-        hasValue: Boolean(codeSymbol),
-      });
+      customProps =
+        typeof cellProps === 'function'
+          ? cellProps({
+              index,
+              isFocused: isActive,
+              hasValue: Boolean(codeSymbol),
+            })
+          : cellProps;
     }
 
     return (
-      <Text
+      // $FlowFixMe - Strange bag with `onLayout` property
+      <TextCustom
         {...customProps}
         key={index}
         index={index}
@@ -120,7 +121,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
         {isActive
           ? this.renderCursor()
           : (codeSymbol && maskSymbol) || codeSymbol}
-      </Text>
+      </TextCustom>
     );
   };
 
@@ -161,7 +162,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
         },
         () => {
           if (this.getCodeLength() === codeLength) {
-            this.blurInput();
+            this.blur();
 
             onFulfill(codeValue);
           }
@@ -180,7 +181,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
       .slice(0, codeLength);
   }
 
-  blurInput() {
+  blur() {
     const { current } = this.input;
 
     if (current) {
@@ -188,7 +189,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     }
   }
 
-  focusInput() {
+  focus() {
     const { current } = this.input;
 
     if (current) {
@@ -245,7 +246,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     const { inputProps, keyboardType } = this.props;
 
     return (
-      <TextInput
+      <TextInputCustom
         ref={this.input}
         keyboardType={keyboardType}
         {...inputProps}
@@ -256,7 +257,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
         onChangeText={this.handlerOnTextChange}
       >
         {this.state.codeValue}
-      </TextInput>
+      </TextInputCustom>
     );
   }
 

@@ -13,7 +13,7 @@
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
 
-.*/examples/.*
+<PROJECT_ROOT>/examples/.*
 [include]
 
 [libs]

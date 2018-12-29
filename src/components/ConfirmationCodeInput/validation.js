@@ -20,24 +20,3 @@ export const validateCompareCode: PropsTypeCustomValidatorFn = (
     }
   }
 };
-
-const notOverwrittenProps = [
-  'maxLength',
-  'onChangeText',
-  'onFocus',
-  'onKeyPress',
-];
-
-export const validateInputProps = (props: ?Object): void => {
-  const p = props;
-
-  // eslint-disable-next-line no-eq-null
-  if (typeof p === 'object' && p != null) {
-    notOverwrittenProps.forEach(key => {
-      if (p[key]) {
-        // eslint-disable-next-line no-console
-        console.warn(`You can't set "${key}" property to TextInput`);
-      }
-    });
-  }
-};

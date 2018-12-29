@@ -7,8 +7,10 @@ import type { Props } from './types';
 
 export const styles = StyleSheet.create({
   maskInput: {
+    // Invisible TextInput on top of all container component
     ...StyleSheet.absoluteFillObject,
     opacity: 0.01,
+    // By clicking the cursor was always placed at the end of TextInput
     fontSize: 1,
   },
 });

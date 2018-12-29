@@ -1,12 +1,17 @@
 // @flow
+import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 import React, { Component, type ElementConfig } from 'react';
 import { Text } from 'react-native';
 
-import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
+import { omit } from '../../omit';
+
+type TextProps = ElementConfig<typeof Text>;
+type TextPropsWithoutOnLayot = $Diff<TextProps, { onLayout: any }>;
+
 type Props = $ReadOnly<{|
-  ...$Exact<$Diff<ElementConfig<typeof Text>, { onLayout: any }>>,
+  ...$Exact<TextPropsWithoutOnLayot>,
+  onLayout?: (index: number, event: LayoutEvent) => void,
   index: number,
-  onLayout: (number, LayoutEvent) => mixed,
 |}>;
 
 class TextCustom extends Component<Props> {
@@ -19,8 +24,12 @@ class TextCustom extends Component<Props> {
   };
 
   render() {
-    // $FlowFixMe
-    return <Text {...this.props} onLayout={this.handlerOnLayout} />;
+    return (
+      <Text
+        onLayout={this.handlerOnLayout}
+        {...omit(['onLayout', 'index'], this.props)}
+      />
+    );
   }
 }
 
