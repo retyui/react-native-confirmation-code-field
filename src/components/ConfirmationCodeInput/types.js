@@ -38,6 +38,7 @@ export type Props = $ReadOnly<{|
 
 export type State = {|
   codeValue: string,
+  isFocused: boolean,
 |};
 
 export type PropsTypeCustomValidatorFn = (

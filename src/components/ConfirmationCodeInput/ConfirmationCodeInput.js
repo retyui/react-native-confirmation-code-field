@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 
 import Text from '../Text';
+import Cursor from '../Cursor';
 import TextInput from '../TextInput';
 import createRef from '../../createRef';
 import { concatStyles } from '../../styles';
@@ -66,6 +67,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
   input = createRef();
 
   state = {
+    isFocused: false,
     codeValue: this.props.defaultCode
       ? this.truncateString(this.props.defaultCode)
       : '',
@@ -115,41 +117,58 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
           customProps && customProps.style,
         )}
       >
-        {(codeSymbol && maskSymbol) || codeSymbol}
+        {isActive
+          ? this.renderCursor()
+          : (codeSymbol && maskSymbol) || codeSymbol}
       </Text>
     );
   };
+
+  renderCursor() {
+    if (this.state.isFocused) {
+      return <Cursor />;
+    }
+
+    return null;
+  }
 
   renderCodeCells() {
     // $FlowFixMe
     return this.getCodeSymbols().map(this.renderCode);
   }
 
-  handlerOnTextChange = (text: string) => {
-    const codeValue = this.truncateString(text);
-    const {
-      inputProps: { onChangeText },
-      codeLength,
-      onFulfill,
-    } = this.props;
+  inheritTextInputMethod(methodName: string, handler: Function) {
+    return (e: mixed) => {
+      handler(e);
 
-    this.setState(
-      {
-        codeValue,
-      },
-      () => {
-        if (this.getCodeLength() === codeLength) {
-          this.blurInput();
+      const { inputProps } = this.props;
 
-          onFulfill(codeValue);
-        }
-      },
-    );
+      if (inputProps && inputProps[methodName]) {
+        inputProps[methodName](e);
+      }
+    };
+  }
 
-    if (onChangeText) {
-      return onChangeText(text);
-    }
-  };
+  handlerOnTextChange = this.inheritTextInputMethod(
+    'onTextChange',
+    (text: string) => {
+      const codeValue = this.truncateString(text);
+      const { codeLength, onFulfill } = this.props;
+
+      this.setState(
+        {
+          codeValue,
+        },
+        () => {
+          if (this.getCodeLength() === codeLength) {
+            this.blurInput();
+
+            onFulfill(codeValue);
+          }
+        },
+      );
+    },
+  );
 
   getCodeSymbols(): Array<string> {
     const { codeLength } = this.props;
@@ -214,6 +233,14 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     }
   };
 
+  handlerOnFocus = this.inheritTextInputMethod('onFocus', () =>
+    this.setState({ isFocused: true }),
+  );
+
+  handlerOnBlur = this.inheritTextInputMethod('onBlur', () =>
+    this.setState({ isFocused: false }),
+  );
+
   renderInput() {
     const { inputProps, keyboardType } = this.props;
 
@@ -222,6 +249,8 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
         ref={this.input}
         keyboardType={keyboardType}
         {...inputProps}
+        onBlur={this.handlerOnBlur}
+        onFocus={this.handlerOnFocus}
         onPress={this.handlerOnPress}
         style={concatStyles(styles.maskInput, inputProps.style)}
         onChangeText={this.handlerOnTextChange}
