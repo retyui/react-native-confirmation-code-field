@@ -5,8 +5,6 @@
 - [API](#api)
   - [Base props](#base-props)
     - [`onFulfill: (code: string) => void`](#onfulfill-code-string--void)
-    - [`onChangeCode?: (code: string) => void`](#onchangecode-code-string--void)
-    - [`canPasteCode?: boolean`](#canpastecode-boolean)
     - [`autoFocus?: boolean`](#autofocus-boolean)
     - [`codeLength?: number`](#codelength-number)
     - [`defaultCode?: string`](#defaultcode-string)
@@ -19,14 +17,16 @@
     - [`space?: number`](#space-number)
     - [`size?: number`](#size-number)
     - [`inputPosition?: 'left' | 'right' | 'center' | 'full-width'`](#inputposition-left--right--center--full-width)
-    - [`variant?: 'border-box' | 'border-circle' | 'border-b' | 'border-b-t' | 'border-l-r' | 'clear'`](#variant-border-box--border-circle--border-b--border-b-t--border-l-r--clear)
+    - [`variant?: 'border-box' | 'border-circle' | 'border-b' | 'clear'`](#variant-border-box--border-circle--border-b--clear)
   - [Customize props](#customize-props)
-    - [`containerProps?: Object`](#containerprops-object)
-    - [`inputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`](#inputstyle-index-number-isfocused-boolean-hasvalue-boolean--object)
-    - [`inputProps?: (index: number) => Object`](#inputprops-index-number--object)
+    - [`containerProps?: ViewProps`](#containerprops-viewprops)
+    - [`inputProps?: TextInputProps`](#inputprops-textinputprops)
+    - [`cellProps: TextProps | ({index: number, isFocused: boolean, hasValue: boolean}) => TextProps`](#cellprops-textprops--index-number-isfocused-boolean-hasvalue-boolean--textprops)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
   - [Functions](#functions)
+    - [`focus() => void`](#focus--void)
+    - [`blur() => void`](#blur--void)
     - [`clear = () => void`](#clear----void)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -40,14 +40,6 @@
 Callback function called when fulfilling code.
 
 **Required**
-
-### `onChangeCode?: (code: string) => void`
-
-Callback function called when code changed.
-
-### `canPasteCode?: boolean`
-
-Enable paste support. Default `false`
 
 ### `autoFocus?: boolean`
 
@@ -73,7 +65,7 @@ A symbol that will be displayed when the field is filled. Supports emoji.
 
 Determines which keyboard to open.
 
-[All values: KeyboardType](https://github.com/facebook/react-native/blob/master/Libraries/Components/TextInput/TextInput.js#L82-L98).
+[All values: KeyboardType](https://github.com/facebook/react-native/blob/386c2ec6f0f0a61cbd49865d8283f88e64185f34/Libraries/Components/TextInput/TextInput.js#L143-L159).
 
 Default value: `"default"`
 
@@ -113,7 +105,7 @@ The position of code input in its container. Default `center`. [Demo `inputPosit
 
 <img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/inputPosition.jpg"/>
 
-### `variant?: 'border-box' | 'border-circle' | 'border-b' | 'border-b-t' | 'border-l-r' | 'clear'`
+### `variant?: 'border-box' | 'border-circle' | 'border-b' | 'clear'`
 
 Some built-in variants. Default `border-box`. [Demo `variant`:](examples/rn56/src/propsDemos/Variant.js)
 
@@ -121,17 +113,27 @@ Some built-in variants. Default `border-box`. [Demo `variant`:](examples/rn56/sr
 
 ## Customize props
 
-### `containerProps?: Object`
+### `containerProps?: ViewProps`
 
 [`<View/>` component props](https://facebook.github.io/react-native/docs/view#props)
 
-### `inputStyle?: (index: number, isFocused: boolean, hasValue: boolean) => Object`
-
-Help customize any input, must return [Style Object](https://facebook.github.io/react-native/docs/textinput#style) or `null`. [example](https://github.com/retyui/react-native-confirmation-code-field/blob/master/examples/rn56/src/realDemo/DarkExample/index.js#L36-L41)
-
-### `inputProps?: (index: number) => Object`
+### `inputProps?: TextInputProps`
 
 [`<TextInput/>` component props](https://facebook.github.io/react-native/docs/textinput#props)
+
+### `cellProps: TextProps | ({index: number, isFocused: boolean, hasValue: boolean}) => TextProps`
+
+That property help customize Cells. When pass Object it must be [`<Text/> component props`](https://facebook.github.io/react-native/docs/text#props) and this object will spread for each cell.
+
+And if you pass function component will call with next options: 
+
+- `index`: uniq number of cell
+- `isFocused`: is cell in focus now
+- `hasValue`: is cell has value
+
+Component expects you will pass TextProps or null.
+
+ ([Example](https://github.com/retyui/react-native-confirmation-code-field/blob/cf1dfab32f253312642d42eaffd586396c924435/examples/src/realDemo/DarkExample/index.js#L35-L45) for custom style)
 
 ## Other props
 
@@ -141,9 +143,17 @@ Help in test
 
 ## Functions
 
+### `focus() => void`
+
+Method that will focus the TextInput programmatically.
+
+### `blur() => void`
+
+Method that will blur the TextInput programmatically.
+
 ### `clear = () => void`
 
-Method to clear the entered code
+Method to clear the entered code.
 
 ```js
 import React, { Component, createRef } from 'react';
@@ -153,7 +163,11 @@ class App extends Component {
   inputRef = createRef();
 
   handlerOnIvalidCode() {
-    this.inputRef.current.clear();
+    const { current } = this.inputRef;
+
+    if (current) {
+      current.clear();
+    }
   }
 
   render() {
