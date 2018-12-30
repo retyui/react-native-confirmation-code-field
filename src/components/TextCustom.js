@@ -3,7 +3,7 @@ import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 import React, { Component, type ElementConfig } from 'react';
 import { Text } from 'react-native';
 
-import { omit } from '../../omit';
+import { omit } from '../omit';
 
 type TextProps = ElementConfig<typeof Text>;
 type TextPropsWithoutOnLayout = $Diff<TextProps, { onLayout: any }>;
@@ -31,6 +31,15 @@ class TextCustom extends Component<Props> {
       />
     );
   }
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  const PropTypes = require('prop-types');
+
+  TextCustom.propTypes = {
+    ...Text.propTypes,
+    index: PropTypes.number.isRequired,
+  };
 }
 
 export default TextCustom;

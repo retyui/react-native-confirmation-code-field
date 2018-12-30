@@ -35,4 +35,13 @@ const TextInputCustom: Class<
   };
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  const PropTypes = require('prop-types');
+
+  TextInputCustom.propTypes = {
+    ...TextInput.propTypes,
+    onPress: PropTypes.func,
+  };
+}
+
 export default TextInputCustom;

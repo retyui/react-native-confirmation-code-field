@@ -1,15 +1,18 @@
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import TextInputCustom from '../TextInputCustom';
+import TextCustom from '../TextCustom';
+
 import ConfirmationCodeInput from './ConfirmationCodeInput';
-import TextInput from '../TextInput';
-import Text from '../Text';
 
 const defaultProps = { onFulfill: () => {} };
 
-export const spy = (component, methodName) => {
+export const spy = (component: any, methodName: string) => {
   if (component.instance()[methodName]) {
     // eslint-disable-next-line no-undef
+    // $FlowFixMe
     const newMethod = jest.fn();
 
     component.instance()[methodName] = newMethod;
@@ -29,7 +32,7 @@ test('Text count must be equal codeLength', () => {
     codeLength,
   });
 
-  expect(wrap.find(Text).length).toBe(codeLength);
+  expect(wrap.find(TextCustom).length).toBe(codeLength);
 });
 
 describe('cellProps', () => {
@@ -63,7 +66,7 @@ describe('cellProps', () => {
       expect(cellProps).toHaveBeenCalledTimes(codeLength);
 
       const props = wrap
-        .find(Text)
+        .find(TextCustom)
         .first()
         .props();
 
@@ -71,7 +74,7 @@ describe('cellProps', () => {
       expect(props).not.toEqual(expect.objectContaining(overWrittenProps));
 
       const lastProps = wrap
-        .find(Text)
+        .find(TextCustom)
         .last()
         .props();
 
@@ -92,7 +95,7 @@ describe('cellProps', () => {
       });
 
       const props = wrap
-        .find(Text)
+        .find(TextCustom)
         .first()
         .props();
 
@@ -107,24 +110,16 @@ test('must change index and set value when text change', () => {
 
   const [index, text] = [0, '12'];
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: '',
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual('');
 
   wrap
-    .find(TextInput)
+    .find(TextInputCustom)
     .first()
     .prop('onChangeText')(text, index);
 
   wrap.update();
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: text,
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual(text);
 });
 
 test('must call onFulfill and blur from last input when the code is full', () => {
@@ -136,16 +131,12 @@ test('must call onFulfill and blur from last input when the code is full', () =>
 
   const blur = spy(wrap, 'blur');
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: '',
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual('');
 
   const text = '12';
 
   wrap
-    .find(TextInput)
+    .find(TextInputCustom)
     .first()
     .props()
     .onChangeText(text);
@@ -163,27 +154,19 @@ test('must clear code starting from clicked cell', () => {
     codeLength: 7,
   });
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: '',
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual('');
 
   const text = '123456';
 
   wrap
-    .find(TextInput)
+    .find(TextInputCustom)
     .first()
     .props()
     .onChangeText(text);
 
   wrap.update();
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: text,
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual(text);
 
   // simulate onLayout fourth cell
   const cellIndex = 3;
@@ -195,7 +178,7 @@ test('must clear code starting from clicked cell', () => {
   };
 
   wrap
-    .find(Text)
+    .find(TextCustom)
     .get(cellIndex)
     .props.onLayout(cellIndex, {
       nativeEvent: {
@@ -205,7 +188,7 @@ test('must clear code starting from clicked cell', () => {
 
   // simulate onPress outside the cell
   wrap
-    .find(TextInput)
+    .find(TextInputCustom)
     .first()
     .props()
     .onPress({
@@ -218,15 +201,11 @@ test('must clear code starting from clicked cell', () => {
   wrap.update();
 
   // nothing changed
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: text,
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual(text);
 
   // simulate onPress inside the cell
   wrap
-    .find(TextInput)
+    .find(TextInputCustom)
     .first()
     .props()
     .onPress({
@@ -238,9 +217,16 @@ test('must clear code starting from clicked cell', () => {
 
   wrap.update();
 
-  expect(wrap.state()).toEqual(
-    expect.objectContaining({
-      codeValue: text.slice(0, cellIndex),
-    }),
-  );
+  expect(wrap.state().codeValue).toEqual(text.slice(0, cellIndex));
+});
+
+test('should init state with truncated codeValue based by defaultCode', () => {
+  const defaultCode = '123467890';
+  const codeLength = 7;
+  const wrap = render({
+    codeLength,
+    defaultCode,
+  });
+
+  expect(wrap.state().codeValue).toBe(defaultCode.slice(0, codeLength));
 });

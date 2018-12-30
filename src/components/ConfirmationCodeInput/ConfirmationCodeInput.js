@@ -1,13 +1,13 @@
 // @flow
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { View, TextInput as TextInputNative } from 'react-native';
 
-import TextCustom from '../Text';
-import Cursor from '../Cursor';
-import TextInputCustom from '../TextInput';
 import createRef from '../../createRef';
 import { concatStyles } from '../../styles';
+
+import Cursor from '../Cursor';
+import TextCustom from '../TextCustom';
+import TextInputCustom from '../TextInputCustom';
 
 import { getCellStyle, getContainerStyle, styles } from './styles';
 import { validateCompareCode } from './validation';
@@ -18,31 +18,7 @@ import type {
   PressEvent,
 } from 'react-native/Libraries/Types/CoreEventTypes';
 
-export default class ConfirmationCodeInput extends PureComponent<Props, State> {
-  static propTypes = {
-    activeColor: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    cellBorderWidth: PropTypes.number,
-    codeLength: PropTypes.number,
-    containerProps: PropTypes.object,
-    defaultCode: validateCompareCode,
-    cellProps: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    inputProps: PropTypes.object,
-    inactiveColor: PropTypes.string,
-    inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
-    onFulfill: PropTypes.func.isRequired,
-    size: PropTypes.number,
-    space: PropTypes.number,
-    variant: PropTypes.oneOf([
-      'border-box',
-      'border-circle',
-      'border-b',
-      'clear',
-    ]),
-    keyboardType: TextInputNative.propTypes.keyboardType,
-    maskSymbol: PropTypes.string,
-  };
-
+class ConfirmationCodeInput extends PureComponent<Props, State> {
   static defaultProps = {
     cellProps: null,
     activeColor: '#fff',
@@ -50,7 +26,7 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     cellBorderWidth: 1,
     codeLength: 5,
     containerProps: {},
-    defaultCode: '',
+    defaultCode: null,
     inputProps: {},
     inactiveColor: '#ffffff40',
     inputPosition: 'center',
@@ -272,3 +248,34 @@ export default class ConfirmationCodeInput extends PureComponent<Props, State> {
     );
   }
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  const PropTypes = require('prop-types');
+
+  ConfirmationCodeInput.propTypes = {
+    onFulfill: PropTypes.func.isRequired,
+
+    activeColor: PropTypes.string,
+    autoFocus: PropTypes.bool,
+    cellBorderWidth: PropTypes.number,
+    codeLength: PropTypes.number,
+    containerProps: PropTypes.object,
+    defaultCode: validateCompareCode,
+    cellProps: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    inputProps: PropTypes.object,
+    inactiveColor: PropTypes.string,
+    inputPosition: PropTypes.oneOf(['center', 'left', 'right', 'full-width']),
+    size: PropTypes.number,
+    space: PropTypes.number,
+    variant: PropTypes.oneOf([
+      'border-box',
+      'border-circle',
+      'border-b',
+      'clear',
+    ]),
+    keyboardType: TextInputNative.propTypes.keyboardType,
+    maskSymbol: PropTypes.string,
+  };
+}
+
+export default ConfirmationCodeInput;

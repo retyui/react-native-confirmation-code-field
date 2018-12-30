@@ -25,7 +25,7 @@ export type Props = $ReadOnly<{|
   // Not required props (rewritten in defaultProps)
   autoFocus: boolean,
   codeLength: number,
-  defaultCode: string,
+  defaultCode: ?string,
 
   activeColor: string,
   cellBorderWidth: number,
@@ -37,7 +37,7 @@ export type Props = $ReadOnly<{|
   keyboardType: KeyboardType,
   maskSymbol: string,
 
-  cellProps: TextProps | CellPropsFn,
+  cellProps: null | TextProps | CellPropsFn,
   containerProps: ViewProps,
   inputProps: TextInputProp,
   testID?: any,

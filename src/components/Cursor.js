@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 
-const CURSOR_BLINKING_ANIMATION_SPEED = 500;
-const CURSOR_SYMBOL = '|';
+export const CURSOR_BLINKING_ANIMATION_SPEED = 500;
+export const CURSOR_SYMBOL = '|';
 
 export default class Cursor extends Component<
   {||},
