@@ -33,7 +33,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     size: 40,
     space: 8,
     variant: 'border-box',
-    keyboardType: 'default',
+    keyboardType: 'number-pad',
     maskSymbol: '',
   };
 
@@ -219,12 +219,13 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   );
 
   renderInput() {
-    const { inputProps, keyboardType } = this.props;
+    const { inputProps, keyboardType, codeLength } = this.props;
 
     return (
       <TextInputCustom
         ref={this.input}
         keyboardType={keyboardType}
+        maxLength={codeLength}
         {...inputProps}
         onBlur={this.handlerOnBlur}
         onFocus={this.handlerOnFocus}

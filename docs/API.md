@@ -67,7 +67,7 @@ Determines which keyboard to open.
 
 [All values: KeyboardType](https://github.com/facebook/react-native/blob/386c2ec6f0f0a61cbd49865d8283f88e64185f34/Libraries/Components/TextInput/TextInput.js#L143-L159).
 
-Default value: `"default"`
+Default value: `"number-pad"`
 
 ### `activeColor?: string`
 
