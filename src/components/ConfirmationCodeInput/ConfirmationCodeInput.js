@@ -82,6 +82,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
           : cellProps;
     }
 
+    const customStyle = customProps && customProps.style;
+
     return (
       // $FlowFixMe - Strange bag with `onLayout` property
       <TextCustom
@@ -90,8 +92,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         index={index}
         onLayout={this.handlerOnLayoutCell}
         style={concatStyles(
-          getCellStyle(this.props, { isActive }),
-          customProps && customProps.style,
+          getCellStyle(this.props, { isActive, customStyle }),
+          customStyle,
         )}
       >
         {isActive

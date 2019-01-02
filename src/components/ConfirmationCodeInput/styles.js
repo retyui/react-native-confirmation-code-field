@@ -1,5 +1,5 @@
 // @flow
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -68,17 +68,50 @@ export const getInputSpaceStyle = ({ inputPosition, space }: Props) => {
   }
 };
 
-export const getCellStyle = (props: Props, { isActive }: Object) => {
+export const findCellHeight = (size: number, customStyle: any) => {
+  if (Array.isArray(customStyle)) {
+    const revertedStyles = customStyle.slice().reverse();
+
+    for (const style of revertedStyles) {
+      const result = findCellHeight(size, style);
+
+      if (result !== size) {
+        return result;
+      }
+    }
+  }
+
+  if (customStyle && typeof customStyle === 'object' && customStyle.height) {
+    return customStyle.height;
+  }
+
+  return size;
+};
+
+export const getCellStyle = (
+  props: Props,
+  { isActive, customStyle }: Object,
+) => {
   const { size, inactiveColor, activeColor, variant } = props;
 
   return {
     color: activeColor,
-    fontSize: Math.max(14, 0.4 * size),
+    fontSize: Math.max(14, 0.5 * size),
     textAlign: 'center',
-    textAlignVertical: 'center',
+    ...Platform.select({
+      android: {
+        textAlignVertical: 'center',
+      },
+      ios: {
+        lineHeight: findCellHeight(size, customStyle),
+      },
+    }),
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
 
     borderColor: isActive ? activeColor : inactiveColor,
-    borderRadius: variant === 'border-circle' ? size : 0,
+    borderRadius: variant === 'border-circle' ? size / 2 : 0,
 
     width: size,
     height: size,
