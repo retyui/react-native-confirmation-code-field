@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   rootView: {
@@ -8,6 +8,7 @@ export default StyleSheet.create({
     borderBottomColor: 'gold',
   },
   sectionDemo: {
+    padding: 10,
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 2,
@@ -15,12 +16,18 @@ export default StyleSheet.create({
     marginHorizontal: 20,
   },
   preText: {
-    fontFamily: 'monospace',
+    fontFamily: Platform.select({
+      ios: 'Courier New',
+      android: 'monospace',
+    }),
     color: '#fff',
   },
   typing: {
     textAlign: 'center',
-    fontFamily: 'monospace',
+    fontFamily: Platform.select({
+      ios: 'Courier New',
+      android: 'monospace',
+    }),
     color: '#fff',
     fontSize: 20,
     marginTop: 15,
