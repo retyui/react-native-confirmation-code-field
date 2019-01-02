@@ -5,6 +5,11 @@ import { Text } from 'react-native';
 export const CURSOR_BLINKING_ANIMATION_SPEED = 500;
 export const CURSOR_SYMBOL = '|';
 
+const style = {
+  // reset inherit value
+  backgroundColor: '#00000000',
+};
+
 export default class Cursor extends Component<
   {||},
   {| cursorSymbol: string |},
@@ -31,6 +36,6 @@ export default class Cursor extends Component<
   }
 
   render() {
-    return <Text>{this.state.cursorSymbol}</Text>;
+    return <Text style={style}>{this.state.cursorSymbol}</Text>;
   }
 }
