@@ -10,7 +10,7 @@
   "dependencies": {
     "react": "16.5.0",
     "react-native": "0.57.0",
-    "react-native-linear-gradient": "^2.4.2"
+    "react-native-linear-gradient": "^2.5.3"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
