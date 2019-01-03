@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 3.0.0-beta-1
+## 3.0.0
 
 - Remove base implementation based on `One code cell` === `One TextInput`
 - Fix IOS fast paste SMS code

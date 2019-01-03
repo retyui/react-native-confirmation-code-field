@@ -37,7 +37,6 @@ declare module 'react-native-confirmation-code-field' {
     maskSymbol?: string;
 
     autoFocus?: boolean;
-    canPasteCode?: boolean;
 
     cellProps?: ReactNative.TextProps | CellPropsFn;
     inputProps?: ReactNative.TextInputProps;
