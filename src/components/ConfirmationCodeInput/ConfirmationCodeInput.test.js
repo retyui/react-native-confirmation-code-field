@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import TextInputCustom from '../TextInputCustom';
-import Cell from '../TextCustom';
+import Cell from '../Cell';
 
 import ConfirmationCodeInput from './ConfirmationCodeInput';
 
