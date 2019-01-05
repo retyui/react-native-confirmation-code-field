@@ -3,11 +3,11 @@ import React from 'react';
 import { Text } from 'react-native';
 import { shallow } from 'enzyme';
 
-import TextCustom from '../TextCustom';
+import Cell from '../TextCustom';
 
 const defaultProps = { index: 0 };
 
-const render = props => shallow(<TextCustom {...defaultProps} {...props} />);
+const render = props => shallow(<Cell {...defaultProps} {...props} />);
 
 test('should call onLayout with index and LayoutEvent', () => {
   const index = 12;
