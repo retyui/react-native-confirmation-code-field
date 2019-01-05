@@ -1,10 +1,9 @@
 // @flow
-import { View, Text, TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
 
 import type { ElementConfig } from 'react';
 
 export type TextInputProp = ElementConfig<typeof TextInput>;
-export type TextProps = ElementConfig<typeof Text>;
 export type ViewProps = ElementConfig<typeof View>;
 export type KeyboardType = $PropertyType<TextInputProp, 'keyboardType'>;
 
@@ -16,7 +15,7 @@ export type CellPropsOptions = {|
   hasValue: boolean,
 |};
 
-export type CellPropsFn = CellPropsOptions => ?TextProps;
+export type CellPropsFn = CellPropsOptions => ?TextInputProp;
 
 export type Props = $ReadOnly<{|
   // Required props
@@ -37,7 +36,7 @@ export type Props = $ReadOnly<{|
   keyboardType: KeyboardType,
   maskSymbol: string,
 
-  cellProps: null | TextProps | CellPropsFn,
+  cellProps: null | TextInputProp | CellPropsFn,
   containerProps: ViewProps,
   inputProps: TextInputProp,
   testID?: any,

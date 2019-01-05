@@ -18,7 +18,7 @@ declare module 'react-native-confirmation-code-field' {
 
   export type CellPropsFn = (
     options: CellPropsOptions,
-  ) => ReactNative.TextProps | void;
+  ) => ReactNative.TextInputProps | void | null;
 
   export interface ConfirmationCodeInputProps {
     onFulfill: (code: string) => void;
@@ -38,7 +38,7 @@ declare module 'react-native-confirmation-code-field' {
 
     autoFocus?: boolean;
 
-    cellProps?: ReactNative.TextProps | CellPropsFn;
+    cellProps?: ReactNative.TextInputProps | CellPropsFn;
     inputProps?: ReactNative.TextInputProps;
     containerProps?: ReactNative.ViewProps;
 

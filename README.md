@@ -51,6 +51,6 @@ class App extends Component {
 This component consists of:
 
 1. Container `<View  {...containerProps}/>`;
-2. Render the "Cells" for the text code inside the container ("Cells" is `<Text {...cellProps} />`);
+2. Render the "Cells" for the text code inside the container ("Cells" is `<TextInput {...cellProps} />`);
 3. And over this render invisible `<TextInput {...inputProps}/>`;
 4. "Cursor" inside cell is [simulated component](src/components/Cursor.js)

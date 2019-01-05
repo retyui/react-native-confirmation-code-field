@@ -21,7 +21,7 @@
   - [Customize props](#customize-props)
     - [`containerProps?: ViewProps`](#containerprops-viewprops)
     - [`inputProps?: TextInputProps`](#inputprops-textinputprops)
-    - [`cellProps: TextProps | ({index: number, isFocused: boolean, hasValue: boolean}) => TextProps`](#cellprops-textprops--index-number-isfocused-boolean-hasvalue-boolean--textprops)
+    - [`cellProps: TextInputProps | ({index: number, isFocused: boolean, hasValue: boolean}) => ?TextInputProps`](#cellprops-textinputprops--index-number-isfocused-boolean-hasvalue-boolean--textinputprops)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
   - [Functions](#functions)
@@ -121,19 +121,19 @@ Some built-in variants. Default `border-box`. [Demo `variant`:](examples/rn56/sr
 
 [`<TextInput/>` component props](https://facebook.github.io/react-native/docs/textinput#props)
 
-### `cellProps: TextProps | ({index: number, isFocused: boolean, hasValue: boolean}) => TextProps`
+### `cellProps: TextInputProps | ({index: number, isFocused: boolean, hasValue: boolean}) => ?TextInputProps`
 
-That property help customize Cells. When pass Object it must be [`<Text/> component props`](https://facebook.github.io/react-native/docs/text#props) and this object will spread for each cell.
+That property help customize Cells. When pass Object it must be [`<TextInput/>` component props](https://facebook.github.io/react-native/docs/textinput#props) and this object will spread for each cell.
 
-And if you pass function component will call with next options: 
+And if you pass function component will call with next options:
 
 - `index`: uniq number of cell
 - `isFocused`: is cell in focus now
 - `hasValue`: is cell has value
 
-Component expects you will pass TextProps or null.
+Your function must will pass [TextInputProps](<(https://facebook.github.io/react-native/docs/textinput#props)>) or null.
 
- ([Example](https://github.com/retyui/react-native-confirmation-code-field/blob/cf1dfab32f253312642d42eaffd586396c924435/examples/src/realDemo/DarkExample/index.js#L35-L45) for custom style)
+([Example](https://github.com/retyui/react-native-confirmation-code-field/blob/cf1dfab32f253312642d42eaffd586396c924435/examples/src/realDemo/DarkExample/index.js#L35-L45) for custom style)
 
 ## Other props
 
