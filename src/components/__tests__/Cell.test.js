@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import { Text } from 'react-native';
+import { TextInput } from 'react-native';
 import { shallow } from 'enzyme';
 
-import Cell from '../TextCustom';
+import Cell from '../Cell';
 
 const defaultProps = { index: 0 };
 
@@ -23,7 +23,7 @@ test('should call onLayout with index and LayoutEvent', () => {
   expect(onLayout).toHaveBeenCalledTimes(0);
 
   wrap
-    .find(Text)
+    .find(TextInput)
     .props()
     .onLayout(event);
 
@@ -37,7 +37,7 @@ test('should work correctly when onPress not passed', () => {
   const event = { some: 'data' };
 
   wrap
-    .find(Text)
+    .find(TextInput)
     .props()
     .onLayout(event);
 });

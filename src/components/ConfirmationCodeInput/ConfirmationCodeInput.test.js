@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import TextInputCustom from '../TextInputCustom';
-import TextCustom from '../TextCustom';
+import Cell from '../TextCustom';
 
 import ConfirmationCodeInput from './ConfirmationCodeInput';
 
@@ -32,7 +32,7 @@ test('Text count must be equal codeLength', () => {
     codeLength,
   });
 
-  expect(wrap.find(TextCustom).length).toBe(codeLength);
+  expect(wrap.find(Cell).length).toBe(codeLength);
 });
 
 describe('cellProps', () => {
@@ -66,7 +66,7 @@ describe('cellProps', () => {
       expect(cellProps).toHaveBeenCalledTimes(codeLength);
 
       const props = wrap
-        .find(TextCustom)
+        .find(Cell)
         .first()
         .props();
 
@@ -74,7 +74,7 @@ describe('cellProps', () => {
       expect(props).not.toEqual(expect.objectContaining(overWrittenProps));
 
       const lastProps = wrap
-        .find(TextCustom)
+        .find(Cell)
         .last()
         .props();
 
@@ -95,7 +95,7 @@ describe('cellProps', () => {
       });
 
       const props = wrap
-        .find(TextCustom)
+        .find(Cell)
         .first()
         .props();
 
@@ -178,7 +178,7 @@ test('must clear code starting from clicked cell', () => {
   };
 
   wrap
-    .find(TextCustom)
+    .find(Cell)
     .get(cellIndex)
     .props.onLayout(cellIndex, {
       nativeEvent: {

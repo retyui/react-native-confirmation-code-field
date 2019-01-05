@@ -6,11 +6,10 @@ import createRef from '../../createRef';
 import { concatStyles } from '../../styles';
 
 import Cursor from '../Cursor';
-import TextCustom from '../TextCustom';
+import Cell from '../Cell';
 import TextInputCustom from '../TextInputCustom';
 
 import { getCellStyle, getContainerStyle, styles } from './styles';
-import { validateCompareCode } from './validation';
 
 import type { Props, State } from './types';
 import type {
@@ -86,20 +85,21 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
 
     return (
       // $FlowFixMe - Strange bag with `onLayout` property
-      <TextCustom
-        {...customProps}
+      <Cell
         key={index}
+        editable={false}
+        {...customProps}
         index={index}
         onLayout={this.handlerOnLayoutCell}
         style={concatStyles(
-          getCellStyle(this.props, { isActive, customStyle }),
+          getCellStyle(this.props, { isActive }),
           customStyle,
         )}
       >
         {isActive
           ? this.renderCursor()
           : (codeSymbol && maskSymbol) || codeSymbol}
-      </TextCustom>
+      </Cell>
     );
   };
 
@@ -254,6 +254,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
 
 if (process.env.NODE_ENV !== 'production') {
   const PropTypes = require('prop-types');
+  const { validateCompareCode } = require('./validation');
 
   ConfirmationCodeInput.propTypes = {
     onFulfill: PropTypes.func.isRequired,
