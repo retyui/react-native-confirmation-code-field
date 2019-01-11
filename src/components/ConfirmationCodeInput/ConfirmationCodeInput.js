@@ -87,8 +87,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
       // $FlowFixMe - Strange bag with `onLayout` property
       <Cell
         key={index}
-        editable={false}
         {...customProps}
+        editable={false}
         index={index}
         onLayout={this.handlerOnLayoutCell}
         style={concatStyles(
