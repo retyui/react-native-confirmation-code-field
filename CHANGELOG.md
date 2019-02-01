@@ -2,9 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.1.3
+
+- Fix `autoFucus` prop [#32](https://github.com/retyui/react-native-confirmation-code-field/pull/32)
+
 ## 3.1.0
 
-- Fix IOS borderBottom style [#28](https://github.com/retyui/react-native-confirmation-code-field/pull/28/files) 
+- Fix IOS borderBottom style [#28](https://github.com/retyui/react-native-confirmation-code-field/pull/28/files)
 
 ## 3.0.0
 

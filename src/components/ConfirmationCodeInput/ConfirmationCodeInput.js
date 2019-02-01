@@ -220,15 +220,16 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   );
 
   renderInput() {
-    const { inputProps, keyboardType, codeLength } = this.props;
+    const { autoFocus, inputProps, keyboardType, codeLength } = this.props;
 
     return (
       <TextInputCustom
         // $FlowFixMe
         ref={this._input}
-        keyboardType={keyboardType}
         maxLength={codeLength}
         {...inputProps}
+        autoFocus={autoFocus}
+        keyboardType={keyboardType}
         onBlur={this.handlerOnBlur}
         onFocus={this.handlerOnFocus}
         onPress={this.handlerOnPress}
