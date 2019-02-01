@@ -30,7 +30,6 @@ const TextInputCustom: Class<
       onPress(event);
     }
 
-    // $FlowFixMe
     super._onPress(event);
   };
 };

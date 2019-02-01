@@ -1,8 +1,7 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { View, TextInput as TextInputNative } from 'react-native';
 
-import createRef from '../../createRef';
 import { concatStyles } from '../../styles';
 
 import Cursor from '../Cursor';
@@ -36,7 +35,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     maskSymbol: '',
   };
 
-  input = createRef();
+  _input = createRef();
 
   state = {
     isFocused: false,
@@ -87,8 +86,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
       // $FlowFixMe - Strange bag with `onLayout` property
       <Cell
         key={index}
-        editable={false}
         {...customProps}
+        editable={false}
         index={index}
         onLayout={this.handlerOnLayoutCell}
         style={concatStyles(
@@ -160,7 +159,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   }
 
   blur() {
-    const { current } = this.input;
+    const { current } = this._input;
 
     if (current) {
       current.blur();
@@ -168,7 +167,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   }
 
   focus() {
-    const { current } = this.input;
+    const { current } = this._input;
 
     if (current) {
       current.focus();
@@ -225,7 +224,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
 
     return (
       <TextInputCustom
-        ref={this.input}
+        // $FlowFixMe
+        ref={this._input}
         keyboardType={keyboardType}
         maxLength={codeLength}
         {...inputProps}
