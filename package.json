@@ -29,7 +29,7 @@
     "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "0.76.0",
+    "flow-bin": "^0.92.0",
     "husky": "^1.1.4",
     "jest": "23.6.0",
     "lint-staged": "^8.0.5",
@@ -37,7 +37,7 @@
     "prop-types": "^15.6.2",
     "react": "16.5.1",
     "react-dom": "16.5.1",
-    "react-native": "0.57.0"
+    "react-native": "^0.58.3"
   },
   "husky": {
     "hooks": {
