@@ -22,23 +22,23 @@ export type Props = $ReadOnly<{|
   onFulfill: (code: string) => void,
 
   // Not required props (rewritten in defaultProps)
-  autoFocus: boolean,
-  codeLength: number,
-  defaultCode: ?string,
+  autoFocus?: boolean,
+  codeLength?: number,
+  defaultCode?: ?string,
 
-  activeColor: string,
-  cellBorderWidth: number,
-  inactiveColor: string,
-  inputPosition: InputPositions,
-  size: number,
-  space: number,
-  variant: VariantNames,
-  keyboardType: KeyboardType,
-  maskSymbol: string,
+  activeColor?: string,
+  cellBorderWidth?: number,
+  inactiveColor?: string,
+  inputPosition?: InputPositions,
+  size?: number,
+  space?: number,
+  variant?: VariantNames,
+  keyboardType?: KeyboardType,
+  maskSymbol?: string,
 
-  cellProps: null | TextInputProp | CellPropsFn,
-  containerProps: ViewProps,
-  inputProps: TextInputProp,
+  cellProps?: null | TextInputProp | CellPropsFn,
+  containerProps?: ViewProps,
+  inputProps?: TextInputProp,
   testID?: any,
 |}>;
 
