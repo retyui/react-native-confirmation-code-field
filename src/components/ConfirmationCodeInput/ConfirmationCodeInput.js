@@ -53,6 +53,14 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     |},
   } = {};
 
+  static getDerivedStateFromProps(nextProps: Object) {
+    if (nextProps.value && nextProps.value.length) {
+      return { codeValue: nextProps.value };
+    }
+
+    return null;
+  }
+
   clear() {
     this.handlerOnTextChange('');
   }
