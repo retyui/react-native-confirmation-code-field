@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
+import { View } from 'react-native';
 
 import TextInputCustom from '../TextInputCustom';
 import Cell from '../Cell';
@@ -229,4 +230,12 @@ test('should init state with truncated codeValue based by defaultCode', () => {
   });
 
   expect(wrap.state().codeValue).toBe(defaultCode.slice(0, codeLength));
+});
+
+test('should pass testID to root <View/> component', () => {
+  const testID = '123';
+  const wrap = render({ testID });
+
+  expect(wrap.get(0).type).toBe(View);
+  expect(wrap.get(0).props.testID).toBe(testID);
 });

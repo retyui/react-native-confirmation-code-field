@@ -242,10 +242,14 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   }
 
   render() {
-    const { containerProps } = this.props;
+    const { containerProps, testID } = this.props;
 
     return (
-      <View {...containerProps} style={getContainerStyle(this.props)}>
+      <View
+        {...containerProps}
+        testID={testID}
+        style={getContainerStyle(this.props)}
+      >
         {this.renderCodeCells()}
         {this.renderInput()}
       </View>
