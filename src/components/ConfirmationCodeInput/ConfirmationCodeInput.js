@@ -233,6 +233,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         ref={this._input}
         maxLength={codeLength}
         {...inputProps}
+        value={this.state.codeValue}
         autoFocus={autoFocus}
         keyboardType={keyboardType}
         onBlur={this.handlerOnBlur}
@@ -240,9 +241,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         onPress={this.handlerOnPress}
         style={concatStyles(styles.maskInput, inputProps.style)}
         onChangeText={this.handlerOnTextChange}
-      >
-        {this.state.codeValue}
-      </TextInputCustom>
+      />
     );
   }
 
