@@ -33,6 +33,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     variant: 'border-box',
     keyboardType: 'number-pad',
     maskSymbol: '',
+    formatCode: null,
   };
 
   _input = createRef();
@@ -130,8 +131,12 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   handlerOnTextChange = this.inheritTextInputMethod(
     'onTextChange',
     (text: string) => {
-      const codeValue = this.truncateString(text);
-      const { codeLength, onFulfill } = this.props;
+      const { codeLength, onFulfill, formatCode } = this.props;
+
+      const codeValue =
+        typeof formatCode === 'function'
+          ? formatCode(this.truncateString(text))
+          : this.truncateString(text);
 
       this.setState(
         {
@@ -284,6 +289,7 @@ if (process.env.NODE_ENV !== 'production') {
     ]),
     keyboardType: TextInputNative.propTypes.keyboardType,
     maskSymbol: PropTypes.string,
+    formatCode: PropTypes.func,
   };
 }
 

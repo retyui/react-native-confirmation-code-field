@@ -40,6 +40,7 @@ export type Props = $ReadOnly<{|
   containerProps: ViewProps,
   inputProps: TextInputProp,
   testID?: any,
+  formatCode: (code: string) => string,
 |}>;
 
 export type State = {|

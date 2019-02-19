@@ -43,6 +43,7 @@ declare module 'react-native-confirmation-code-field' {
     containerProps?: ReactNative.ViewProps;
 
     testID?: any;
+    formatCode?: (code: string) => string;
   }
 
   export default class ConfirmationCodeInput extends React.Component<

@@ -24,6 +24,7 @@
     - [`cellProps: TextInputProps | ({index: number, isFocused: boolean, hasValue: boolean}) => ?TextInputProps`](#cellprops-textinputprops--index-number-isfocused-boolean-hasvalue-boolean--textinputprops)
   - [Other props](#other-props)
     - [`testID?: any`](#testid-any)
+    - [`formatCode?: (code: string) => string`](#formatcode-code-string--string)
   - [Functions](#functions)
     - [`focus() => void`](#focus--void)
     - [`blur() => void`](#blur--void)
@@ -140,6 +141,10 @@ Your function must will pass [TextInputProps](<(https://facebook.github.io/react
 ### `testID?: any`
 
 Help in test
+
+### `formatCode: (code: string) => string`
+
+Function that formats code on `onChangeText`.
 
 ## Functions
 
