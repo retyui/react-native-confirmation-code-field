@@ -45,12 +45,18 @@ declare module 'react-native-confirmation-code-field' {
     testID?: any;
   }
 
+  export interface ConfirmationCodeInputState {
+    isFocused: boolean;
+    codeValue: string;
+  }
+
   export default class ConfirmationCodeInput extends React.Component<
     ConfirmationCodeInputProps,
-    {}
+    ConfirmationCodeInputState
   > {
     clear(): void;
     focus(): void;
     blur(): void;
+    handlerOnTextChange(text: string): void;
   }
 }

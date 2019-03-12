@@ -7,10 +7,11 @@ A react-native confirmation code field for both IOS and Android (base on [this](
 
 ### Component features:
 
-- 🔮 Simple. Easy to use.
-- 🍎 IOS "fast paste SMS-code" support.
-- 🚮 Clearing part of the code by clicking on the cell
-- 🛠 Extendable and hackable.
+- 🔮 Simple. Easy to use;
+- 🍎 IOS "fast paste SMS-code" support (\* and custom code paste for Android);
+- 🚮 Clearing part of the code by clicking on the cell;
+- ⚡ `blur()` and `focus()` methods support;
+- 🛠 Extendable and hackable;
 - 🤓 Readable [changelog](CHANGELOG.md).
 
 ## Links
@@ -46,11 +47,52 @@ class App extends Component {
 }
 ```
 
+## How paste or clear code
+
+Paste code can helpful for Android platform when you can read SMS.
+
+```js
+import React, { Component, createRef } from 'react';
+import CodeInput from 'react-native-confirmation-code-field';
+
+class App extends Component {
+  handlerOnFulfill = code => {
+    if (isValidCode(code)) {
+      console.log(code);
+    } else {
+      this.clearCode();
+    }
+  };
+
+  field = createRef();
+
+  clearCode() {
+    const { current } = this.field;
+
+    if (current) {
+      current.clear();
+    }
+  }
+
+  pasteCode() {
+    const { current } = this.field;
+
+    if (current) {
+      current.handlerOnTextChange(value);
+    }
+  }
+
+  render() {
+    return <CodeInput ref={this.field} onFulfill={this.handlerOnFulfill} />;
+  }
+}
+```
+
 ## How it works?
 
 This component consists of:
 
-1. Container `<View  {...containerProps}/>`;
+1. Container `<View {...containerProps}/>`;
 2. Render the "Cells" for the text code inside the container ("Cells" is `<TextInput {...cellProps} />`);
 3. And over this render invisible `<TextInput {...inputProps}/>`;
 4. "Cursor" inside cell is [simulated component](src/components/Cursor.js)
