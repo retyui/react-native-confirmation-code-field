@@ -24,9 +24,9 @@ const TextInputCustom: Class<
   // and then calculate what cell on clicked
   _onPress = event => {
     // $FlowFixMe
-    const { onPress } = this.props;
+    const { onPress, editable } = this.props;
 
-    if (onPress) {
+    if (onPress && (editable || editable === undefined)) {
       onPress(event);
     }
 
