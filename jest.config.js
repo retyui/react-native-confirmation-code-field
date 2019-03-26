@@ -2,7 +2,7 @@
 
 module.exports = {
   preset: 'react-native',
-  setupTestFrameworkScriptFile: '<rootDir>.setup-tests.js',
+  setupFilesAfterEnv: ['<rootDir>.setup-tests.js'],
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '/.setup-tests.js',
