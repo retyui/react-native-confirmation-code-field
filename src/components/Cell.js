@@ -1,7 +1,7 @@
 // @flow
 import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 import React, { Component, type ElementConfig } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, Text, Platform } from 'react-native';
 
 import { omit } from '../omit';
 
@@ -13,6 +13,8 @@ type Props = $ReadOnly<{|
   onLayout?: (index: number, event: LayoutEvent) => void,
   index: number,
 |}>;
+
+const CellComponent = Platform.OS === 'web' ? Text : TextInput;
 
 class Cell extends Component<Props> {
   handlerOnLayout = (event: LayoutEvent) => {
@@ -26,7 +28,7 @@ class Cell extends Component<Props> {
   render() {
     // TODO: replace to Text component (via: https://github.com/facebook/react-native/issues/23537)
     return (
-      <TextInput
+      <CellComponent
         onLayout={this.handlerOnLayout}
         {...omit(['onLayout', 'index'], this.props)}
       />

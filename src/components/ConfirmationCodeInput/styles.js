@@ -1,5 +1,5 @@
 // @flow
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
     opacity: 0.01,
     // By clicking the cursor was always placed at the end of TextInput
     fontSize: 1,
+    ...Platform.select({
+      web: {
+        width: '100%',
+      },
+    }),
   },
 });
 
@@ -95,5 +100,12 @@ export const getCellStyle = (props: Props, { isActive }: Options) => {
 
     ...getBorderWidthStyle(props),
     ...getInputSpaceStyle(props),
+
+    ...Platform.select({
+      web: {
+        borderStyle: 'solid',
+        lineHeight: size * 0.9,
+      },
+    }),
   };
 };

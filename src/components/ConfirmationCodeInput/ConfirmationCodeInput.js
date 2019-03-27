@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent, createRef } from 'react';
-import { View, TextInput as TextInputNative } from 'react-native';
+import { View, TextInput as TextInputNative, Platform } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -206,12 +206,25 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     return -1;
   }
 
-  handlerOnPress = ({ nativeEvent: { locationX, locationY } }: PressEvent) => {
+  clearCodeByCoords(locationX: number, locationY: number) {
     const index = this.findIndex(locationX, locationY);
 
     if (index !== -1) {
       this.handlerOnTextChange(this.state.codeValue.slice(0, index));
     }
+  }
+
+  handlerOnPress = ({ nativeEvent: { locationX, locationY } }: PressEvent) => {
+    this.clearCodeByCoords(locationX, locationY);
+  };
+
+  // For support react-native-web
+  handlerOnClick = (e: any) => {
+    const offset = e.target.getClientRects()[0];
+    const locationX = e.clientX - offset.left;
+    const locationY = e.clientY - offset.top;
+
+    this.clearCodeByCoords(locationX, locationY);
   };
 
   handlerOnFocus = this.inheritTextInputMethod('onFocus', () =>
@@ -224,23 +237,26 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
 
   renderInput() {
     const { autoFocus, inputProps, keyboardType, codeLength } = this.props;
+    const handlers =
+      Platform.OS === 'web'
+        ? { onClick: this.handlerOnClick }
+        : { onPress: this.handlerOnPress };
 
     return (
+      // $FlowFixMe - onClick strange prop
       <TextInputCustom
-        // $FlowFixMe
         ref={this._input}
         maxLength={codeLength}
         {...inputProps}
+        {...handlers}
         autoFocus={autoFocus}
         keyboardType={keyboardType}
         onBlur={this.handlerOnBlur}
         onFocus={this.handlerOnFocus}
-        onPress={this.handlerOnPress}
         style={concatStyles(styles.maskInput, inputProps.style)}
         onChangeText={this.handlerOnTextChange}
-      >
-        {this.state.codeValue}
-      </TextInputCustom>
+        value={this.state.codeValue}
+      />
     );
   }
 
