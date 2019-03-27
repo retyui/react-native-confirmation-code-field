@@ -86,7 +86,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     const customStyle = customProps && customProps.style;
     const cellValue = isActive
       ? this.renderCursor()
-      : (codeSymbol && maskSymbol) || codeSymbol
+      : (codeSymbol && maskSymbol) || codeSymbol;
+
     return (
       // $FlowFixMe - Strange bag with `onLayout` property
       <Cell
@@ -99,19 +100,19 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
           getCellStyle(this.props, { isActive }),
           customStyle,
         )}
-        {...(isWeb? {value: cellValue} : {})}
+        {...(isWeb ? { value: cellValue } : {})}
       >
-        {isWeb? null : cellValue}
+        {isWeb ? null : cellValue}
       </Cell>
     );
   };
 
   renderCursor() {
     if (this.state.isFocused) {
-      return isWeb? "|" : <Cursor />;
+      return isWeb ? '|' : <Cursor />;
     }
 
-    return "";
+    return '';
   }
 
   renderCodeCells() {
@@ -241,9 +242,10 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         onPress={this.handlerOnPress}
         style={concatStyles(styles.maskInput, inputProps.style)}
         onChangeText={this.handlerOnTextChange}
-        {...(isWeb? {value: this.state.codeValue} : {children: this.state.codeValue})}
-      >
-      </TextInputCustom>
+        {...(isWeb
+          ? { value: this.state.codeValue }
+          : { children: this.state.codeValue })}
+      />
     );
   }
 
