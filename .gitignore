@@ -1,3 +1,8 @@
 coverage/
 node_modules/
 examples/ConfirmationCodeField/src/
+examples/web/src/
+examples/web/ios/
+examples/web/android/
+examples/web/public/
+examples/web/yarn.lock
