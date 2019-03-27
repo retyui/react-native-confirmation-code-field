@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     // Invisible TextInput on top of all container component
     ...StyleSheet.absoluteFillObject,
     opacity: 0.01,
+    width: '100%',
     // By clicking the cursor was always placed at the end of TextInput
     fontSize: 1,
   },

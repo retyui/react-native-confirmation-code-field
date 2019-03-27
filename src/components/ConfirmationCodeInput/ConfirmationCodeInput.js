@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent, createRef } from 'react';
-import { View, TextInput as TextInputNative } from 'react-native';
+import { View, TextInput as TextInputNative, Platform } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -15,6 +15,8 @@ import type {
   LayoutEvent,
   PressEvent,
 } from 'react-native/Libraries/Types/CoreEventTypes';
+
+const isWeb = Platform.OS === 'web';
 
 class ConfirmationCodeInput extends PureComponent<Props, State> {
   static defaultProps = {
@@ -82,7 +84,9 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     }
 
     const customStyle = customProps && customProps.style;
-
+    const cellValue = isActive
+      ? this.renderCursor()
+      : (codeSymbol && maskSymbol) || codeSymbol
     return (
       // $FlowFixMe - Strange bag with `onLayout` property
       <Cell
@@ -95,20 +99,19 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
           getCellStyle(this.props, { isActive }),
           customStyle,
         )}
+        {...(isWeb? {value: cellValue} : {})}
       >
-        {isActive
-          ? this.renderCursor()
-          : (codeSymbol && maskSymbol) || codeSymbol}
+        {isWeb? null : cellValue}
       </Cell>
     );
   };
 
   renderCursor() {
     if (this.state.isFocused) {
-      return <Cursor />;
+      return isWeb? "|" : <Cursor />;
     }
 
-    return null;
+    return "";
   }
 
   renderCodeCells() {
@@ -238,8 +241,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         onPress={this.handlerOnPress}
         style={concatStyles(styles.maskInput, inputProps.style)}
         onChangeText={this.handlerOnTextChange}
+        {...(isWeb? {value: this.state.codeValue} : {children: this.state.codeValue})}
       >
-        {this.state.codeValue}
       </TextInputCustom>
     );
   }
