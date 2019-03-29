@@ -1,5 +1,5 @@
 // @flow
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, I18nManager } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -31,7 +31,7 @@ export const getContainerStyle = ({ inputPosition, containerProps }: Props) =>
   concatStyles(
     {
       flex: 1,
-      flexDirection: 'row',
+      flexDirection: (I18nManager.isRTL) ? 'row-reverse' : 'row',
       justifyContent: positionMap[inputPosition],
     },
     containerProps && containerProps.style,
