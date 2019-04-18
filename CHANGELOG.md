@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.5.0
+
+- Add new prop ...
+
 ## 3.4.1
 
 - Add RTL support [#55](https://github.com/retyui/react-native-confirmation-code-field/pull/55) by [bamlhs](https://github.com/bamlhs)

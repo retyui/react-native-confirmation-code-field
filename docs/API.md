@@ -10,8 +10,9 @@
     - [`codeLength?: number`](#codelength-number)
     - [`defaultCode?: string`](#defaultcode-string)
   - [Style props](#style-props)
-    - [`maskSymbol:? string`](#masksymbol-string)
-    - [`keyboardType:? KeyboardType`](#keyboardtype-keyboardtype)
+    - [`CellComponent?: ComponentType<any>`](#cellcomponent-componenttypeany)
+    - [`maskSymbol?: string`](#masksymbol-string)
+    - [`keyboardType?: KeyboardType`](#keyboardtype-keyboardtype)
     - [`activeColor?: string`](#activecolor-string)
     - [`inactiveColor?: string`](#inactivecolor-string)
     - [`cellBorderWidth?: number`](#cellborderwidth-number)
@@ -60,13 +61,17 @@ Default code value, must be the same length as `codeLength`
 
 ## Style props
 
-### `maskSymbol:? string`
+### `CellComponent?: ComponentType<any>`
+
+A react component that use for render cell. It is really helpful for create [animation](https://github.com/retyui/react-native-confirmation-code-field/tree/master/examples/src/realDemo/AnimatedExample).
+
+### `maskSymbol?: string`
 
 A symbol that will be displayed when the field is filled. Supports emoji.
 
 <img width="400" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/master/docs/img/maskSymbol.jpg"/>
 
-### `keyboardType:? KeyboardType`
+### `keyboardType?: KeyboardType`
 
 Determines which keyboard to open.
 
