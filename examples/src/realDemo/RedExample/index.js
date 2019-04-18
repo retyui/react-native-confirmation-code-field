@@ -52,7 +52,6 @@ export default class RedExample extends Component {
           <CodeFiled
             variant="clear"
             codeLength={6}
-            compareWithCode="123456"
             keyboardType="numeric"
             cellProps={this.cellProps}
             containerProps={this.containerProps}

@@ -14,6 +14,7 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 25,
     fontWeight: '700',
+    textAlign: 'center',
   },
   inputSubLabel: {
     color: '#fff',

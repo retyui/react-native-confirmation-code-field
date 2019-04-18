@@ -42,22 +42,19 @@ export default StyleSheet.create({
     height: 70,
     borderRadius: 2,
     backgroundColor: '#fff',
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
-    alignItems: 'center',
     justifyContent: 'center',
+
+    // IOS
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    // Android
+    elevation: 5,
   },
   nextButtonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: '700',
+    textAlign: 'center',
   },
 });
