@@ -34,6 +34,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     variant: 'border-box',
     keyboardType: 'number-pad',
     maskSymbol: '',
+    CellComponent: Cell,
   };
 
   _input = createRef();
@@ -65,7 +66,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   };
 
   renderCode = (codeSymbol: string, index: number) => {
-    const { cellProps, maskSymbol } = this.props;
+    const { isFocused } = this.state;
+    const { cellProps, maskSymbol, CellComponent } = this.props;
     const isActive = this.getCurrentIndex() === index;
 
     let customProps = null;
@@ -75,7 +77,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         typeof cellProps === 'function'
           ? cellProps({
               index,
-              isFocused: isActive,
+              isFocused: isActive && isFocused,
               hasValue: Boolean(codeSymbol),
             })
           : cellProps;
@@ -84,13 +86,12 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     const customStyle = customProps && customProps.style;
 
     return (
-      // $FlowFixMe - Strange bag with `onLayout` property
-      <Cell
+      <CellComponent
         key={index}
         {...customProps}
         editable={false}
         index={index}
-        onLayout={this.handlerOnLayoutCell}
+        onLayout={event => this.handlerOnLayoutCell(index, event)}
         style={concatStyles(
           getCellStyle(this.props, { isActive }),
           customStyle,
@@ -99,7 +100,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         {isActive
           ? this.renderCursor()
           : (codeSymbol && maskSymbol) || codeSymbol}
-      </Cell>
+      </CellComponent>
     );
   };
 

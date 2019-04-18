@@ -1,7 +1,7 @@
 // @flow
 import { View, TextInput } from 'react-native';
 
-import type { ElementConfig } from 'react';
+import type { ElementConfig, ComponentType } from 'react';
 
 export type TextInputProp = ElementConfig<typeof TextInput>;
 export type ViewProps = ElementConfig<typeof View>;
@@ -22,6 +22,7 @@ export type Props = $ReadOnly<{|
   onFulfill: (code: string) => void,
 
   // Not required props (rewritten in defaultProps)
+  CellComponent: ComponentType<any>,
   autoFocus: boolean,
   codeLength: number,
   defaultCode: ?string,
