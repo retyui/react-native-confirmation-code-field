@@ -12,6 +12,7 @@ import VariantDemo from './propsDemos/Variant';
 
 import DarkExample from './realDemo/DarkExample';
 import RedExample from './realDemo/RedExample';
+import AnimatedExample from './realDemo/AnimatedExample';
 
 import styles from './styles';
 
@@ -20,6 +21,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
+          <AnimatedExample />
           <RedExample />
           <DarkExample />
 
