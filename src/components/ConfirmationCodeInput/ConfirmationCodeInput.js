@@ -90,7 +90,6 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         key={index}
         {...customProps}
         editable={false}
-        index={index}
         onLayout={event => this.handlerOnLayoutCell(index, event)}
         style={concatStyles(
           getCellStyle(this.props, { isActive }),

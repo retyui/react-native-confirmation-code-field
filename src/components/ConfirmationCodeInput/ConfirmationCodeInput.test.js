@@ -181,7 +181,7 @@ test('must clear code starting from clicked cell', () => {
   wrap
     .find(Cell)
     .get(cellIndex)
-    .props.onLayout(cellIndex, {
+    .props.onLayout({
       nativeEvent: {
         layout,
       },
