@@ -35,6 +35,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     keyboardType: 'number-pad',
     maskSymbol: '',
     CellComponent: Cell,
+    blurOnSubmit: true,
   };
 
   _input = createRef();
@@ -132,7 +133,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     'onTextChange',
     (text: string) => {
       const codeValue = this.truncateString(text);
-      const { codeLength, onFulfill } = this.props;
+      const { codeLength, onFulfill, blurOnSubmit } = this.props;
 
       this.setState(
         {
@@ -140,7 +141,9 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         },
         () => {
           if (this.getCodeLength() === codeLength) {
-            this.blur();
+            if (blurOnSubmit) {
+              this.blur();
+            }
 
             onFulfill(codeValue);
           }
@@ -304,6 +307,7 @@ if (process.env.NODE_ENV !== 'production') {
     ]),
     keyboardType: TextInputNative.propTypes.keyboardType,
     maskSymbol: PropTypes.string,
+    blurOnSubmit: PropTypes.bool,
   };
 }
 
