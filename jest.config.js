@@ -2,10 +2,10 @@
 
 module.exports = {
   preset: 'react-native',
-  setupFilesAfterEnv: ['<rootDir>.setup-tests.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup-tests.js'],
   coveragePathIgnorePatterns: [
     '/node_modules/',
-    '/.setup-tests.js',
+    'jest.setup-tests.js',
     '(.*)/styles.js',
     '<rootDir>/src/components/ConfirmationCodeInput/validation.js',
   ],

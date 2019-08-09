@@ -13,9 +13,7 @@ export const validateCompareCode: PropsTypeCustomValidatorFn = (
 
     if (compareWithCode.length !== codeLength) {
       return new Error(
-        `Invalid prop ${propName} supplied to ${componentName}. Validation failed. ${propName} length  is not equal to "codeLength" (${
-          compareWithCode.length
-        } !== ${codeLength}).`,
+        `Invalid prop ${propName} supplied to ${componentName}. Validation failed. ${propName} length  is not equal to "codeLength" (${compareWithCode.length} !== ${codeLength}).`,
       );
     }
   }

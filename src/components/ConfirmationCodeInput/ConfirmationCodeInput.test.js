@@ -181,6 +181,7 @@ test('must clear code starting from clicked cell', () => {
   wrap
     .find(Cell)
     .get(cellIndex)
+    // $FlowFixMe
     .props.onLayout({
       nativeEvent: {
         layout,
@@ -236,6 +237,8 @@ test('should pass testID to root <View/> component', () => {
   const testID = '123';
   const wrap = render({ testID });
 
+  // $FlowFixMe
   expect(wrap.get(0).type).toBe(View);
+  // $FlowFixMe
   expect(wrap.get(0).props.testID).toBe(testID);
 });

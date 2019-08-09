@@ -21,6 +21,7 @@ test('should call onPress', () => {
 
   expect(onPress).toHaveBeenCalledTimes(0);
 
+  // $FlowFixMe
   wrap.instance()._onPress(event);
 
   expect(onPress).toHaveBeenCalledTimes(1);
@@ -36,6 +37,7 @@ test('should call super method _onPress', () => {
 
   expect(focus).toHaveBeenCalledTimes(0);
 
+  // $FlowFixMe
   wrap.instance()._onPress(event);
 
   expect(focus).toHaveBeenCalledTimes(1);

@@ -5,6 +5,7 @@ import { View, TextInput as TextInputNative, Platform } from 'react-native';
 import { concatStyles } from '../../styles';
 
 import Cursor from '../Cursor';
+import MaskSymbol from '../MaskSymbol';
 import Cell from '../Cell';
 import TextInputCustom from '../TextInputCustom';
 
@@ -68,7 +69,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
 
   renderCode = (codeSymbol: string, index: number) => {
     const { isFocused } = this.state;
-    const { cellProps, maskSymbol, CellComponent } = this.props;
+    const { cellProps, CellComponent } = this.props;
     const isActive = this.getCurrentIndex() === index;
 
     let customProps = null;
@@ -91,18 +92,35 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         key={index}
         {...customProps}
         editable={false}
+        // eslint-disable-next-line react/jsx-no-bind
         onLayout={event => this.handlerOnLayoutCell(index, event)}
         style={concatStyles(
           getCellStyle(this.props, { isActive }),
           customStyle,
         )}
       >
-        {isActive
-          ? this.renderCursor()
-          : (codeSymbol && maskSymbol) || codeSymbol}
+        {isActive ? this.renderCursor() : this.renderSymbol(codeSymbol, index)}
       </CellComponent>
     );
   };
+
+  renderSymbol(symbol: string, index: number) {
+    const { maskSymbol } = this.props;
+    const lastIndex = this.getLastIndex();
+
+    if (maskSymbol && symbol) {
+      return (
+        <MaskSymbol
+          isLast={index === lastIndex}
+          delay={500}
+          mask={maskSymbol}
+          symbol={symbol}
+        />
+      );
+    }
+
+    return symbol;
+  }
 
   renderCursor() {
     if (this.state.isFocused) {
@@ -152,14 +170,18 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     },
   );
 
+  getLastIndex() {
+    return Math.min(this.state.codeValue.length, this.props.codeLength) - 1;
+  }
+
   getCodeSymbols(): Array<string> {
     const { codeLength } = this.props;
     const { codeValue } = this.state;
 
-    return codeValue
-      .split('')
-      .concat(new Array(codeLength).fill(''))
-      .slice(0, codeLength);
+    return [...codeValue, ...new Array(codeLength).fill('')].slice(
+      0,
+      codeLength,
+    );
   }
 
   blur() {

@@ -1,6 +1,6 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "main": "src/components/ConfirmationCodeInput/index.js",
   "scripts": {
     "test": "jest",
@@ -8,7 +8,7 @@
     "lint": "eslint src ./*.js",
     "docs": "doctoc docs/API.md",
     "speller": "yaspeller-ci *.md docs/*.md",
-    "ci": "yarn run test & yarn run flow & yarn run lint & yarn run speller",
+    "ci": "yarn run test && yarn run flow && yarn run lint && yarn run speller",
     "prepublishOnly": "yarn run ci"
   },
   "peerDependencies": {
@@ -17,29 +17,29 @@
     "react-native": ">= 0.57.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "@exeto/eslint-config": "^2.0.0",
     "@exeto/eslint-config-react": "^3.0.0",
-    "@types/react": "^16.8.13",
-    "@types/react-native": "^0.57.45",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.2",
+    "clean-publish": "^1.1.2",
     "doctoc": "^1.4.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-flowtype": "^3.6.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "flow-bin": "^0.95.1",
-    "husky": "^1.3.1",
-    "jest": "^24.7.1",
-    "lint-staged": "^8.1.5",
-    "prettier": "^1.17.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-flowtype": "^4.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "flow-bin": "^0.98.1",
+    "husky": "^3.0.3",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-native": "^0.59.6",
-    "yaspeller-ci": "^1.0.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "^0.60.4",
+    "yaspeller-ci": "^1.0.1"
   },
   "husky": {
     "hooks": {
@@ -49,7 +49,6 @@
   },
   "description": "A react-native component to input confirmation code for both Android and IOS",
   "repository": "git@github.com:retyui/react-native-confirmation-code-input.git",
-  "author": "David Nrb <offantik@gmail.com>",
   "license": "MIT",
   "keywords": [
     "react",

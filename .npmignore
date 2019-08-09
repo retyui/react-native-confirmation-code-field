@@ -6,9 +6,9 @@
 .eslintignore
 .eslintrc.js
 .flowconfig
-.setup-tests.js
 .travis.yml
 .yaspellerrc
+jest.setup-tests.js
 appveyor.yml
 yarn.lock
 .idea/
