@@ -1,14 +1,19 @@
 // @flow
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 export const CURSOR_BLINKING_ANIMATION_SPEED = 500;
 export const CURSOR_SYMBOL = '|';
 
-const style = {
-  // reset inherit value
-  backgroundColor: '#00000000',
-};
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: '#00000000',
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    textDecorationLine: 'none',
+    textTransform: 'none',
+  },
+});
 
 export default class Cursor extends Component<
   {||},
@@ -36,6 +41,6 @@ export default class Cursor extends Component<
   }
 
   render() {
-    return <Text style={style}>{this.state.cursorSymbol}</Text>;
+    return <Text style={styles.root}>{this.state.cursorSymbol}</Text>;
   }
 }
