@@ -32,7 +32,6 @@ const positionMap = {
 export const getContainerStyle = ({ inputPosition, containerProps }: Props) =>
   concatStyles(
     {
-      flex: 1,
       flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       justifyContent: positionMap[inputPosition],
     },
