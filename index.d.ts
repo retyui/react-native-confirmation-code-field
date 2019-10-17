@@ -27,7 +27,7 @@ declare module 'react-native-confirmation-code-field' {
     defaultCode?: string;
     normalizeCode?: (code: string) => string;
 
-    CellComponent?: React.ComponentType<any>,
+    CellComponent?: React.ComponentType<any>;
     activeColor?: string;
     cellBorderWidth?: number;
     inactiveColor?: string;
@@ -42,7 +42,10 @@ declare module 'react-native-confirmation-code-field' {
     blurOnSubmit?: boolean;
 
     cellProps?: ReactNative.TextInputProps | CellPropsFn;
-    inputProps?: ReactNative.TextInputProps;
+    inputProps?: Omit<
+      ReactNative.TextInputProps,
+      'autoFocus' | 'keyboardType' | 'value'
+    >;
     containerProps?: ReactNative.ViewProps;
 
     testID?: any;

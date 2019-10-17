@@ -41,7 +41,14 @@ export type Props = $ReadOnly<{|
 
   cellProps: null | TextInputProp | CellPropsFn,
   containerProps: ViewProps,
-  inputProps: TextInputProp,
+  inputProps: $Diff<
+    TextInputProp,
+    {
+      autoFocus: any,
+      keyboardType: any,
+      value: any,
+    },
+  >,
   testID?: any,
 |}>;
 

@@ -109,14 +109,14 @@ describe('cellProps', () => {
 test('must change index and set value when text change', () => {
   const wrap = render();
 
-  const [index, text] = [0, '12'];
+  const text = '12';
 
   expect(wrap.state().codeValue).toEqual('');
 
   wrap
     .find(TextInputCustom)
     .first()
-    .prop('onChangeText')(text, index);
+    .prop('onChangeText')(text);
 
   wrap.update();
 
@@ -241,4 +241,21 @@ test('should pass testID to root <View/> component', () => {
   expect(wrap.get(0).type).toBe(View);
   // $FlowFixMe
   expect(wrap.get(0).props.testID).toBe(testID);
+});
+
+test('should call onTextChange from inputProps', () => {
+  const onChangeText = jest.fn();
+  const inputProps = { onChangeText };
+  const wrap = render({ inputProps });
+  const text = '123';
+
+  expect(onChangeText).toHaveBeenCalledTimes(0);
+
+  wrap
+    .find(TextInputCustom)
+    .first()
+    .prop('onChangeText')(text);
+
+  expect(onChangeText).toHaveBeenCalledTimes(1);
+  expect(onChangeText).toHaveBeenCalledWith(text);
 });

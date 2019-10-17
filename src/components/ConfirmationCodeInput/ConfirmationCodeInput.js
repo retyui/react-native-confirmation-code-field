@@ -1,6 +1,6 @@
 // @flow
-import React, { PureComponent, createRef } from 'react';
-import { View, TextInput as TextInputNative, Platform } from 'react-native';
+import React, { createRef, PureComponent } from 'react';
+import { Platform, TextInput as TextInputNative, View } from 'react-native';
 
 import { concatStyles } from '../../styles';
 
@@ -11,7 +11,7 @@ import TextInputCustom from '../TextInputCustom';
 
 import { getCellStyle, getContainerStyle, styles } from './styles';
 
-import type { Props, State } from './types';
+import type { Props, State, TextInputProp } from './types';
 import type {
   LayoutEvent,
   PressEvent,
@@ -135,7 +135,10 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     return this.getCodeSymbols().map(this.renderCode);
   }
 
-  inheritTextInputMethod(methodName: string, handler: Function) {
+  inheritTextInputMethod<MethodName: string>(
+    methodName: MethodName,
+    handler: $ElementType<TextInputProp, MethodName>,
+  ) {
     return (e: mixed) => {
       handler(e);
 
@@ -147,8 +150,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     };
   }
 
-  handlerOnTextChange = this.inheritTextInputMethod(
-    'onTextChange',
+  handlerOnTextChange = this.inheritTextInputMethod<'onChangeText'>(
+    'onChangeText',
     (text: string) => {
       const codeValue = this.truncateString(text);
       const { codeLength, onFulfill, blurOnSubmit } = this.props;
@@ -252,11 +255,11 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     this.clearCodeByCoords(locationX, locationY);
   };
 
-  handlerOnFocus = this.inheritTextInputMethod('onFocus', () =>
+  handlerOnFocus = this.inheritTextInputMethod<'onFocus'>('onFocus', () =>
     this.setState({ isFocused: true }),
   );
 
-  handlerOnBlur = this.inheritTextInputMethod('onBlur', () =>
+  handlerOnBlur = this.inheritTextInputMethod<'onBlur'>('onBlur', () =>
     this.setState({ isFocused: false }),
   );
 
@@ -277,9 +280,9 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         autoFocus={autoFocus}
         keyboardType={keyboardType}
         onBlur={this.handlerOnBlur}
+        onChangeText={this.handlerOnTextChange}
         onFocus={this.handlerOnFocus}
         style={concatStyles(styles.maskInput, inputProps.style)}
-        onChangeText={this.handlerOnTextChange}
         value={this.state.codeValue}
       />
     );
