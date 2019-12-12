@@ -10,7 +10,9 @@
     - [`codeLength?: number`](#codelength-number)
     - [`defaultCode?: string`](#defaultcode-string)
     - [`blurOnSubmit?: boolean`](#bluronsubmit-boolean)
+    - [`showInput?: boolean`](#showInput-boolean)
   - [Style props](#style-props)
+    - [`maskStyle?: object`](#maskStyle-object)
     - [`CellComponent?: ComponentType`](#cellcomponent-componenttype)
     - [`maskSymbol?: string`](#masksymbol-string)
     - [`keyboardType?: KeyboardType`](#keyboardtype-keyboardtype)
@@ -66,7 +68,15 @@ Default code value, must be the same length as `codeLength`
 
 Control the focus after submitting. Default `true`
 
+### `showInput?: boolean`
+
+Shows the user input for 500ms or set `false` to always show mask symbol. Default `true`
+
 ## Style props
+
+### `maskStyle?: Object`
+
+Styles to be applied on mask symbol text.
 
 ### `CellComponent?: ComponentType`
 

@@ -40,10 +40,10 @@ class MaskSymbol extends Component<Props, State> {
   }
 
   render() {
-    const { mask, symbol } = this.props;
+    const { mask, symbol, style } = this.props;
     const { showSymbol } = this.state;
 
-    return <Text>{showSymbol ? symbol : mask}</Text>;
+    return <Text style={style}>{showSymbol ? symbol : mask}</Text>;
   }
 }
 

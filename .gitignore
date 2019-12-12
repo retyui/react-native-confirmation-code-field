@@ -13,3 +13,5 @@ examples/web/src/realDemo/
 examples/web/src/App.js
 examples/web/src/commonStyles.js
 examples/web/src/styles.js
+
+.idea/*
