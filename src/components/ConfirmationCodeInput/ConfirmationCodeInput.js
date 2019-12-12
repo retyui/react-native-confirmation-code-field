@@ -37,6 +37,8 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     maskSymbol: '',
     CellComponent: Cell,
     blurOnSubmit: true,
+    maskStyle: {},
+    showInput: true,
   };
 
   _input = createRef();
@@ -105,7 +107,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   };
 
   renderSymbol(symbol: string, index: number) {
-    const { maskSymbol, maskStyle, showInput = true } = this.props;
+    const { maskSymbol, maskStyle, showInput } = this.props;
     const lastIndex = this.getLastIndex();
 
     if (maskSymbol && symbol) {
@@ -334,6 +336,8 @@ if (process.env.NODE_ENV !== 'production') {
     keyboardType: TextInputNative.propTypes.keyboardType,
     maskSymbol: PropTypes.string,
     blurOnSubmit: PropTypes.bool,
+    showInput: PropTypes.bool,
+    maskStyle: PropTypes.object,
   };
 }
 
