@@ -114,7 +114,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
       return (
         <MaskSymbol
           isLast={index === lastIndex}
-          delay={showInput ? 500: 0}
+          delay={showInput ? 500 : 0}
           style={maskStyle}
           mask={maskSymbol}
           symbol={symbol}

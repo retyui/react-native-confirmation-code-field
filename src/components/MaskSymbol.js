@@ -7,6 +7,7 @@ type Props = {|
   mask: string,
   symbol: string,
   isLast: boolean,
+  style: Object,
 |};
 
 type State = {|

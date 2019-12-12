@@ -70,7 +70,7 @@ Control the focus after submitting. Default `true`
 
 ### `showInput?: boolean`
 
-Shows the user input for 500ms or set `false` to always show mask symbol. Default `true`
+Shows the user input for 500 MS or set `false` to always show mask symbol. Default `true`
 
 ## Style props
 

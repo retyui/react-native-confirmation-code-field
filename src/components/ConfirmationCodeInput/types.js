@@ -38,6 +38,8 @@ export type Props = $ReadOnly<{|
   variant: VariantNames,
   keyboardType: KeyboardType,
   maskSymbol: string,
+  maskStyle: Object,
+  showInput: boolean,
 
   cellProps: null | TextInputProp | CellPropsFn,
   containerProps: ViewProps,
