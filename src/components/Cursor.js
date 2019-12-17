@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontStyle: 'normal',
     textDecorationLine: 'none',
-    textTransform: 'none',
   },
 });
 
