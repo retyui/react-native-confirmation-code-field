@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "esnext",
+    "lib": ["es2018"],
+    "skipLibCheck": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "jsx": "react-native",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/*"]
+}

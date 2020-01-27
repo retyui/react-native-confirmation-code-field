@@ -1,15 +1,2 @@
-coverage/
 node_modules/
-examples/ConfirmationCodeField/src/
-examples/web/ios/
-examples/web/android/
-examples/web/build/
-examples/web/yarn.lock
-
-# Based on examples/src/*
-examples/web/src/LinearGradient/
-examples/web/src/propsDemos/
-examples/web/src/realDemo/
-examples/web/src/App.js
-examples/web/src/commonStyles.js
-examples/web/src/styles.js
+lib/

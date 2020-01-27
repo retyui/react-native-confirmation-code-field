@@ -1,49 +1,25 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "4.2.0",
-  "main": "src/components/ConfirmationCodeInput/index.js",
+  "version": "5.0.0-beta.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "test": "jest",
-    "lint": "eslint src ./*.js",
-    "docs": "doctoc docs/API.md",
-    "speller": "yaspeller-ci *.md docs/*.md",
-    "ci": "yarn run test && yarn run lint && yarn run speller",
-    "prepublishOnly": "yarn run ci"
+    "build": "rm -f lib/* && yarn tsc",
+    "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "prop-types": ">= 15.0.0",
-    "react": ">= 16.4.0",
-    "react-native": ">= 0.57.0"
+    "react": ">=16.4.0",
+    "react-native": ">=0.59.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@exeto/eslint-config": "^2.0.0",
-    "@exeto/eslint-config-react": "^3.0.0",
-    "babel-eslint": "^10.0.3",
-    "clean-publish": "^1.1.2",
-    "doctoc": "^1.4.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
-    "husky": "^3.0.9",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2",
-    "prop-types": "^15.7.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-native": "^0.60.4",
-    "yaspeller-ci": "^1.0.1"
+    "@types/react": "^16.9.19",
+    "@types/react-native": "^0.61.5",
+    "typescript": "^3.7.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn ci"
-    }
-  },
+  "author": "David <4661784+retyui@users.noreply.github.com>",
   "description": "A react-native component to input confirmation code for both Android and IOS",
   "repository": "git@github.com:retyui/react-native-confirmation-code-input.git",
   "license": "MIT",
