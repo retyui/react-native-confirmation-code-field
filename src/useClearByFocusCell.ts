@@ -23,7 +23,7 @@ type Options = {
   value?: string;
 };
 
-const useClearByFocusCell = (options: Options) => {
+const useClearByFocusCell = (options: Options): [{}, ((index: number) => (event: LayoutChangeEvent) => void)] => {
   const valueRef = useRef<Options>(options);
   const cellsLayouts = useRef<LayoutsMap>({});
 
@@ -43,7 +43,12 @@ const useClearByFocusCell = (options: Options) => {
   const getCellOnLayoutHandler = (index: number) => (event: LayoutChangeEvent) => {
     const { width, height, x, y } = event.nativeEvent.layout;
 
-    cellsLayouts.current[`${index}`] = { x, xEnd: x + width, y, yEnd: y + height };
+    cellsLayouts.current[`${index}`] = {
+      x,
+      xEnd: x + width,
+      y,
+      yEnd: y + height
+    };
   };
 
   const onPress = (event: GestureResponderEvent) => clearCodeByCoords(event.nativeEvent);

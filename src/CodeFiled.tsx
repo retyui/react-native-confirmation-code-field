@@ -10,29 +10,42 @@ type Props = {
   rootStyle?: StyleProp<any>;
   textInputStyle?: StyleProp<TextStyle>;
   RootProps?: {};
-  cellCount?: number;
   RootComponent?: ComponentType<any>;
-  renderCell: (symbol: string, index: number, isFocused: boolean) => ReactElement<any, any>;
+
+  cellCount?: number;
+  renderCell: (options: { symbol: string; index: number; isFocused: boolean }) => ReactElement<any, any>;
 } & Omit<TextInputProps, "style">;
 
 const DEFAULT_CELL_COUNT = 4;
 
 const CodeFiled = ({ rootStyle, textInputStyle, onBlur, onFocus, value, renderCell, cellCount = DEFAULT_CELL_COUNT, RootProps = {}, RootComponent = View, ...rest }: Props, ref: Ref<TextInput>) => {
-  const [isFocused, handleOnBlur, handleOnFocus] = useFocusState({ onBlur, onFocus });
+  const [isFocused, handleOnBlur, handleOnFocus] = useFocusState({
+    onBlur,
+    onFocus
+  });
   const cells = getSymbols(value || "", cellCount).map((symbol, index, symbols) => {
     const isFirstEmptySymbol = symbols.indexOf("") === index;
 
-    // @ts-ignore
-    return renderCell({ index, symbol, isFocused: isFocused && isFirstEmptySymbol });
+    return renderCell({
+      index,
+      symbol,
+      isFocused: isFocused && isFirstEmptySymbol
+    });
   });
 
   return (
     <RootComponent {...RootProps} style={getStyle(styles.root, rootStyle)}>
       {cells}
-      {
+      <TextInputCustom
+        {...rest}
         // @ts-ignore
-        <TextInputCustom {...rest} ref={ref} value={value} onBlur={handleOnBlur} onFocus={handleOnFocus} style={getStyle(styles.textInput, textInputStyle)} maxLength={cellCount} />
-      }
+        ref={ref}
+        value={value}
+        onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
+        style={getStyle(styles.textInput, textInputStyle)}
+        maxLength={cellCount}
+      />
     </RootComponent>
   );
 };

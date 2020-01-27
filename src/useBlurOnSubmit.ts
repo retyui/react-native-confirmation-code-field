@@ -5,7 +5,6 @@ type Options = {
   value?: string;
   cellCount: number;
 };
-
 const useBlurOnSubmit = ({ value, cellCount }: Options) => {
   const inputRef = useRef<TextInput>(null);
 
