@@ -1,10 +1,10 @@
-import { Platform, StyleSheet, I18nManager } from "react-native";
+import {Platform, StyleSheet, I18nManager} from 'react-native';
 
 const codeFiledStyles = StyleSheet.create({
   root: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     // https://github.com/retyui/react-native-confirmation-code-field/pull/55
-    flexDirection: I18nManager.isRTL ? "row-reverse" : "row"
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
   },
   textInput: {
     ...StyleSheet.absoluteFillObject,
@@ -12,12 +12,12 @@ const codeFiledStyles = StyleSheet.create({
     fontSize: 1,
     ...Platform.select({
       web: {
-        width: "100%",
+        width: '100%',
         // Fix iOS aggressive zoom
-        fontSize: 16
-      }
-    })
-  }
+        fontSize: 16,
+      },
+    }),
+  },
 });
 
 export default codeFiledStyles;

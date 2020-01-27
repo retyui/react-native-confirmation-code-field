@@ -1,8 +1,10 @@
-import { TextInput } from "react-native";
+import {TextInput} from 'react-native';
 
 // @ts-ignore
 if (!new TextInput({})._onPress) {
-  console.warn("[react-native-confirmation-code-field]: This version React Native not support hack for TextInput!");
+  console.warn(
+    '[react-native-confirmation-code-field]: This version React Native not support hack for TextInput!',
+  );
 }
 
 const TextInputCustom = class extends TextInput {
@@ -10,7 +12,7 @@ const TextInputCustom = class extends TextInput {
   // and then calculate what cell on clicked
   _onPress = event => {
     // @ts-ignore
-    const { onPress, editable } = this.props;
+    const {onPress, editable} = this.props;
 
     if (onPress && (editable || editable === undefined)) {
       onPress(event);
