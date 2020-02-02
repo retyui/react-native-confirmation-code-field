@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/react-native-confirmation-code-field.svg)](https://www.npmtrends.com/react-native-confirmation-code-field)
 [![Travis](https://img.shields.io/travis/retyui/react-native-confirmation-code-field.svg?label=unix)](https://travis-ci.org/retyui/react-native-confirmation-code-field)
 
-A react-native confirmation code field compatible with iOS, Android and Web Platforms (based on [this](https://github.com/ttdung11t2/react-native-confirmation-code-input) project [Migration Guide](docs/migration.md))
+A react-native confirmation code field compatible with iOS, Android
 
 ### Links
 
@@ -32,7 +32,7 @@ yarn add react-native-confirmation-code-field
 
 ## How it work
 
-I use an invisible `<TextInput/>` component that absolutely stretched over `<Cell/>` components to have ability paste code normally on iOS [issue#25](https://github.com/retyui/react-native-confirmation-code-field/issues/25#issuecomment-446497934)
+I use an invisible `<TextInput/>` component that will be stretched over `<Cell/>` components to have ability paste code normally on iOS [issue#25](https://github.com/retyui/react-native-confirmation-code-field/issues/25#issuecomment-446497934)
 
 ```js
 import React, {useState} from 'react';
