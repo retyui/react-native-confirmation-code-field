@@ -5,7 +5,7 @@ type Options = {
   value?: string;
   cellCount: number;
 };
-const useBlurOnSubmit = ({value, cellCount}: Options) => {
+const useBlurOnFulfill = ({value, cellCount}: Options) => {
   const inputRef = useRef<TextInput>(null);
 
   if (value && value.length === cellCount) {
@@ -16,7 +16,7 @@ const useBlurOnSubmit = ({value, cellCount}: Options) => {
     }
   }
 
-  return [inputRef];
+  return inputRef;
 };
 
-export default useBlurOnSubmit;
+export default useBlurOnFulfill;

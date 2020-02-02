@@ -1,6 +1,6 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "rm -f lib/* && yarn tsc",
-    "prepublishOnly": "yarn build"
+    "docs": "yarn doctoc API.md",
+    "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {
     "react": ">=16.4.0",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@types/react": "^16.9.19",
     "@types/react-native": "^0.61.5",
+    "doctoc": "^1.4.0",
     "typescript": "^3.7.5"
   },
   "author": "David <4661784+retyui@users.noreply.github.com>",

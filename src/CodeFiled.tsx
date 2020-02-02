@@ -63,14 +63,21 @@ const CodeFiled = (
     <RootComponent {...RootProps} style={getStyle(styles.root, rootStyle)}>
       {cells}
       <TextInputCustom
+        caretHidden
+        disableFullscreenUI
+        spellCheck={false}
+        autoCorrect={false}
+        blurOnSubmit={false}
+        clearButtonMode='never'
+        autoCapitalize='characters'
+        underlineColorAndroid='transparent'
+        maxLength={cellCount}
         {...rest}
-        // @ts-ignore
-        ref={ref}
         value={value}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
         style={getStyle(styles.textInput, textInputStyle)}
-        maxLength={cellCount}
+        ref={ref}
       />
     </RootComponent>
   );

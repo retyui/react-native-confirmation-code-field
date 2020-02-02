@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.0.0
+
+New release, requirements `react>=16.4.0` & `react-native:>=0.59.0`
+
+- stateless component and new API (see [docs](API.md))
+- rewrited on TypeScript
+
 ## 4.2.0
 
 - Add more controls on mask symbol component, inspired by [91](https://github.com/retyui/react-native-confirmation-code-field/pull/91)
