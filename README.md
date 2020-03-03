@@ -28,6 +28,9 @@ A react-native confirmation code field compatible with iOS, Android
 
 ```sh
 yarn add react-native-confirmation-code-field
+
+# for react-native@0.62.x and above
+yarn add react-native-confirmation-code-field@next
 ```
 
 ## How it work

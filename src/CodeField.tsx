@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import React, {ComponentType, forwardRef, ReactElement, Ref} from 'react';
 import {getStyle, getSymbols} from './utils';
-import TextInputCustom from './TextInputCustom';
 import useFocusState from './useFocusState';
 
 import styles from './CodeField.styles';
@@ -62,7 +61,7 @@ const CodeField = (
   return (
     <RootComponent {...RootProps} style={getStyle(styles.root, rootStyle)}>
       {cells}
-      <TextInputCustom
+      <TextInput
         caretHidden
         disableFullscreenUI
         spellCheck={false}
