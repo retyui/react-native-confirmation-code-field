@@ -1,14 +1,16 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "5.1.0",
+  "version": "6.0.0-rc.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "path-rn-62.js"
   ],
   "scripts": {
     "build": "rm -f lib/* && yarn tsc",
     "docs": "yarn doctoc API.md",
+    "postinstall": "node ./path-rn-62.js",
     "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {

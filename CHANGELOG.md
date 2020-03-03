@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 6.0.0
+
+Added support of react native 0.62.x
+
 ## 5.0.0
 
 New release, requirements `react>=16.4.0` & `react-native:>=0.59.0`
