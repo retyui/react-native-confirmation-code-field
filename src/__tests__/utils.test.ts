@@ -1,4 +1,4 @@
-import {getStyle, getSymbols, isLastFilledCell} from '../utils';
+import { getStyle, getSymbols, isLastFilledCell } from '../utils';
 
 describe('isLastFilledCell', () => {
   it('should work properly', () => {
@@ -6,29 +6,29 @@ describe('isLastFilledCell', () => {
       isLastFilledCell({
         value: '123',
         index: 1,
-      }),
+      })
     ).toBe(true);
 
     expect(
       isLastFilledCell({
         value: '123',
         index: 2,
-      }),
+      })
     ).toBe(false);
 
     expect(
       isLastFilledCell({
         value: '',
         index: 2,
-      }),
+      })
     ).toBe(false);
   });
 });
 
 describe('getStyle', () => {
   it('should work properly', () => {
-    const styleA = {color: 'red'};
-    const styleB = {color: 'gold'};
+    const styleA = { color: 'red' };
+    const styleB = { color: 'gold' };
 
     expect(getStyle(styleA, styleB)).toEqual([styleA, styleB]);
     expect(getStyle(styleA, null)).toEqual(styleA);

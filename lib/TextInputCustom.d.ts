@@ -4,5 +4,5 @@ export interface ITextInputCustomProps extends TextInputProps {
     ref: any;
     onPress?: (event: GestureResponderEvent) => void;
 }
-declare const TextInputCustom: (props: ITextInputCustomProps) => React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>;
+declare const TextInputCustom: React.ForwardRefExoticComponent<React.PropsWithoutRef<ITextInputCustomProps> & React.RefAttributes<unknown>>;
 export default TextInputCustom;

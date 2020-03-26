@@ -1,4 +1,4 @@
-import {Platform, StyleSheet, I18nManager} from 'react-native';
+import { Platform, StyleSheet, I18nManager } from 'react-native';
 
 const codeFieldStyles = StyleSheet.create({
   root: {
