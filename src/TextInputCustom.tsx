@@ -22,7 +22,13 @@ const TextInputCustom = (props: ITextInputCustomProps): ReactElement => {
   };
   return (
     <TouchableOpacity onPress={_onPress}>
-      <TextInput editable={editable} />;
+      <TextInput
+        {...props}
+        editable={editable}
+        pointerEvents="none"
+        onTouchStart-={_onPress}
+      />
+      ;
     </TouchableOpacity>
   );
 };
