@@ -1,27 +1,30 @@
 import React, {ReactElement} from 'react';
 import {
-  NativeSyntheticEvent,
+  GestureResponderEvent,
   TextInput,
-  TextInputKeyPressEventData,
   TextInputProps,
+  TouchableOpacity,
 } from 'react-native';
 
 // eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface ITextInputCustomProps extends TextInputProps {
   ref: any;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const TextInputCustom = (props: ITextInputCustomProps): ReactElement => {
-  const {onKeyPress, editable} = props;
+  const {onPress, editable} = props;
   // This hack needs to get click position and then calculate what cell on clicked
-  const _onKeyPress = (
-    event: NativeSyntheticEvent<TextInputKeyPressEventData>,
-  ) => {
-    if (onKeyPress && (editable || editable === undefined)) {
-      onKeyPress(event);
+  const _onPress = (event: GestureResponderEvent) => {
+    if (onPress && (editable || editable === undefined)) {
+      onPress(event);
     }
   };
-  return <TextInput onKeyPress={_onKeyPress} editable={editable} />;
+  return (
+    <TouchableOpacity onPress={_onPress}>
+      <TextInput editable={editable} />;
+    </TouchableOpacity>
+  );
 };
 
 export default TextInputCustom;
