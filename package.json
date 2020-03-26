@@ -11,27 +11,28 @@
     "lint": "eslint './src/*.{js,ts,tsx}' --quiet",
     "build": "rm -f lib/* && yarn tsc",
     "docs": "yarn doctoc API.md",
-    "prepublishOnly": "yarn docs && yarn build"
+    "prepublishOnly": "yarn docs && yarn build",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,json}\""
   },
   "peerDependencies": {
-    "react": ">=16.4.0",
-    "react-native": ">=0.59.0"
+    "react": ">=16.13.1",
+    "react-native": ">=0.62.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "^0.61.5",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
+    "@types/react": "^16.9.26",
+    "@types/react-native": "^0.61.23",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
     "doctoc": "^1.4.0",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
-    "jest": "^25.1.0",
-    "prettier": "^1.19.1",
+    "jest": "^25.2.3",
+    "prettier": "^2.0.2",
     "react-native": "^0.61.5",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   },
   "author": "David <4661784+retyui@users.noreply.github.com>",
   "description": "A react-native component to input confirmation code for both Android and IOS",

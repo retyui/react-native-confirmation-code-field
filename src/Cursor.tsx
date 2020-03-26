@@ -9,7 +9,7 @@ const Cursor = ({
   delay = DEFAULT_BLINKING_SPEED,
 }): JSX.Element => {
   const [visibleFlag, setFlag] = useState(true);
-  const [start, stop] = useInterval(() => setFlag(flag => !flag), delay, []);
+  const [start, stop] = useInterval(() => setFlag((flag) => !flag), delay, []);
 
   useEffect(() => {
     start();
