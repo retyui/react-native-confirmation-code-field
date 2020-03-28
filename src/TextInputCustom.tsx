@@ -17,7 +17,7 @@ const TextInputCustom: React.ForwardRefExoticComponent<React.PropsWithoutRef<ITe
         onPress(event);
       }
     };
-    return <TextInput ref={ref} {...props} editable={editable} onTouchStart-={_onPress} />;
+    return <TextInput ref={ref} {...props} editable={editable} onTouchStart={_onPress} />;
   }
 );
 
