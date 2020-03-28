@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactElement } from 'react';
-import { GestureResponderEvent, Text, TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { GestureResponderEvent, TextInput, TextInputProps } from 'react-native';
 
 // eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface ITextInputCustomProps extends TextInputProps {
@@ -7,6 +7,7 @@ export interface ITextInputCustomProps extends TextInputProps {
   onPress?: (event: GestureResponderEvent) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const TextInputCustom: React.ForwardRefExoticComponent<React.PropsWithoutRef<ITextInputCustomProps> & React.RefAttributes<unknown>> = forwardRef(
   (props: ITextInputCustomProps, ref): ReactElement => {
     const { onPress, editable } = props;
