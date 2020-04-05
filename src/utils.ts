@@ -9,7 +9,7 @@ export const getSymbols = (codeValue: string, codeLength: number) =>
     ...new Array(codeLength).fill(''),
   ].slice(0, codeLength);
 
-export const getStyle = (base: StyleProp<any>, custom: StyleProp<any>) =>
+export const getStyle = (base: StyleProp<any>, custom?: StyleProp<any>) =>
   custom ? [base, custom] : base;
 
 export const isLastFilledCell = ({

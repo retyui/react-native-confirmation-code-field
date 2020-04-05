@@ -16,7 +16,8 @@ const findIndex = ({locationX, locationY}: Coords, map: LayoutsMap): number => {
     if (
       x < locationX &&
       locationX < xEnd &&
-      (y < locationY && locationY < yEnd)
+      y < locationY &&
+      locationY < yEnd
     ) {
       return parseInt(index, 10);
     }
@@ -32,7 +33,7 @@ type Options = {
 
 const useClearByFocusCell = (
   options: Options,
-): [{}, ((index: number) => (event: LayoutChangeEvent) => void)] => {
+): [{}, (index: number) => (event: LayoutChangeEvent) => void] => {
   const valueRef = useRef<Options>(options);
   const cellsLayouts = useRef<LayoutsMap>({});
 

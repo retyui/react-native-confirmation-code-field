@@ -67,9 +67,9 @@ const CodeField = (
         spellCheck={false}
         autoCorrect={false}
         blurOnSubmit={false}
-        clearButtonMode='never'
-        autoCapitalize='characters'
-        underlineColorAndroid='transparent'
+        clearButtonMode="never"
+        autoCapitalize="characters"
+        underlineColorAndroid="transparent"
         maxLength={cellCount}
         {...rest}
         value={value}

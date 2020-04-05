@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-# 6.0.0
+## 6.0.0
 
 Added support of react native 0.62.x
 
@@ -12,6 +12,20 @@ New release, requirements `react>=16.4.0` & `react-native:>=0.59.0`
 
 - stateless component and new API (see [docs](API.md))
 - rewrited on TypeScript
+- deprecated `onFulfill` use `onChangeText` instead of it:
+
+```typescript jsx
+const CELL_COUNT = 6;
+
+<CodeField
+  cellCount={CELL_COUNT}
+  onChangeText={value => {
+    if (value.length === CELL_COUNT) {
+      onFulfill(value);
+    }
+  }}
+/>;
+```
 
 ## 4.2.0
 
