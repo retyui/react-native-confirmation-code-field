@@ -26,7 +26,7 @@ const MaskExample = () => {
     if (symbol) {
       textChild = (
         <MaskSymbol
-          mask="﹡"
+          mask="❤️"
           delay={500}
           value={symbol}
           isLastIndex={index === value.length - 1}

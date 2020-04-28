@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, Text} from 'react-native';
 
 import {
   CodeField,
@@ -8,23 +8,7 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
-const styles = StyleSheet.create({
-  root: {padding: 20, minHeight: 400},
-  title: {textAlign: 'center', fontSize: 30},
-  codeFiledRoot: {marginTop: 20},
-  cell: {
-    width: 40,
-    height: 40,
-    lineHeight: 38,
-    fontSize: 24,
-    borderWidth: 2,
-    borderColor: '#00000030',
-    textAlign: 'center',
-  },
-  focusCell: {
-    borderColor: '#000',
-  },
-});
+import styles from './styles';
 
 const CELL_COUNT = 6;
 
@@ -38,7 +22,7 @@ const BasicExample = () => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <Text style={styles.title}>Verification</Text>
+      <Text style={styles.title}>Basic example</Text>
       <CodeField
         ref={ref}
         {...props}

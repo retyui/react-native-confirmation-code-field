@@ -7,7 +7,7 @@ export default StyleSheet.create({
   cell: {
     width: 40,
     height: 40,
-    lineHeight: 40,
+    lineHeight: 38,
     fontSize: 24,
     borderWidth: 2,
     borderColor: '#00000030',
