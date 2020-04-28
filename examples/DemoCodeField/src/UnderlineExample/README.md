@@ -2,7 +2,7 @@
 
 ![react-native-confirmation-code-field underline example](https://media.giphy.com/media/XEazF64IwELNV8wZge/giphy.gif)
 
-React Native have issue with [border styles on iOS](https://github.com/facebook/react-native/issues/23537).
+React Native have issue with [border styles for `<Text/>` on iOS](https://github.com/facebook/react-native/issues/23537).
 
 To fix it need `<View/>` wrapper for Cell, but don't forger to move `onLayout={getCellOnLayoutHandler(index)` to `<View/>`:
 

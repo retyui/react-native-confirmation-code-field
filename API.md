@@ -1,7 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [API documentation react-native-confirmation-code-field](#api-documentation-react-native-confirmation-code-field)
   - [Components](#components)
     - [`<CodeField />`](#codefield-)
@@ -96,6 +95,36 @@ After invoke this hook wil return array with two values `[props,getCellOnLayout]
 
 - `props` - an object that you should spreed to `<CodeField/>`
 - `getCellOnLayout(index: number): Function` - helper method that returns `onLayout` handler
+
+⚠️ ⚠️ ⚠️ If you need to style only one borderX (example `borderBottom`) you need to know about React Native issue with [border styles for `<Text/>` on iOS](https://github.com/facebook/react-native/issues/23537).
+
+To fix it need `<View/>` wrapper for Cell, but don't forger to move `onLayout={getCellOnLayoutHandler(index)` to `<View/>`:
+
+```js
+// BAD 👎
+renderCell={({index, symbol, isFocused}) => (
+  <View key={index}>
+    <Text
+      onLayout={getCellOnLayoutHandler(index)}
+    >
+      {...}
+    </Text>
+  </View>
+)}
+
+
+// GOOD ✔️
+renderCell={({index, symbol, isFocused}) => (
+  <View
+    key={index}
+    onLayout={getCellOnLayoutHandler(index)}
+  >
+    <Text>{...}</Text>
+  </View>
+)}
+```
+
+#### Example
 
 ```js
 import {
