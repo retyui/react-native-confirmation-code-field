@@ -22,7 +22,10 @@ A simple react-native confirmation code field compatible with iOS, Android.
 
 ## Screenshots
 
-[![Animated example](https://media.giphy.com/media/huJrqF0YRrNJBTwUmz/giphy.gif)](examples/DemoCodeField/src/AnimatedExample)
+|   |   |
+|---|---|
+| [![react-native-confirmation-code-field animated example](https://media.giphy.com/media/huJrqF0YRrNJBTwUmz/giphy.gif)](examples/DemoCodeField/src/AnimatedExample) | [![react-native-confirmation-code-field mask example](https://media.giphy.com/media/L4HHvT9Rwdlcdj59np/giphy.gif)](examples/DemoCodeField/src/MaskExample) [![react-native-confirmation-code-field underline example](https://media.giphy.com/media/XEazF64IwELNV8wZge/giphy.gif)](examples/DemoCodeField/src/UnderlineExample) [![react-native-confirmation-code-field basic example](https://media.giphy.com/media/WT4NHiw3XM0GWbjstc/giphy.gif)](examples/DemoCodeField/src/BasicExample) |
+
 
 ## Install
 

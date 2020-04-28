@@ -11,9 +11,9 @@ const style = {flex: 1, backgroundColor: '#fff'};
 const App = () => (
   <ScrollView style={style}>
     <AnimatedExample />
-    <BasicExample />
-    <UnderlineExample />
     <MaskExample />
+    <UnderlineExample />
+    <BasicExample />
   </ScrollView>
 );
 

@@ -43,4 +43,4 @@ yarn android
 
 - Basic example [src/AnimatedExample](src/BasicExample)
 
-[![react-native-confirmation-code-field basic example](https://media.giphy.com/media/lr8SAw6ZeY4cuiSv1E/giphy.gif)](src/BasicExample)
+[![react-native-confirmation-code-field basic example](https://media.giphy.com/media/WT4NHiw3XM0GWbjstc/giphy.gif)](src/BasicExample)
