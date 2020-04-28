@@ -35,6 +35,12 @@ yarn android
 
 ---
 
+- Underline example [src/UnderlineExample](src/UnderlineExample)
+
+[![react-native-confirmation-code-field underline example](https://media.giphy.com/media/XEazF64IwELNV8wZge/giphy.gif)](src/UnderlineExample)
+
+---
+
 - Basic example [src/AnimatedExample](src/BasicExample)
 
 [![react-native-confirmation-code-field basic example](https://media.giphy.com/media/lr8SAw6ZeY4cuiSv1E/giphy.gif)](src/BasicExample)

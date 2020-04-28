@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/react-native-confirmation-code-field.svg)](https://www.npmtrends.com/react-native-confirmation-code-field)
 ![Node.js CI](https://github.com/retyui/react-native-confirmation-code-field/workflows/Node.js%20CI/badge.svg)
 
-A react-native confirmation code field compatible with iOS, Android
+A simple react-native confirmation code field compatible with iOS, Android.
 
 ### Links
 
@@ -17,7 +17,7 @@ A react-native confirmation code field compatible with iOS, Android
 - 🚮 Clearing part of the code by clicking on the cell;
 - 🍎 Support "fast paste SMS-code" on iOS. And custom code paste for Android;
 - ⚡ TextInput `ref` support;
-- 🛠 Extendable and hackable;
+- 🛠 Highly customizable;
 - 🤓 Readable [changelog](CHANGELOG.md).
 
 ## Screenshots
@@ -44,13 +44,14 @@ I use an invisible `<TextInput/>` component that will be stretched over `<Cell/>
 ## Basic example
 
 I took a minimal implementation approach.
-It mean that this component provides low-level functionality so you can create incredible examples without tears 😭.
+It mean that this component provides low-level functionality so you can create incredible UI without tears 😭.
 I recommend you start with creating your own wrapper where you apply all styles and basic configuration.
 
 You can use a ready-made solution out of the box:
 
 - [Animated variant](examples/DemoCodeField/src/AnimatedExample)
 - [Mask variant](examples/DemoCodeField/src/MaskExample)
+- [Underline variant](examples/DemoCodeField/src/UnderlineExample)
 
 ```js
 import React, {useState} from 'react';
