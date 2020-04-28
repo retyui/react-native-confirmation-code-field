@@ -22,7 +22,7 @@ A react-native confirmation code field compatible with iOS, Android
 
 ## Screenshots
 
-<img width="250" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/4.x/docs/img/animated.gif"/><img width="250" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/4.x/docs/img/red.gif"/><img width="250" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/4.x/docs/img/dark.gif"/>
+<img width="250" src="https://media.giphy.com/media/huJrqF0YRrNJBTwUmz/giphy.gif"/><img width="250" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/4.x/docs/img/red.gif"/><img width="250" src="https://raw.githubusercontent.com/retyui/react-native-confirmation-code-field/4.x/docs/img/dark.gif"/>
 
 ## Install
 

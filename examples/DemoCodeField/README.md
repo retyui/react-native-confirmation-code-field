@@ -23,10 +23,18 @@ yarn android
 
 ## Examples
 
-- Customizable password mask and placeholder characters
+- Animated example [src/AnimatedExample](src/AnimatedExample)
 
-[![react-native-confirmation-code-field mask example](https://media.giphy.com/media/lOsYK6oy4TVjK0qgbt/giphy.gif)](MaskExample)
+[![react-native-confirmation-code-field animated example](https://media.giphy.com/media/huJrqF0YRrNJBTwUmz/giphy.gif)](src/AnimatedExample)
 
-- Basic example
+---
 
-[![react-native-confirmation-code-field basic example](https://media.giphy.com/media/lr8SAw6ZeY4cuiSv1E/giphy.gif)](BasicExample)
+- Customizable password mask and placeholder characters [src/AnimatedExample](src/MaskExample)
+
+[![react-native-confirmation-code-field mask example](https://media.giphy.com/media/lOsYK6oy4TVjK0qgbt/giphy.gif)](src/MaskExample)
+
+---
+
+- Basic example [src/AnimatedExample](src/BasicExample)
+
+[![react-native-confirmation-code-field basic example](https://media.giphy.com/media/lr8SAw6ZeY4cuiSv1E/giphy.gif)](src/BasicExample)

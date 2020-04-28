@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   nextButton: {
-    marginTop: 40,
-    borderRadius: 80,
-    height: 80,
+    marginTop: 30,
+    borderRadius: 60,
+    height: 60,
     backgroundColor: '#3557b7',
     justifyContent: 'center',
     minWidth: 300,

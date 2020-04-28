@@ -3,13 +3,15 @@ import {ScrollView} from 'react-native';
 
 import AnimatedExample from './AnimatedExample';
 import BasicExample from './BasicExample';
+import MaskExample from './MaskExample';
 
-const style = {flex: 1};
+const style = {flex: 1, backgroundColor: '#fff'};
 
 const App = () => (
   <ScrollView style={style}>
-    <AnimatedExample />
     <BasicExample />
+    <MaskExample />
+    <AnimatedExample />
   </ScrollView>
 );
 
