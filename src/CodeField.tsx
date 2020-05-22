@@ -5,7 +5,7 @@ import {
   TextStyle,
   View,
 } from 'react-native';
-import React, {ComponentType, forwardRef, ReactElement, Ref} from 'react';
+import * as React from 'react';
 import {getStyle, getSymbols} from './utils';
 import useFocusState from './useFocusState';
 
@@ -15,14 +15,14 @@ type Props = {
   rootStyle?: StyleProp<any>;
   textInputStyle?: StyleProp<TextStyle>;
   RootProps?: {};
-  RootComponent?: ComponentType<any>;
+  RootComponent?: React.ComponentType<any>;
 
   cellCount?: number;
   renderCell: (options: {
     symbol: string;
     index: number;
     isFocused: boolean;
-  }) => ReactElement<any, any>;
+  }) => React.ReactElement<any, any>;
 } & Omit<TextInputProps, 'style'>;
 
 const DEFAULT_CELL_COUNT = 4;
@@ -40,7 +40,7 @@ const CodeField = (
     RootComponent = View,
     ...rest
   }: Props,
-  ref: Ref<TextInput>,
+  ref: React.Ref<TextInput>,
 ) => {
   const [isFocused, handleOnBlur, handleOnFocus] = useFocusState({
     onBlur,
@@ -82,4 +82,4 @@ const CodeField = (
   );
 };
 
-export default forwardRef(CodeField);
+export default React.forwardRef(CodeField);

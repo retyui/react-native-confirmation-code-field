@@ -3,12 +3,12 @@
     "target": "ESNext",
     "lib": ["ESNext"],
     "skipLibCheck": true,
-    "declaration": true,
     "outDir": "./lib",
     "rootDir": "./src",
     "jsx": "react-native",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "importHelpers": true
   },
   "include": ["src/*"]
 }
