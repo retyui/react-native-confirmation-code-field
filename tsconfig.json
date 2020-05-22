@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
+    "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext"],
     "skipLibCheck": true,
+    "declaration": true,
     "outDir": "./lib",
     "rootDir": "./src",
     "jsx": "react",
     "strict": true,
-    "esModuleInterop": true,
-    "importHelpers": true
+    "esModuleInterop": true
   },
   "include": ["src/*"]
 }

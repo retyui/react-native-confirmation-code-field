@@ -1,26 +1,23 @@
 {
   "name": "react-native-confirmation-code-field",
   "version": "6.2.0-beta.1",
-  "main": "cmj/index.js",
-  "module": "esm/index.js",
+  "main": "esm/index.js",
   "types": "esm/index.d.ts",
   "files": [
-    "cmj",
     "esm",
     "path-rn-62.js"
   ],
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint './src/*.{js,ts,tsx}' --quiet",
-    "build": "rm -rf esm cmj && tsc --declaration true --module ES2020 --outDir esm && tsc --module CommonJS --outDir cmj",
-    "postbuild": "cp src/*.d.ts esm/ && prettier --write esm/*.js esm/*.d.ts cmj/*.js",
+    "build": "rm -rf esm && tsc --outDir esm",
+    "postbuild": "cp src/*.d.ts esm/ && prettier --write esm/*.js esm/*.d.ts",
     "docs": "yarn doctoc API.md",
     "postinstall": "node ./path-rn-62.js",
     "postuninstall": "node ./path-rn-62.js",
     "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {
-    "tslib": ">= 2.0.0",
     "react": ">=16.4.0",
     "react-native": ">=0.59.0"
   },
@@ -39,7 +36,6 @@
     "prettier": "^2.0.5",
     "react-native": "^0.62.2",
     "react": "^16.9.0",
-    "tslib": "^2.0.0",
     "typescript": "^3.9.2"
   },
   "author": "David <4661784+retyui@users.noreply.github.com>",
