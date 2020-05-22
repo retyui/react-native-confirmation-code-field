@@ -5,7 +5,7 @@
     "skipLibCheck": true,
     "outDir": "./lib",
     "rootDir": "./src",
-    "jsx": "react-native",
+    "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
     "importHelpers": true

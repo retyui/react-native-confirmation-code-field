@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint './src/*.{js,ts,tsx}' --quiet",
-    "build": "rm -rf esm cmj && tsc --declaration true --module ES2020 --outDir esm && tsc --module CommonJS --jsx react --outDir cmj",
+    "build": "rm -rf esm cmj && tsc --declaration true --module ES2020 --outDir esm && tsc --module CommonJS --outDir cmj",
     "postbuild": "cp src/*.d.ts esm/ && prettier --write esm/*.js esm/*.d.ts cmj/*.js",
     "docs": "yarn doctoc API.md",
     "postinstall": "node ./path-rn-62.js",
