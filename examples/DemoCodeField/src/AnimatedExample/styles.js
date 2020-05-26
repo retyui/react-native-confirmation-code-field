@@ -7,7 +7,7 @@ export const NOT_EMPTY_CELL_BG_COLOR = '#3557b7';
 export const ACTIVE_CELL_BG_COLOR = '#f7fafe';
 
 const styles = StyleSheet.create({
-  codeFiledRoot: {
+  codeFieldRoot: {
     height: CELL_SIZE,
     marginTop: 30,
     paddingHorizontal: 20,

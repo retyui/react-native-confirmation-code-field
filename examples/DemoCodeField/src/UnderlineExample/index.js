@@ -29,7 +29,7 @@ const UnderlineExample = () => {
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFiledRoot}
+        rootStyle={styles.codeFieldRoot}
         keyboardType="number-pad"
         textContentType="oneTimeCode"
         renderCell={({index, symbol, isFocused}) => (

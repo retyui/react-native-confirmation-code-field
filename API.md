@@ -134,14 +134,14 @@ import {
 } from 'react-native-confirmation-code-field';
 
 const App = () => {
-  const [codeFiledProps, getCellOnLayout] = useClearByFocusCell({
+  const [codeFieldProps, getCellOnLayout] = useClearByFocusCell({
     value,
     setValue,
   });
 
   return (
     <CodeField
-      {...codeFiledProps}
+      {...codeFieldProps}
       value={value}
       onChangeText={setValue}
       renderCell={({index, symbol, isFocused}) => (

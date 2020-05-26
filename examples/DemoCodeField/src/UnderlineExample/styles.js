@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   root: {padding: 20, minHeight: 300},
   title: {textAlign: 'center', fontSize: 30},
-  codeFiledRoot: {
+  codeFieldRoot: {
     marginTop: 20,
     width: 280,
     marginLeft: 'auto',

@@ -73,7 +73,7 @@ import {
 const styles = StyleSheet.create({
   root: {flex: 1, padding: 20},
   title: {textAlign: 'center', fontSize: 30},
-  codeFiledRoot: {marginTop: 20},
+  codeFieldRoot: {marginTop: 20},
   cell: {
     width: 40,
     height: 40,
@@ -107,7 +107,7 @@ const App = () => {
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFiledRoot}
+        rootStyle={styles.codeFieldRoot}
         keyboardType="number-pad"
         textContentType="oneTimeCode"
         renderCell={({index, symbol, isFocused}) => (
