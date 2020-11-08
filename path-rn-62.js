@@ -1,4 +1,3 @@
-
 const {writeFileSync, readFileSync} = require('fs');
 
 // TODO https://github.com/facebook/react-native/pull/28224
