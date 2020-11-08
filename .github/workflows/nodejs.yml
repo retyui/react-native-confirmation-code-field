@@ -1,22 +1,29 @@
-name: Node.js CI
+name: Code quality
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'yarn.lock'
+      - '**.js'
+      - '**.ts'
+      - '**.tsx'
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        node-version: [12.x]
-
+  test_and_lint:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+
+      - uses: actions/cache@master
+        id: node_modules_cache
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install --frozen-lockfile --ignore-engines
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - run: yarn install --frozen-lockfile
+        # Install `node_modules` only when a `yarn.lock` file was changed
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+
       - run: yarn ci
         env:
           CI: true
