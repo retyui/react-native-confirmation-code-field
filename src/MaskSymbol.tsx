@@ -3,21 +3,22 @@ import {useTimeout} from './useTimer';
 
 export const DEFAULT_BLINKING_SPEED = 500;
 
-type Props = {
+interface Props {
   maskSymbol: string;
   isLastFilledCell: boolean;
   children: string;
   delay?: number;
-};
+}
 
-const MaskSymbol = ({
+export function MaskSymbol({
   isLastFilledCell,
   children: symbol,
   maskSymbol,
   delay = DEFAULT_BLINKING_SPEED,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const [visibleFlag, setFlag] = useState(true);
-  const [start, stop] = useTimeout(() => setFlag(false), delay, []);
+
+  useTimeout(() => setFlag(false), delay);
 
   useEffect(() => {
     if (isLastFilledCell) {
@@ -25,14 +26,6 @@ const MaskSymbol = ({
     }
   }, [isLastFilledCell]);
 
-  useEffect(() => {
-    start();
-
-    return stop;
-  }, [start, stop]);
-
-  // @ts-ignore
+  // @ts-expect-error `JSX.Element` is not a `ReactNode`
   return visibleFlag ? symbol : maskSymbol;
-};
-
-export default MaskSymbol;
+}

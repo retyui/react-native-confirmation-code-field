@@ -1,22 +1,18 @@
 import {useCallback} from 'react';
 import {NativeSyntheticEvent} from 'react-native';
 
-const useEvent = <Event extends NativeSyntheticEvent<any>>(
+export const useEvent = <Event extends NativeSyntheticEvent<any>>(
   nativeEvent: ((event: Event) => void) | undefined,
   customHandler: () => void,
-) => {
-  const handleOnEvent = useCallback(
+): ((e: Event) => void) =>
+  useCallback(
     (event: Event) => {
       customHandler();
 
-      if (nativeEvent) {
+      if (typeof nativeEvent === 'function') {
         nativeEvent(event);
       }
     },
 
     [nativeEvent],
   );
-  return handleOnEvent;
-};
-
-export default useEvent;

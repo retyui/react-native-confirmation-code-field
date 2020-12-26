@@ -1,15 +1,21 @@
-import {useMemo, useRef} from 'react';
+import {MouseEvent, useMemo, useRef} from 'react';
 import {GestureResponderEvent, LayoutChangeEvent, Platform} from 'react-native';
 
-type LayoutsMap = Record<
-  string,
-  {x: number; y: number; xEnd: number; yEnd: number}
->;
+interface Layout {
+  x: number;
+  y: number;
+  xEnd: number;
+  yEnd: number;
+}
 
-type Coords = {
+interface LayoutsMap {
+  [cellIndex: string]: Layout;
+}
+
+interface Coords {
   locationX: number;
   locationY: number;
-};
+}
 
 const findIndex = ({locationX, locationY}: Coords, map: LayoutsMap): number => {
   for (const [index, {x, y, xEnd, yEnd}] of Object.entries(map)) {
@@ -26,17 +32,17 @@ const findIndex = ({locationX, locationY}: Coords, map: LayoutsMap): number => {
   return -1;
 };
 
-type Options = {
-  setValue: (text: string) => void;
+interface Options {
+  setValue(text: string): void;
   value?: string;
-};
+}
 
-const useClearByFocusCell = (
-  options: Options,
-): [
-  Record<string, unknown>,
+type HookResult = [
+  {onPress: (event: GestureResponderEvent) => void},
   (index: number) => (event: LayoutChangeEvent) => void,
-] => {
+];
+
+export const useClearByFocusCell = (options: Options): HookResult => {
   const valueRef = useRef<Options>(options);
   const cellsLayouts = useRef<LayoutsMap>({});
 
@@ -70,22 +76,20 @@ const useClearByFocusCell = (
     clearCodeByCoords(event.nativeEvent);
 
   // For support react-native-web
-  const onClick = (e: any) => {
-    const offset = e.target.getClientRects()[0];
-    const locationX = e.clientX - offset.left;
-    const locationY = e.clientY - offset.top;
+  const onClick = (event: MouseEvent<HTMLDivElement>) => {
+    // @ts-expect-error: not types for getClientRects
+    const [offset] = event.target.getClientRects() as [
+      {left: number; top: number},
+    ];
+    const locationX = event.clientX - offset.left;
+    const locationY = event.clientY - offset.top;
 
     clearCodeByCoords({locationX, locationY});
   };
 
   return [
-    useMemo(
-      () => (Platform.OS === 'web' ? {onClick} : {onPress}),
-      // eslint-disable-next-line
-      [],
-    ),
+    // @ts-expect-error: for web support
+    useMemo(() => Platform.select({web: {onClick}, default: {onPress}}), []),
     getCellOnLayoutHandler,
   ];
 };
-
-export default useClearByFocusCell;

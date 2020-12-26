@@ -1,6 +1,6 @@
 import {Platform, StyleSheet} from 'react-native';
 
-const codeFieldStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
   root: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -21,5 +21,3 @@ const codeFieldStyles = StyleSheet.create({
     }),
   },
 });
-
-export default codeFieldStyles;

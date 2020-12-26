@@ -4,30 +4,34 @@ import {
   TextInputProps,
   TextStyle,
   View,
+  ViewProps,
 } from 'react-native';
-import * as React from 'react';
+import React, {ComponentType, ReactNode, Ref} from 'react';
 import {getStyle, getSymbols} from './utils';
-import useFocusState from './useFocusState';
+import {useFocusState} from './useFocusState';
 
-import styles from './CodeField.styles';
+import {styles} from './CodeField.styles';
 
-type Props = {
-  rootStyle?: StyleProp<any>;
+export interface RenderCellOptions {
+  symbol: string;
+  index: number;
+  isFocused: boolean;
+}
+
+type TextInputPropsWithoutStyle = Omit<TextInputProps, 'style'>;
+
+export interface Props extends TextInputPropsWithoutStyle {
+  renderCell: (options: RenderCellOptions) => ReactNode;
+  RootProps?: ViewProps;
+  RootComponent?: ComponentType<ViewProps>;
+  rootStyle?: ViewProps['style'];
   textInputStyle?: StyleProp<TextStyle>;
-  RootProps?: Record<string, unknown>;
-  RootComponent?: React.ComponentType<any>;
-
   cellCount?: number;
-  renderCell: (options: {
-    symbol: string;
-    index: number;
-    isFocused: boolean;
-  }) => React.ReactElement<any, any>;
-} & Omit<TextInputProps, 'style'>;
+}
 
 const DEFAULT_CELL_COUNT = 4;
 
-const CodeField = (
+function CodeFieldComponent(
   {
     rootStyle,
     textInputStyle,
@@ -40,12 +44,9 @@ const CodeField = (
     RootComponent = View,
     ...rest
   }: Props,
-  ref: React.Ref<TextInput>,
-) => {
-  const [isFocused, handleOnBlur, handleOnFocus] = useFocusState({
-    onBlur,
-    onFocus,
-  });
+  ref: Ref<TextInput>,
+) {
+  const focusState = useFocusState(onBlur, onFocus);
   const cells = getSymbols(value || '', cellCount).map(
     (symbol, index, symbols) => {
       const isFirstEmptySymbol = symbols.indexOf('') === index;
@@ -53,7 +54,7 @@ const CodeField = (
       return renderCell({
         index,
         symbol,
-        isFocused: isFocused && isFirstEmptySymbol,
+        isFocused: focusState.isFocused && isFirstEmptySymbol,
       });
     },
   );
@@ -75,13 +76,13 @@ const CodeField = (
         maxLength={cellCount}
         {...rest}
         value={value}
-        onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
+        onBlur={focusState.onBlur}
+        onFocus={focusState.onFocus}
         style={getStyle(styles.textInput, textInputStyle)}
         ref={ref}
       />
     </RootComponent>
   );
-};
+}
 
-export default React.forwardRef(CodeField);
+export const CodeField = React.forwardRef(CodeFieldComponent);

@@ -1,15 +1,16 @@
 import {useRef} from 'react';
 import {TextInput} from 'react-native';
 
-type Options = {
+interface Options {
   value?: string;
   cellCount: number;
-};
-const useBlurOnFulfill = ({value, cellCount}: Options) => {
+}
+
+export const useBlurOnFulfill = ({value, cellCount}: Options) => {
   const inputRef = useRef<TextInput>(null);
 
   if (value && value.length === cellCount) {
-    const {current: inputInstance} = inputRef;
+    const inputInstance = inputRef.current;
 
     if (inputInstance) {
       inputInstance.blur();
@@ -18,5 +19,3 @@ const useBlurOnFulfill = ({value, cellCount}: Options) => {
 
   return inputRef;
 };
-
-export default useBlurOnFulfill;

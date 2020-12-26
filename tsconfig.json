@@ -3,12 +3,27 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "declaration": true,
     "rootDir": "./src",
-    "jsx": "react",
+    "jsx": "react-native",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
   },
-  "include": ["src/*"]
+  "include": ["./src"]
 }
