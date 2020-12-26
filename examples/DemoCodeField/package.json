@@ -5,16 +5,18 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "postinstall": "cd node_modules/react-native-confirmation-code-field; rm -rf node_modules examples src .idea .github"
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.0-rc.0",
-    "react-native-confirmation-code-field": "^6.4.0"
+    "react": "17.0.1",
+    "react-native": "0.64.0-rc.2",
+    "react-native-confirmation-code-field": "./../.."
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/runtime": "^7.8.4",
-    "metro-react-native-babel-preset": "^0.59.0"
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react-native-codegen": "^0.0.6"
   }
 }
