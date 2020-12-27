@@ -38,7 +38,7 @@ interface Options {
 }
 
 type HookResult = [
-  {onPress: (event: GestureResponderEvent) => void},
+  {onPressOut: (event: GestureResponderEvent) => void},
   (index: number) => (event: LayoutChangeEvent) => void,
 ];
 
@@ -72,7 +72,7 @@ export const useClearByFocusCell = (options: Options): HookResult => {
     };
   };
 
-  const onPress = (event: GestureResponderEvent) =>
+  const onPressOut = (event: GestureResponderEvent) =>
     clearCodeByCoords(event.nativeEvent);
 
   // For support react-native-web
@@ -89,7 +89,7 @@ export const useClearByFocusCell = (options: Options): HookResult => {
 
   return [
     // @ts-expect-error: for web support
-    useMemo(() => Platform.select({web: {onClick}, default: {onPress}}), []),
+    useMemo(() => Platform.select({web: {onClick}, default: {onPressOut}}), []),
     getCellOnLayoutHandler,
   ];
 };

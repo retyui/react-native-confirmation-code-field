@@ -49,7 +49,7 @@ it('should clear value coords', () => {
    * [1] [2] [3] [4] [5] [6]
    * --------^^^ press location `index:2`
    */
-  props.onPress({
+  props.onPressOut({
     // @ts-expect-error - mock of nativeEvent
     nativeEvent: callPosition({size, index: 2}),
   });
@@ -78,7 +78,7 @@ it('should do nothing when press outside of cell', () => {
    * [1] [2] [3] [4] [5] [6]
    * -------------------------^^ press location `index:6`
    */
-  props.onPress({
+  props.onPressOut({
     // @ts-expect-error - mock of nativeEvent
     nativeEvent: callPosition({size, index: 6}),
   });
@@ -107,7 +107,7 @@ it('should invoke setValue with empty string when value undefined and user press
    *     [ ] [ ] [ ] [ ] [ ] [ ]
    * ----^^ press location `index:0`
    */
-  props.onPress({
+  props.onPressOut({
     // @ts-expect-error - mock of nativeEvent
     nativeEvent: callPosition({size, index: 0}),
   });
