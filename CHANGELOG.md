@@ -2,13 +2,20 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.0.0
+
+- Support react-native 0.64.x and above only!!!
+- Remove a ~~crazy~~ workaround for listening to user taps on the `<TextInput/>` component
+- Optimize a bundle size
+- Export `CodeFieldProps` and `RenderCellOptions` types
+
 ## 6.5.1
 
 - Revert previous fix (6.5.0) to solve an issue [#153](https://github.com/retyui/react-native-confirmation-code-field/issues/153)
 
 ## 6.5.0
 
-- Fix copy\paste menu appearing when `caretHidden={true}` and `value={''}` [#140](https://github.com/retyui/react-native-confirmation-code-field/issues/140), thanks @sprotymo 
+- Fix copy\paste menu appearing when `caretHidden={true}` and `value={''}` [#140](https://github.com/retyui/react-native-confirmation-code-field/issues/140), thanks @sprotymo
 
 ## 6.4.0
 
@@ -43,7 +50,7 @@ const CELL_COUNT = 6;
 
 <CodeField
   cellCount={CELL_COUNT}
-  onChangeText={value => {
+  onChangeText={(value) => {
     if (value.length === CELL_COUNT) {
       onFulfill(value);
     }

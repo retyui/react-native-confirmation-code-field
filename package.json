@@ -1,6 +1,6 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "6.5.1",
+  "version": "7.0.0",
   "main": "esm/index.js",
   "types": "esm/index.d.ts",
   "files": [
