@@ -5,7 +5,6 @@
   "types": "esm/index.d.ts",
   "files": [
     "esm",
-    "path-rn-62.js",
     "!__tests__"
   ],
   "scripts": {
@@ -18,7 +17,6 @@
     "build": "rm -rf esm && tsc --outDir esm",
     "postbuild": "prettier --write esm/*.js esm/*.d.ts",
     "docs": "yarn doctoc API.md",
-    "postinstall": "node ./path-rn-62.js",
     "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {
