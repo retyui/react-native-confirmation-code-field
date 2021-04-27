@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useRef, useEffect} from 'react';
 import {TextInput} from 'react-native';
 
 interface Options {
@@ -9,13 +9,15 @@ interface Options {
 export const useBlurOnFulfill = ({value, cellCount}: Options) => {
   const inputRef = useRef<TextInput>(null);
 
-  if (value && value.length === cellCount) {
-    const inputInstance = inputRef.current;
+  useEffect(() => {
+    if (value && value.length === cellCount) {
+      const inputInstance = inputRef.current;
 
-    if (inputInstance) {
-      inputInstance.blur();
+      if (inputInstance) {
+        inputInstance.blur();
+      }
     }
-  }
+  }, [value, cellCount]);
 
   return inputRef;
 };
