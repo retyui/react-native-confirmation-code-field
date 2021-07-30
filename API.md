@@ -134,6 +134,7 @@ import {
 } from 'react-native-confirmation-code-field';
 
 const App = () => {
+  const [value, setValue] = useState('');
   const [codeFieldProps, getCellOnLayout] = useClearByFocusCell({
     value,
     setValue,
