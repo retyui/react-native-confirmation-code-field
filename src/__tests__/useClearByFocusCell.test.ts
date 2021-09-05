@@ -116,7 +116,6 @@ it('should invoke setValue with empty string when value undefined and user press
 });
 
 it('should adapt a Web click event to ReactNative press event', () => {
-  // @ts-expect-error - web support
   Platform.select = ({web}) => web;
 
   const setValue = jest.fn();

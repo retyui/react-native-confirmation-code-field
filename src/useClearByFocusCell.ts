@@ -59,18 +59,17 @@ export const useClearByFocusCell = (options: Options): HookResult => {
     }
   };
 
-  const getCellOnLayoutHandler = (index: number) => (
-    event: LayoutChangeEvent,
-  ) => {
-    const {width, height, x, y} = event.nativeEvent.layout;
+  const getCellOnLayoutHandler =
+    (index: number) => (event: LayoutChangeEvent) => {
+      const {width, height, x, y} = event.nativeEvent.layout;
 
-    cellsLayouts.current[`${index}`] = {
-      x,
-      xEnd: x + width,
-      y,
-      yEnd: y + height,
+      cellsLayouts.current[`${index}`] = {
+        x,
+        xEnd: x + width,
+        y,
+        yEnd: y + height,
+      };
     };
-  };
 
   const onPressOut = (event: GestureResponderEvent) =>
     clearCodeByCoords(event.nativeEvent);

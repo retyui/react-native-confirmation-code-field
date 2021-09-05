@@ -3,22 +3,21 @@ import {useEffect, useRef} from 'react';
 type ClearTimerFn = (id: number | undefined) => void;
 type RunTimerFn = (handler: () => void, timeout: number) => number;
 
-const creteUseTimer = (clear: ClearTimerFn, runTimer: RunTimerFn) => (
-  callback: () => void,
-  delay: number,
-): void => {
-  const timerRef = useRef<number>();
+const creteUseTimer =
+  (clear: ClearTimerFn, runTimer: RunTimerFn) =>
+  (callback: () => void, delay: number): void => {
+    const timerRef = useRef<number>();
 
-  useEffect(() => {
-    const stop = () => clear(timerRef.current);
+    useEffect(() => {
+      const stop = () => clear(timerRef.current);
 
-    stop();
+      stop();
 
-    timerRef.current = runTimer(callback, delay);
+      timerRef.current = runTimer(callback, delay);
 
-    return stop;
-  }, [delay]);
-};
+      return stop;
+    }, [delay]);
+  };
 
 export const useInterval = creteUseTimer(
   // @ts-expect-error - I know better

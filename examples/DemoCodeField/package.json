@@ -4,19 +4,31 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "build:android": "mkdirp dist/res && react-native bundle --entry-file index.js --platform android --dev true --bundle-output dist/main.android.jsbundle --assets-dest dist/res",
+    "build:ios": "mkdirp dist && react-native bundle --entry-file index.js --platform ios --dev true --bundle-output dist/main.ios.jsbundle --assets-dest dist",
     "ios": "react-native run-ios",
+    "lint": "eslint .",
     "start": "react-native start",
-    "postinstall": "cd node_modules/react-native-confirmation-code-field; rm -rf node_modules examples src .idea .github"
+    "test": "jest"
   },
   "dependencies": {
-    "react": "17.0.1",
-    "react-native": "0.64.0-rc.2",
-    "react-native-confirmation-code-field": "./../.."
+    "react": "17.0.2",
+    "react-native": "0.65.1",
+    "react-native-confirmation-code-field": "7.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "react-native-codegen": "^0.0.6"
+    "@babel/core": "^7.15.5",
+    "@babel/runtime": "^7.15.4",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.1.0",
+    "eslint": "7.32.0",
+    "jest": "^27.1.0",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "mkdirp": "^1.0.0",
+    "react-native-test-app": "^0.7.6",
+    "react-test-renderer": "17.0.1"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }

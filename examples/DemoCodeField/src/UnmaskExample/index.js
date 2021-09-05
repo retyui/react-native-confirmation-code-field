@@ -24,7 +24,7 @@ const UnmaskExample = () => {
     value,
     setValue,
   });
-  const toggleMask = () => setEnableMask(f => !f);
+  const toggleMask = () => setEnableMask((f) => !f);
   const renderCell = ({index, symbol, isFocused}) => {
     let textChild = null;
 

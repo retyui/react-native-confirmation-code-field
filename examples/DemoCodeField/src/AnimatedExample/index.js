@@ -25,8 +25,7 @@ const {Value, Text: AnimatedText} = Animated;
 
 const CELL_COUNT = 4;
 const source = {
-  uri:
-    'https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png',
+  uri: 'https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png',
 };
 
 const animationsColor = [...new Array(CELL_COUNT)].map(() => new Value(0));
@@ -53,6 +52,8 @@ const AnimatedExample = () => {
     value,
     setValue,
   });
+
+  console.log(' --- xdebug useClearByFocusCell.props', {props});
 
   const renderCell = ({index, symbol, isFocused}) => {
     const hasValue = Boolean(symbol);
@@ -90,7 +91,10 @@ const AnimatedExample = () => {
       <AnimatedText
         key={index}
         style={[styles.cell, animatedCellStyle]}
-        onLayout={getCellOnLayoutHandler(index)}>
+        onLayout={(e) => {
+          console.log(' --- xdebug getCellOnLayoutHandler', e.nativeEvent);
+          return getCellOnLayoutHandler(index)(e);
+        }}>
         {symbol || (isFocused ? <Cursor /> : null)}
       </AnimatedText>
     );
