@@ -24,6 +24,7 @@ export interface Props extends TextInputPropsWithoutStyle {
   renderCell: (options: RenderCellOptions) => ReactNode;
   RootProps?: ViewProps;
   RootComponent?: ComponentType<ViewProps>;
+  InputComponent?: ComponentType<TextInputProps>;
   rootStyle?: ViewProps['style'];
   textInputStyle?: StyleProp<TextStyle>;
   cellCount?: number;
@@ -42,6 +43,7 @@ function CodeFieldComponent(
     cellCount = DEFAULT_CELL_COUNT,
     RootProps = {},
     RootComponent = View,
+    InputComponent = TextInput,
     ...rest
   }: Props,
   ref: Ref<TextInput>,
@@ -62,7 +64,7 @@ function CodeFieldComponent(
   return (
     <RootComponent {...RootProps} style={getStyle(styles.root, rootStyle)}>
       {cells}
-      <TextInput
+      <InputComponent
         disableFullscreenUI
         // Use `caretHidden={false}` when `value={''}` and user can't paste\copy text because menu doesn't appear
         // See more: https://github.com/retyui/react-native-confirmation-code-field/issues/140
