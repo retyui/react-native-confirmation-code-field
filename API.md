@@ -7,6 +7,7 @@
       - [`cellCount?: number`](#cellcount-number)
       - [`renderCell: (options: {symbol: string, index: number, isFocused: boolean}) => ReactElement`](#rendercell-options-symbol-string-index-number-isfocused-boolean--reactelement)
       - [`RootComponent?: ComponentType<any>`](#rootcomponent-componenttypeany)
+      - [`InputComponent?: ComponentType<any>`](#inputcomponent-componenttypeany)
       - [`rootStyle?: StyleProp<RootComponent>`](#rootstyle-styleproprootcomponent)
       - [`RootProps?: Object`](#rootprops-object)
       - [`textInputStyle?: StyleProp<TextStyle>`](#textinputstyle-styleproptextstyle)
@@ -53,6 +54,10 @@ Required function for Cell rendering, will be invoke with next options:
 #### `RootComponent?: ComponentType<any>`
 
 If you want change root component for example using animations `RootComponent={Animated.View}` (optional, default [`View`](https://facebook.github.io/react-native/docs/view))
+
+#### `InputComponent?: ComponentType<any>`
+
+If you want to provide a custom TextInput component that can receive the same props (optional, default [`TextInput`](https://facebook.github.io/react-native/docs/textinput))
 
 #### `rootStyle?: StyleProp<RootComponent>`
 
