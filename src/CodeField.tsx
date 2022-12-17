@@ -36,6 +36,7 @@ interface BaseProps {
   rootStyle?: ViewProps['style'];
   textInputStyle?: StyleProp<TextStyle>;
   cellCount?: number;
+  autoFocus?: boolean;
 }
 
 const DEFAULT_CELL_COUNT = 4;
@@ -52,6 +53,7 @@ function CodeFieldComponent(
     RootProps = {},
     RootComponent = View,
     InputComponent = TextInput,
+    autoFocus = false,
     ...rest
   }: Props & {InputComponent?: ComponentType<any>},
   ref: Ref<TextInput>,
@@ -79,6 +81,7 @@ function CodeFieldComponent(
         caretHidden={true}
         spellCheck={false}
         autoCorrect={false}
+        autoFocus={autoFocus}
         blurOnSubmit={false}
         clearButtonMode="never"
         autoCapitalize="characters"
