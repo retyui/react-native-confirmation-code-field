@@ -22,13 +22,13 @@ jobs:
   test_and_lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/cache@master
+      - uses: actions/cache@v3
         id: node_modules_cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('./yarn.lock') }}
 
       - run: yarn install --frozen-lockfile
         if: steps.node_modules_cache.outputs.cache-hit != 'true'

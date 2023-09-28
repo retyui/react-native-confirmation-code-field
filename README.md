@@ -2,7 +2,7 @@
 
 [![react-native-confirmation-code-field on npm](https://badgen.net/npm/v/react-native-confirmation-code-field)](https://www.npmjs.com/package/react-native-confirmation-code-field)
 [![react-native-confirmation-code-field downloads](https://badgen.net/npm/dm/react-native-confirmation-code-field)](https://www.npmtrends.com/react-native-confirmation-code-field)
-[![react-native-confirmation-code-field bundle size](https://badgen.net/bundlephobia/minzip/react-native-confirmation-code-field)](https://bundlephobia.com/result?p=react-native-confirmation-code-field)
+[![react-native-confirmation-code-field install size](https://packagephobia.com/badge?p=react-native-confirmation-code-field)](https://packagephobia.com/result?p=react-native-confirmation-code-field)
 [![CI status](https://github.com/retyui/react-native-confirmation-code-field/workflows/Node.js%20CI/badge.svg)](https://github.com/retyui/react-native-confirmation-code-field/actions)
 
 A simple react-native confirmation code field compatible with iOS, Android.
