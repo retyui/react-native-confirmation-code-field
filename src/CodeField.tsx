@@ -1,4 +1,5 @@
 import {
+  Platform,
   StyleProp,
   TextInput,
   TextInputProps,
@@ -39,6 +40,10 @@ interface BaseProps {
 }
 
 const DEFAULT_CELL_COUNT = 4;
+const autoComplete = Platform.select({
+  android: 'sms-otp',
+  default: 'one-time-code',
+});
 
 function CodeFieldComponent(
   {
@@ -84,6 +89,7 @@ function CodeFieldComponent(
         autoCapitalize="characters"
         underlineColorAndroid="transparent"
         maxLength={cellCount}
+        autoComplete={autoComplete}
         {...rest}
         value={value}
         onBlur={focusState.onBlur}
