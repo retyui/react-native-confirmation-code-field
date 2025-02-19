@@ -7,7 +7,7 @@ export const DEFAULT_CURSOR_SYMBOL = '|';
 export function Cursor({
   cursorSymbol = DEFAULT_CURSOR_SYMBOL,
   delay = DEFAULT_BLINKING_SPEED,
-}): JSX.Element {
+}): React.JSX.Element {
   const [visibleFlag, setFlag] = useState(true);
 
   useInterval(() => setFlag((flag) => !flag), delay);

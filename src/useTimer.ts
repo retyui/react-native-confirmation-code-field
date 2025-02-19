@@ -6,7 +6,7 @@ type RunTimerFn = (handler: () => void, timeout: number) => number;
 const creteUseTimer =
   (clear: ClearTimerFn, runTimer: RunTimerFn) =>
   (callback: () => void, delay: number): void => {
-    const timerRef = useRef<number>();
+    const timerRef = useRef<number>(-1);
 
     useEffect(() => {
       const stop = () => clear(timerRef.current);

@@ -15,7 +15,7 @@ export function MaskSymbol({
   children: symbol,
   maskSymbol,
   delay = DEFAULT_BLINKING_SPEED,
-}: Props): JSX.Element {
+}: Props): React.ReactNode {
   const [visibleFlag, setFlag] = useState(true);
 
   useTimeout(() => setFlag(false), delay);
@@ -26,6 +26,5 @@ export function MaskSymbol({
     }
   }, [isLastFilledCell]);
 
-  // @ts-expect-error `JSX.Element` is not a `ReactNode`
   return visibleFlag ? symbol : maskSymbol;
 }

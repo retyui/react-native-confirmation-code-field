@@ -4,7 +4,7 @@
     "types": ["react-native", "jest"],
     "rootDir": "./src",
     "module": "ES2020",
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "declaration": true,
     "noEmit": false
   },

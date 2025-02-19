@@ -1,3 +1,10 @@
 node_modules/
 coverage/
 esm/
+# yarn berry
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

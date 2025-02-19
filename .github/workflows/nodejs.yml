@@ -30,7 +30,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('./yarn.lock') }}
 
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
         if: steps.node_modules_cache.outputs.cache-hit != 'true'
 
       - run: yarn ci

@@ -42,7 +42,6 @@ it('should not throw an error when ref null and value length equal cellCount', (
     }),
   );
 
-  // @ts-expect-error - 'current' is mutable prop
   result.current.current = null;
 
   value = '1234';
