@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "types": ["react-native", "jest"],
     "rootDir": "./src",
     "module": "ES2020",
