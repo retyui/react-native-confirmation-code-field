@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.5.0
+
+- Fix typescript error `Type Error: 'Cursor' cannot be used as a JSX component`
+
+
 ## 7.4.0
 
 - Add  `autoComplete` prop by default, for `CodeField` component [#239](https://github.com/retyui/react-native-confirmation-code-field/pull/239)
