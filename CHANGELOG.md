@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.6.0
+
+- Fix a "clearInterval called with an invalid handle" error, see: [#245](https://github.com/retyui/react-native-confirmation-code-field/issues/245), thanks @fcaldarelli
+
 ## 7.5.0
 
 - Fix typescript error `Type Error: 'Cursor' cannot be used as a JSX component`
