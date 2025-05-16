@@ -6,7 +6,7 @@ type RunTimerFn = (handler: () => void, timeout: number) => number;
 const creteUseTimer =
   (clear: ClearTimerFn, runTimer: RunTimerFn) =>
   (callback: () => void, delay: number): void => {
-    const timerRef = useRef<number>(-1);
+    const timerRef = useRef<number>(undefined);
 
     useEffect(() => {
       const stop = () => clear(timerRef.current);
@@ -20,12 +20,10 @@ const creteUseTimer =
   };
 
 export const useInterval = creteUseTimer(
-  // @ts-expect-error - I know better
-  clearInterval,
+  clearInterval as ClearTimerFn,
   setInterval,
 );
 export const useTimeout = creteUseTimer(
-  // @ts-expect-error - I know better
-  clearTimeout,
+  clearTimeout as ClearTimerFn,
   setTimeout,
 );
