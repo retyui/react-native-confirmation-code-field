@@ -1,6 +1,6 @@
 {
   "name": "react-native-confirmation-code-field",
-  "version": "7.6.0",
+  "version": "7.6.1",
   "main": "esm/index.js",
   "types": "esm/index.d.ts",
   "files": [
@@ -14,11 +14,10 @@
     "test": "jest --coverage",
     "lint": "eslint './src/*.{js,ts,tsx}' --quiet",
     "ts": "tsc --noEmit",
-    "build": "rm -rf esm && tsc --outDir esm",
+    "build": "rm -rf node_modules/@types/react-native && rm -rf esm && tsc --outDir esm",
     "postbuild": "prettier --write esm/*.js esm/*.d.ts",
     "docs": "yarn doctoc API.md",
-    "prepublishOnly": "yarn docs && yarn build",
-    "postinstall": "rm -rf node_modules/@types/react-native"
+    "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {
     "react": ">=16.4.0",
