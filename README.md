@@ -11,7 +11,7 @@ A simple react-native confirmation code field compatible with iOS, Android.
 
 - [Documentation](API.md)
 - [Example app](examples/DemoCodeField)
-- [Live Expo app](https://snack.expo.io/Zil!jCFft)
+- [Live Expo app](https://snack.expo.dev/@retyui/demo-for-react-native-confirmation-code-field)
 
 ### Component features:
 
