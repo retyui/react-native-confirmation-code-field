@@ -2,6 +2,14 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 8.0.0
+
+- support React Compiler (perf. optimisation)
+- add `.web` extension for platform specific code (reduce a bundle size)
+- No anonymous functions (better debugging)
+- update an example app [examples/DemoCodeField](examples/DemoCodeField)
+
+
 ## 7.6.0
 
 - Fix a "clearInterval called with an invalid handle" error, see: [#245](https://github.com/retyui/react-native-confirmation-code-field/issues/245), thanks @fcaldarelli
