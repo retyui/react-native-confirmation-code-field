@@ -1,32 +1,39 @@
-import {useState} from 'react';
-import {
+import {useState, useCallback, useDebugValue} from 'react';
+import type {
+  TextInputProps,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  TextInputProps,
 } from 'react-native';
-import {useEvent} from './useEvent';
 
-interface HookResult {
-  isFocused: boolean;
-  onBlur: Exclude<TextInputProps['onBlur'], undefined>;
-  onFocus: Exclude<TextInputProps['onFocus'], undefined>;
-}
+export function useFocusState(
+  onBlurFromProps?: TextInputProps['onBlur'],
+  onFocusFromProps?: TextInputProps['onFocus'],
+) {
+  'use memo';
 
-export const useFocusState = (
-  onBlur?: TextInputProps['onBlur'],
-  onFocus?: TextInputProps['onFocus'],
-): HookResult => {
   const [isFocused, setFocusFlag] = useState(false);
 
-  return {
-    isFocused,
-    onBlur: useEvent<NativeSyntheticEvent<TextInputFocusEventData>>(
-      onBlur,
-      () => setFocusFlag(false),
-    ),
-    onFocus: useEvent<NativeSyntheticEvent<TextInputFocusEventData>>(
-      onFocus,
-      () => setFocusFlag(true),
-    ),
-  };
-};
+  const onBlur = useCallback(
+    function onInputBlur(
+      blurEvent: NativeSyntheticEvent<TextInputFocusEventData>,
+    ) {
+      setFocusFlag(false);
+      onBlurFromProps?.(blurEvent);
+    },
+    [onBlurFromProps],
+  );
+
+  const onFocus = useCallback(
+    function onInputFocus(
+      focusEvent: NativeSyntheticEvent<TextInputFocusEventData>,
+    ) {
+      setFocusFlag(true);
+      onFocusFromProps?.(focusEvent);
+    },
+    [onFocusFromProps],
+  );
+
+  useDebugValue(isFocused ? 'Focused' : 'Unfocused');
+
+  return [isFocused, onFocus, onBlur] as const;
+}

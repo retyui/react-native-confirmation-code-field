@@ -1,23 +1,24 @@
+import type {NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
+
 import {renderHook, act} from '@testing-library/react-hooks';
 import {useFocusState} from '../useFocusState';
+
+const focusEvent = {
+  type: 'focus',
+} as NativeSyntheticEvent<TextInputFocusEventData>;
+const blurEvent = {
+  type: 'blur',
+} as NativeSyntheticEvent<TextInputFocusEventData>;
 
 it('should invoke passed handler', () => {
   const onBlur = jest.fn();
   const onFocus = jest.fn();
-  const focusEvent = {test: 'event focus'};
-  const blurEvent = {test: 'event blur'};
 
   const {result} = renderHook(() => useFocusState(onBlur, onFocus));
 
   act(() => {
-    result.current.onFocus(
-      // @ts-expect-error 'focusEvent' mock event
-      focusEvent,
-    );
-    result.current.onBlur(
-      // @ts-expect-error 'blurEvent' mock event
-      blurEvent,
-    );
+    result.current[1](focusEvent);
+    result.current[2](blurEvent);
   });
 
   expect(onBlur).toHaveBeenCalledWith(blurEvent);
@@ -30,10 +31,8 @@ it('should not throw an error when pass empty handler', () => {
   const {result} = renderHook(() => useFocusState(onBlur, onFocus));
 
   act(() => {
-    // @ts-expect-error invoke without event
-    result.current.onFocus();
-    // @ts-expect-error invoke without event
-    result.current.onBlur();
+    result.current[1](focusEvent);
+    result.current[2](blurEvent);
   });
 });
 
@@ -42,14 +41,14 @@ it('should memoize handlers', () => {
   const onFocus = jest.fn();
   const {result, rerender} = renderHook(() => useFocusState(onBlur, onFocus));
 
-  const {onBlur: initialOnBlur, onFocus: initialOnFocus} = result.current;
+  const [, initialOnFocus, initialOnBlur] = result.current;
 
   act(() => {
     rerender({new: 'props'});
   });
 
-  expect(result.current.onBlur).toBe(initialOnBlur);
-  expect(result.current.onFocus).toBe(initialOnFocus);
+  expect(result.current[2]).toBe(initialOnBlur);
+  expect(result.current[1]).toBe(initialOnFocus);
 });
 
 it('should enable isFocused on focus ', () => {
@@ -57,14 +56,13 @@ it('should enable isFocused on focus ', () => {
   const onFocus = undefined;
   const {result} = renderHook(() => useFocusState(onBlur, onFocus));
 
-  expect(result.current.isFocused).toBe(false);
+  expect(result.current[0]).toBe(false);
 
   act(() => {
-    // @ts-expect-error invoke without event
-    result.current.onFocus();
+    result.current[1](focusEvent);
   });
 
-  expect(result.current.isFocused).toBe(true);
+  expect(result.current[0]).toBe(true);
 });
 
 it('should disable isFocused on blur', () => {
@@ -73,16 +71,14 @@ it('should disable isFocused on blur', () => {
   const {result} = renderHook(() => useFocusState(onBlur, onFocus));
 
   act(() => {
-    // @ts-expect-error invoke without event
-    result.current.onFocus();
+    result.current[1](focusEvent);
   });
 
-  expect(result.current.isFocused).toBe(true);
+  expect(result.current[0]).toBe(true);
 
   act(() => {
-    // @ts-expect-error invoke without event
-    result.current.onBlur();
+    result.current[2](blurEvent);
   });
 
-  expect(result.current.isFocused).toBe(false);
+  expect(result.current[0]).toBe(false);
 });

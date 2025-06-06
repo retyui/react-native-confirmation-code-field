@@ -2,11 +2,13 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended-legacy',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
+  plugins: ['react-compiler'],
   parserOptions: {
-    ecmaVersion: 2023,
+    ecmaVersion: 2025,
     sourceType: 'module',
     ecmaFeatures: {jsx: true},
   },
@@ -16,6 +18,9 @@ module.exports = {
     },
   },
   rules: {
-    "@typescript-eslint/no-explicit-any": "off",
-  }
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react-compiler/react-compiler': 'error',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+  },
 };

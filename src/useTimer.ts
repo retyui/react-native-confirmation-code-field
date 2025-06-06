@@ -1,29 +1,27 @@
-import {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
 
-type ClearTimerFn = (id: number | undefined) => void;
-type RunTimerFn = (handler: () => void, timeout: number) => number;
+export function useInterval(callback: () => void, delay: number): void {
+  'use memo';
+  useEffect(
+    function setIntervalEffect() {
+      const timer = setInterval(callback, delay);
+      return function cleanupIntervalTimer() {
+        clearInterval(timer);
+      };
+    },
+    [callback, delay],
+  );
+}
 
-const creteUseTimer =
-  (clear: ClearTimerFn, runTimer: RunTimerFn) =>
-  (callback: () => void, delay: number): void => {
-    const timerRef = useRef<number>(undefined);
-
-    useEffect(() => {
-      const stop = () => clear(timerRef.current);
-
-      stop();
-
-      timerRef.current = runTimer(callback, delay);
-
-      return stop;
-    }, [delay]);
-  };
-
-export const useInterval = creteUseTimer(
-  clearInterval as ClearTimerFn,
-  setInterval,
-);
-export const useTimeout = creteUseTimer(
-  clearTimeout as ClearTimerFn,
-  setTimeout,
-);
+export function useTimeout(callback: () => void, delay: number): void {
+  'use memo';
+  useEffect(
+    function setTimeoutEffect() {
+      const timer = setTimeout(callback, delay);
+      return function cleanupTimeoutTimer() {
+        clearTimeout(timer);
+      };
+    },
+    [callback, delay],
+  );
+}

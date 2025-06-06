@@ -17,7 +17,6 @@ it('should invoke blur method of ref when value length equal cellCount', () => {
     }),
   );
 
-  // @ts-expect-error - 'current' is mutable prop
   result.current.current = {blur};
 
   value = '1234';

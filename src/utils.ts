@@ -1,26 +1,14 @@
-import {StyleProp, TextStyle} from 'react-native';
-
-const truncateString = (codeValue: string, codeLength: number): Array<string> =>
-  codeValue.substr(0, codeLength).split('');
-
-const emptySymbols = (codeLength: number) =>
-  new Array<string>(codeLength).fill('');
-
-export const getSymbols = (codeValue: string, codeLength: number) =>
-  new Array<string>()
-    .concat(truncateString(codeValue, codeLength))
-    .concat(emptySymbols(codeLength))
-    .slice(0, codeLength);
-
-export const getStyle = (
-  base: StyleProp<TextStyle>,
-  custom?: StyleProp<TextStyle>,
-) => (custom ? [base, custom] : base);
-
-interface Params {
-  value: string;
-  index: number;
+export function isLastFilledCell(
+  value: string | null | undefined,
+  index: number,
+): boolean {
+  return value != null && value.length - 2 === index;
 }
 
-export const isLastFilledCell = ({value, index}: Params): boolean =>
-  Boolean(value && value.length - 2 === index);
+export function getSymbols(codeValue: string, codeLength: number): string[] {
+  const symbols = new Array<string>(codeLength);
+  for (let i = 0; i < codeLength; i++) {
+    symbols[i] = codeValue[i] ?? '';
+  }
+  return symbols;
+}

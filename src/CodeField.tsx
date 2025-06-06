@@ -1,23 +1,15 @@
+import type {StyleProp, TextStyle, ViewProps} from 'react-native';
+import {Platform, View, TextInput} from 'react-native';
 import {
-  Platform,
-  StyleProp,
-  TextInput,
-  TextInputProps,
-  TextStyle,
-  View,
-  ViewProps,
-} from 'react-native';
-import React, {
   ComponentPropsWithRef,
   ComponentType,
   ElementType,
-  forwardRef,
-  ReactElement,
   ReactNode,
-  Ref,
-  RefAttributes,
+  ForwardedRef,
 } from 'react';
-import {getStyle, getSymbols} from './utils';
+import React, {forwardRef} from 'react';
+
+import {getSymbols} from './utils';
 import {useFocusState} from './useFocusState';
 
 import {styles} from './CodeField.styles';
@@ -49,33 +41,34 @@ function CodeFieldComponent(
   {
     rootStyle,
     textInputStyle,
-    onBlur,
-    onFocus,
     value,
     renderCell,
     cellCount = DEFAULT_CELL_COUNT,
-    RootProps = {},
+    RootProps,
     RootComponent = View,
     InputComponent = TextInput,
     ...rest
   }: Props & {InputComponent?: ComponentType<any>},
-  ref: Ref<TextInput>,
+  ref: ForwardedRef<TextInput>,
 ) {
-  const focusState = useFocusState(onBlur, onFocus);
-  const cells = getSymbols(value || '', cellCount).map(
-    (symbol, index, symbols) => {
-      const isFirstEmptySymbol = symbols.indexOf('') === index;
+  'use memo';
+  const [isFocused, onFocus, onBlur] = useFocusState(rest.onBlur, rest.onFocus);
 
-      return renderCell({
-        index,
-        symbol,
-        isFocused: focusState.isFocused && isFirstEmptySymbol,
-      });
-    },
-  );
+  const symbols = getSymbols(value || '', cellCount);
+  const cells = symbols.map((symbol, index, symbols) => {
+    const isFirstEmptySymbol = symbols.indexOf('') === index;
+    return renderCell({
+      index,
+      symbol,
+      isFocused: isFocused && isFirstEmptySymbol,
+    });
+  });
 
   return (
-    <RootComponent {...RootProps} style={getStyle(styles.root, rootStyle)}>
+    <RootComponent
+      {...RootProps}
+      style={rootStyle ? [styles.root, rootStyle] : styles.root}
+    >
       {cells}
       <InputComponent
         disableFullscreenUI
@@ -92,29 +85,35 @@ function CodeFieldComponent(
         autoComplete={autoComplete}
         {...rest}
         value={value}
-        onBlur={focusState.onBlur}
-        onFocus={focusState.onFocus}
-        style={getStyle(styles.textInput, textInputStyle)}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        style={
+          textInputStyle ? [styles.textInput, textInputStyle] : styles.textInput
+        }
         ref={ref}
       />
     </RootComponent>
   );
 }
 
+CodeFieldComponent.displayName = 'CodeField';
+
 export interface Props
   extends BaseProps,
-    OmitStyle<TextInputProps>,
-    RefAttributes<TextInput> {
+    OmitStyle<ComponentPropsWithRef<typeof TextInput>> {
   //
 }
 
+// Based on: https://github.com/mui/material-ui/blob/c3d02722da19e3bcb9b97eb640c21475fecd501c/packages/mui-material/src/OverridableComponent/index.ts#L10
 export interface CodeFieldOverridableComponent {
-  <C extends ElementType>(
-    props: {InputComponent: C} & OmitStyle<ComponentPropsWithRef<C>> &
+  // Overload for custom InputComponent to consume correct props
+  <TInput extends ElementType>(
+    props: {InputComponent: TInput} & OmitStyle<ComponentPropsWithRef<TInput>> &
       BaseProps,
-  ): ReactElement;
+  ): React.JSX.Element | null;
 
-  (props: Props): ReactElement;
+  // Default overload with TextInput
+  (props: Props): React.JSX.Element | null;
 }
 
 export const CodeField = forwardRef(

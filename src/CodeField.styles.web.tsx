@@ -10,7 +10,9 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     // Hide <TextInput/> to simulate that user will press into a cell
     opacity: 0.015,
-    // Each user press into <TextInput/> should always set the cursor on the end of a text value
-    fontSize: 1,
+    // >>>>>> Web only styles <<<<<
+    width: '100%',
+    // Fix iOS Safari aggressive zoom
+    fontSize: 16,
   },
 });

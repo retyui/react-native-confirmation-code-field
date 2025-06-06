@@ -1,13 +1,15 @@
-import {useEffect, useState} from 'react';
+import type {ReactNode} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+
 import {useTimeout} from './useTimer';
 
 export const DEFAULT_BLINKING_SPEED = 500;
 
-interface Props {
-  maskSymbol: string;
-  isLastFilledCell: boolean;
-  children: string;
+interface MaskSymbolProps {
   delay?: number;
+  children: ReactNode;
+  maskSymbol: ReactNode;
+  isLastFilledCell: boolean;
 }
 
 export function MaskSymbol({
@@ -15,10 +17,15 @@ export function MaskSymbol({
   children: symbol,
   maskSymbol,
   delay = DEFAULT_BLINKING_SPEED,
-}: Props): React.ReactNode {
+}: MaskSymbolProps) {
+  'use memo';
   const [visibleFlag, setFlag] = useState(true);
 
-  useTimeout(() => setFlag(false), delay);
+  const toggleVisibility = useCallback(function toggleMaskVisibility() {
+    setFlag((prev) => !prev);
+  }, []);
+
+  useTimeout(toggleVisibility, delay);
 
   useEffect(() => {
     if (isLastFilledCell) {
@@ -26,5 +33,7 @@ export function MaskSymbol({
     }
   }, [isLastFilledCell]);
 
-  return visibleFlag ? symbol : maskSymbol;
+  return <>{visibleFlag ? symbol : maskSymbol}</>;
 }
+
+MaskSymbol.displayName = 'MaskSymbol';
