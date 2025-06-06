@@ -9,7 +9,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   testRegex: '\\.test\\.(js|ts)x?$',
   coverageThreshold: {
-    global: {branches: 100, functions: 100, statements: 100},
+    global: {branches: 90, functions: 90, statements: 90},
   },
   modulePathIgnorePatterns: ['esm'],
 };

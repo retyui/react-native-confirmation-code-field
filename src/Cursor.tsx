@@ -1,16 +1,29 @@
-import {useState, ReactNode} from 'react';
+import React, {useState, useCallback} from 'react';
+
 import {useInterval} from './useTimer';
 
 export const DEFAULT_BLINKING_SPEED = 500;
 export const DEFAULT_CURSOR_SYMBOL = '|';
 
+export interface CursorProps {
+  cursorSymbol?: string;
+  delay?: number;
+}
+
 export function Cursor({
   cursorSymbol = DEFAULT_CURSOR_SYMBOL,
   delay = DEFAULT_BLINKING_SPEED,
-}): ReactNode {
+}: CursorProps) {
+  'use memo';
   const [visibleFlag, setFlag] = useState(true);
 
-  useInterval(() => setFlag((flag) => !flag), delay);
+  const toggleVisibility = useCallback(function toggleCursorVisibility() {
+    setFlag((prev) => !prev);
+  }, []);
 
-  return visibleFlag ? cursorSymbol : '';
+  useInterval(toggleVisibility, delay);
+
+  return <>{visibleFlag ? cursorSymbol : ''}</>;
 }
+
+Cursor.displayName = 'Cursor';

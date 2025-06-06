@@ -1,4 +1,4 @@
-import React, {ComponentProps, ForwardedRef, forwardRef} from 'react';
+import React, {ComponentProps, forwardRef} from 'react';
 import {Text, TextInput, TextInputProps, View} from 'react-native';
 import {act, render} from '@testing-library/react-native';
 import {CodeField} from '../CodeField';
@@ -95,6 +95,19 @@ it('should invoke renderCell for third cell when isFocused and it empty', () => 
   );
 
   console.log(
+    <CodeField
+      onChangeText={(text: string) => {
+        console.log(text);
+      }}
+      renderCell={() => null}
+      ref={(ref: TextInput | null) => {
+        ref?.focus();
+        ref?.blur();
+      }}
+    />,
+  );
+
+  console.log(
     // @ts-expect-error - number is not function
     <CodeField
       onChangeText={123}
@@ -108,18 +121,16 @@ it('should invoke renderCell for third cell when isFocused and it empty', () => 
 }
 
 {
-  interface MyTextInput extends TextInputProps {
+  interface MyTextInputProps extends TextInputProps {
     myRequiredProps: string;
   }
 
   // eslint-disable-next-line react/display-name
-  const MyTextInput = forwardRef(
-    (props: MyTextInput, ref: ForwardedRef<TextInput>) => (
-      <View testID={props.myRequiredProps}>
-        <TextInput ref={ref} />
-      </View>
-    ),
-  );
+  const MyTextInput = forwardRef<TextInput, MyTextInputProps>((props, ref) => (
+    <View testID={props.myRequiredProps}>
+      <TextInput ref={ref} />
+    </View>
+  ));
 
   console.log(
     <CodeField

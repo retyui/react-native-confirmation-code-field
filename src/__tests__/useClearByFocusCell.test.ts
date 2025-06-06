@@ -1,6 +1,7 @@
-import {Platform} from 'react-native';
-import {useClearByFocusCell} from '../useClearByFocusCell';
 import {renderHook} from '@testing-library/react-hooks';
+
+import {useClearByFocusCell} from '../useClearByFocusCell';
+import {useClearByFocusCell as useClearByFocusCellWeb} from '../useClearByFocusCell.web';
 
 interface Params {
   getCellOnLayoutHandler(index: number): (event: any) => void;
@@ -116,15 +117,13 @@ it('should invoke setValue with empty string when value undefined and user press
 });
 
 it('should adapt a Web click event to ReactNative press event', () => {
-  Platform.select = ({web}) => web;
-
   const setValue = jest.fn();
   const value = '123456';
   const size = 100;
   const count = 6;
 
   const {result} = renderHook(() =>
-    useClearByFocusCell({
+    useClearByFocusCellWeb({
       setValue,
       value,
     }),
