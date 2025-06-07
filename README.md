@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#00000030',
     textAlign: 'center',
+    color: '#000', // text color
   },
   focusCell: {
     borderColor: '#000',
