@@ -16,8 +16,9 @@ A simple react-native confirmation code field compatible with iOS, Android.
 ### Component features:
 
 - 🔮 Simple and tiny `3.8 KB`. Easy to use;
+- 🚀 React Compiler compatible; <img width="516" alt="devtools image" src="https://github.com/user-attachments/assets/208900e7-eb70-411b-93bb-17570a5f3884" />
 - 🚮 Clearing part of the code by clicking on the cell;
-- 🍎 Support "fast paste SMS-code" on iOS. And custom code paste for Android;
+- 🍎 Support "fast paste SMS-code" on iOS & Web. And custom code paste for Android;
 - ⚡ TextInput `ref` support;
 - 🛠 Highly customizable. Can be used as masked TextInput;
 - 🤓 Readable [changelog](CHANGELOG.md).
