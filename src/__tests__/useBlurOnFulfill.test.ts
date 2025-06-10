@@ -17,6 +17,7 @@ it('should invoke blur method of ref when value length equal cellCount', () => {
     }),
   );
 
+  // @ts-expect-error - like text input
   result.current.current = {blur};
 
   value = '1234';

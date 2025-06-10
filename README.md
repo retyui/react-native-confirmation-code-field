@@ -80,9 +80,10 @@ You can use a ready-made solution out of the box:
 - [Show & Hide password](examples/DemoCodeField/src/UnmaskExample)
 - [Mask variant](examples/DemoCodeField/src/MaskExample)
 
-```js
+```tsx
 import React, {useState} from 'react';
-import {SafeAreaView, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, Text, StyleSheet, Platform} from 'react-native';
+import type {TextInputProps} from 'react-native';
 
 import {
   CodeField,
@@ -111,8 +112,12 @@ const styles = StyleSheet.create({
 });
 
 const CELL_COUNT = 6;
+const autoComplete = Platform.select<TextInputProps['autoComplete']>({
+  android: 'sms-otp',
+  default: 'one-time-code',
+});
 
-const App = () => {
+function App() {
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -133,14 +138,14 @@ const App = () => {
         rootStyle={styles.codeFieldRoot}
         keyboardType="number-pad"
         textContentType="oneTimeCode"
-        autoComplete={Platform.select({ android: 'sms-otp', default: 'one-time-code' })}
+        autoComplete={autoComplete}
         testID="my-code-input"
         renderCell={({index, symbol, isFocused}) => (
           <Text
             key={index}
             style={[styles.cell, isFocused && styles.focusCell]}
             onLayout={getCellOnLayoutHandler(index)}>
-            {symbol || (isFocused ? <Cursor/> : null)}
+            {symbol || (isFocused && <Cursor />)}
           </Text>
         )}
       />

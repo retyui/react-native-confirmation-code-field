@@ -1,3 +1,4 @@
+import type {TextInput} from 'react-native';
 import {useRef, useEffect} from 'react';
 
 interface Options {
@@ -5,7 +6,7 @@ interface Options {
   cellCount: number;
 }
 
-export function useBlurOnFulfill<TInput extends {blur(): void}>({
+export function useBlurOnFulfill<TInput extends TextInput>({
   value,
   cellCount,
 }: Options) {
