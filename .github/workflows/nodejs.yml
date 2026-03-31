@@ -22,9 +22,9 @@ jobs:
   test_and_lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         id: node_modules_cache
         with:
           path: node_modules
