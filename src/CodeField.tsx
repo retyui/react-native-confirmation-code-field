@@ -1,12 +1,18 @@
 import {
-  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
   ComponentType,
   ElementType,
-  ForwardedRef,
+  FC,
+  JSX,
   ReactNode,
+  Ref,
 } from 'react';
-import {forwardRef} from 'react';
-import type {StyleProp, TextStyle, ViewProps} from 'react-native';
+import type {
+  StyleProp,
+  TextInputProps,
+  TextStyle,
+  ViewProps,
+} from 'react-native';
 import {Platform, TextInput, View} from 'react-native';
 
 import {styles} from './CodeField.styles';
@@ -19,15 +25,26 @@ export interface RenderCellOptions {
   isFocused: boolean;
 }
 
-type OmitStyle<T extends {style?: any}> = Omit<T, 'style'>;
-
-interface BaseProps {
+export interface Props extends Omit<TextInputProps, 'style'> {
   renderCell: (options: RenderCellOptions) => ReactNode;
   RootProps?: ViewProps;
   RootComponent?: ComponentType<ViewProps>;
   rootStyle?: ViewProps['style'];
   textInputStyle?: StyleProp<TextStyle>;
   cellCount?: number;
+  ref?: Ref<TextInput>;
+}
+
+// Based on: https://github.com/mui/material-ui/blob/c3d02722da19e3bcb9b97eb640c21475fecd501c/packages/mui-material/src/OverridableComponent/index.ts#L10
+export interface CodeFieldOverridableComponent extends FC<Props> {
+  // Overload for custom InputComponent to consume correct props
+  <TInput extends ElementType>(
+    props: {InputComponent: TInput} & Omit<
+      ComponentPropsWithoutRef<TInput>,
+      'style'
+    > &
+      Props,
+  ): JSX.Element | null;
 }
 
 const DEFAULT_CELL_COUNT = 4;
@@ -36,20 +53,18 @@ const autoComplete = Platform.select({
   default: 'one-time-code',
 });
 
-function CodeFieldComponent(
-  {
-    rootStyle,
-    textInputStyle,
-    value,
-    renderCell,
-    cellCount = DEFAULT_CELL_COUNT,
-    RootProps,
-    RootComponent = View,
-    InputComponent = TextInput,
-    ...rest
-  }: Props & {InputComponent?: ComponentType<any>},
-  ref: ForwardedRef<TextInput>,
-) {
+export const CodeField: CodeFieldOverridableComponent = ({
+  rootStyle,
+  textInputStyle,
+  value,
+  renderCell,
+  cellCount = DEFAULT_CELL_COUNT,
+  RootProps,
+  RootComponent = View,
+  InputComponent = TextInput,
+  ref,
+  ...rest
+}: Props & {InputComponent?: ComponentType<any>}) => {
   'use memo';
   const [isFocused, onFocus, onBlur] = useFocusState(rest.onBlur, rest.onFocus);
 
@@ -93,27 +108,6 @@ function CodeFieldComponent(
       />
     </RootComponent>
   );
-}
+};
 
-CodeFieldComponent.displayName = 'CodeField';
-
-export interface Props
-  extends BaseProps, OmitStyle<ComponentPropsWithRef<typeof TextInput>> {
-  //
-}
-
-// Based on: https://github.com/mui/material-ui/blob/c3d02722da19e3bcb9b97eb640c21475fecd501c/packages/mui-material/src/OverridableComponent/index.ts#L10
-export interface CodeFieldOverridableComponent {
-  // Overload for custom InputComponent to consume correct props
-  <TInput extends ElementType>(
-    props: {InputComponent: TInput} & OmitStyle<ComponentPropsWithRef<TInput>> &
-      BaseProps,
-  ): React.JSX.Element | null;
-
-  // Default overload with TextInput
-  (props: Props): React.JSX.Element | null;
-}
-
-export const CodeField = forwardRef(
-  CodeFieldComponent,
-) as CodeFieldOverridableComponent;
+CodeField.displayName = 'CodeField';

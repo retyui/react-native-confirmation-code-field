@@ -20,8 +20,8 @@
     "prepublishOnly": "yarn docs && yarn build"
   },
   "peerDependencies": {
-    "react": ">=16.4.0",
-    "react-native": ">=0.64.0"
+    "react": ">=19.0.0",
+    "react-native": ">=0.78.0"
   },
   "peerDependenciesMeta": {
     "react": {
