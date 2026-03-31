@@ -3,10 +3,11 @@
   "compilerOptions": {
     "types": ["react-native", "jest"],
     "rootDir": "./src",
-    "module": "ES2020",
+    "module": "esnext",
     "skipLibCheck": true,
     "declaration": true,
-    "noEmit": false
+    "noEmit": false,
+    "moduleResolution": "bundler"
   },
   "include": ["./src"]
 }

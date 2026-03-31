@@ -98,8 +98,7 @@ function CodeFieldComponent(
 CodeFieldComponent.displayName = 'CodeField';
 
 export interface Props
-  extends BaseProps,
-    OmitStyle<ComponentPropsWithRef<typeof TextInput>> {
+  extends BaseProps, OmitStyle<ComponentPropsWithRef<typeof TextInput>> {
   //
 }
 
