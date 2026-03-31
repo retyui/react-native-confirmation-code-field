@@ -1,3 +1,4 @@
+import type {FC} from 'react';
 import {useCallback, useState} from 'react';
 
 import {useInterval} from './useTimer';
@@ -10,20 +11,20 @@ export interface CursorProps {
   delay?: number;
 }
 
-export function Cursor({
+export const Cursor: FC<CursorProps> = ({
   cursorSymbol = DEFAULT_CURSOR_SYMBOL,
   delay = DEFAULT_BLINKING_SPEED,
-}: CursorProps) {
+}) => {
   'use memo';
   const [visibleFlag, setFlag] = useState(true);
 
-  const toggleVisibility = useCallback(function toggleCursorVisibility() {
+  const toggleVisibility = useCallback(() => {
     setFlag((prev) => !prev);
   }, []);
 
   useInterval(toggleVisibility, delay);
 
   return <>{visibleFlag ? cursorSymbol : ''}</>;
-}
+};
 
 Cursor.displayName = 'Cursor';

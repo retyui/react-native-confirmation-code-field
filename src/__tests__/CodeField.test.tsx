@@ -109,8 +109,8 @@ it('should invoke renderCell for third cell when isFocused and it empty', () => 
   );
 
   console.log(
-    // @ts-expect-error - number is not function
     <CodeField
+      // @ts-expect-error - number is not function
       onChangeText={123}
       renderCell={() => null}
       ref={(ref: TextInput | null) => {

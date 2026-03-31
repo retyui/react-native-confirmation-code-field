@@ -14,7 +14,7 @@ export const useClearByFocusCell = (params: Params) => {
     (): {
       onClick: ComponentProps<'input'>['onClick'];
     } => ({
-      onClick: function onInputClick(event): void {
+      onClick: (event): void => {
         // @ts-expect-error - getClientRects have to be defined on the target
         const [offset] = event.target.getClientRects() as [
           {left: number; top: number},

@@ -16,7 +16,7 @@ interface Coords {
   locationY: number;
 }
 
-function findIndex({locationX, locationY}: Coords, map: LayoutsMap): number {
+const findIndex = ({locationX, locationY}: Coords, map: LayoutsMap): number => {
   for (const index in map) {
     const layout = map[index];
     if (
@@ -29,7 +29,7 @@ function findIndex({locationX, locationY}: Coords, map: LayoutsMap): number {
     }
   }
   return -1;
-}
+};
 
 export interface Params {
   setValue(text: string): void;
@@ -47,9 +47,7 @@ export const useClearByFocusCellCommon = (params: Params) => {
     paramsRef.current = params;
   }, [params]);
 
-  const clearCodeByCoords = useCallback(function clearCodeByCoords(
-    coords: Coords,
-  ): void {
+  const clearCodeByCoords = useCallback((coords: Coords): void => {
     const index = findIndex(coords, cellsLayouts.current);
     if (index !== -1) {
       const {value, setValue} = paramsRef.current;
@@ -58,13 +56,9 @@ export const useClearByFocusCellCommon = (params: Params) => {
     }
   }, []);
 
-  const getCellOnLayoutHandler = useCallback(function getCellOnLayoutHandler(
-    index: number,
-  ) {
+  const getCellOnLayoutHandler = useCallback((index: number) => {
     if (!callbackRef.current[index]) {
-      callbackRef.current[index] = function onCellLayout(
-        event: LayoutChangeEvent,
-      ) {
+      callbackRef.current[index] = (event: LayoutChangeEvent): void => {
         const {width, height, x, y} = event.nativeEvent.layout;
         cellsLayouts.current[`${index}`] = {
           x,
