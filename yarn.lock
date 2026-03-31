@@ -8477,8 +8477,8 @@ __metadata:
     typescript: "npm:^6.0.2"
     typescript-eslint: "npm:^8.58.0"
   peerDependencies:
-    react: ">=16.4.0"
-    react-native: ">=0.64.0"
+    react: ">=19.0.0"
+    react-native: ">=0.78.0"
   peerDependenciesMeta:
     react:
       optional: true
