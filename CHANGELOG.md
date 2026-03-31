@@ -2,6 +2,19 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 9.0.0
+
+🚨 **BREAKING CHANGES:**
+- React 19 **required**
+- Remove deprecated `StyleSheet.absoluteFillObject`
+
+Other:
+- Eslint flat config
+- Example app was updated to RN `0.84.x`
+- Update `devDependencies`
+- Yarn `4.13.0`
+
+
 ## 8.0.0
 
 - support React Compiler (perf. optimisation)
