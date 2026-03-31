@@ -1,5 +1,6 @@
+import {renderHook} from '@testing-library/react-native';
+
 import {useBlurOnFulfill} from '../useBlurOnFulfill';
-import {renderHook} from '@testing-library/react-hooks';
 
 it('should invoke blur method of ref when value length equal cellCount', () => {
   const blur = jest.fn();
@@ -22,7 +23,7 @@ it('should invoke blur method of ref when value length equal cellCount', () => {
 
   value = '1234';
 
-  rerender();
+  rerender({});
 
   expect(blur).toHaveBeenCalledTimes(1);
 });
@@ -47,6 +48,6 @@ it('should not throw an error when ref null and value length equal cellCount', (
   value = '1234';
 
   expect(() => {
-    rerender();
+    rerender({});
   }).not.toThrow();
 });

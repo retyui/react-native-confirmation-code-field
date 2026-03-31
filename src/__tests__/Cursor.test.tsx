@@ -1,6 +1,8 @@
-import React, {ComponentProps} from 'react';
+import {ComponentProps} from 'react';
 import {render} from '@testing-library/react-native';
+
 import {Cursor} from '../Cursor';
+
 import {delay} from './delay';
 
 type Props = ComponentProps<typeof Cursor>;
@@ -30,4 +32,3 @@ it('should hide cursor after timeout', async () => {
 
   expect(UNSAFE_getByType(Cursor).children).toEqual([]);
 });
-

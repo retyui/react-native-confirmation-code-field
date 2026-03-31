@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import React, {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import {useTimeout} from './useTimer';
 
@@ -29,6 +29,7 @@ export function MaskSymbol({
 
   useEffect(() => {
     if (isLastFilledCell) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFlag(false);
     }
   }, [isLastFilledCell]);

@@ -1,6 +1,8 @@
-import React, {ComponentProps} from 'react';
+import {ComponentProps} from 'react';
 import {render} from '@testing-library/react-native';
+
 import {MaskSymbol} from '../MaskSymbol';
+
 import {delay} from './delay';
 
 type Props = ComponentProps<typeof MaskSymbol>;

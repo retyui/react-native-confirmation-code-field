@@ -1,6 +1,7 @@
-import React, {ComponentProps, forwardRef} from 'react';
+import {ComponentProps, forwardRef} from 'react';
 import {Text, TextInput, TextInputProps, View} from 'react-native';
-import {act, render} from '@testing-library/react-native';
+import {act, render, screen} from '@testing-library/react-native';
+
 import {CodeField} from '../CodeField';
 import {styles} from '../CodeField.styles';
 
@@ -19,9 +20,9 @@ it('should use custom root component', () => {
     <View {...p} testID={id} />
   );
 
-  const {getByTestId} = renderCodeField({RootComponent});
+  renderCodeField({RootComponent});
 
-  expect(getByTestId(id)).toBeTruthy();
+  expect(screen.getByTestId(id)).toBeTruthy();
 });
 
 it('should spread props to root component', () => {
@@ -29,9 +30,9 @@ it('should spread props to root component', () => {
   const accessible = false;
   const RootProps = {testID: id, accessible};
 
-  const {getByTestId} = renderCodeField({RootProps});
+  renderCodeField({RootProps});
 
-  expect(getByTestId(id).props.accessible).toEqual(accessible);
+  expect(screen.getByTestId(id).props.accessible).toEqual(accessible);
 });
 
 it('should extends root component style with passed rootStyle', () => {
@@ -39,18 +40,18 @@ it('should extends root component style with passed rootStyle', () => {
   const rootStyle = {backgroundColor: 'black'};
   const RootProps = {testID: id};
 
-  const {getByTestId} = renderCodeField({RootProps, rootStyle});
+  renderCodeField({RootProps, rootStyle});
 
-  expect(getByTestId(id).props.style).toEqual([styles.root, rootStyle]);
+  expect(screen.getByTestId(id).props.style).toEqual([styles.root, rootStyle]);
 });
 
 it('should render 4 cells', () => {
   const cellCount = 4;
   const cellId = 'cell';
   const renderCell = ({index = 0}) => <Text key={index} testID={cellId} />;
-  const {getAllByTestId} = renderCodeField({cellCount, renderCell});
+  renderCodeField({cellCount, renderCell});
 
-  expect(getAllByTestId(cellId).length).toEqual(cellCount);
+  expect(screen.getAllByTestId(cellId)).toHaveLength(cellCount);
 });
 
 it('should invoke renderCell for third cell when isFocused and it empty', () => {
@@ -59,7 +60,7 @@ it('should invoke renderCell for third cell when isFocused and it empty', () => 
   const onFocusEvent = {};
   const renderCell = jest.fn().mockReturnValue(null);
 
-  const {getByTestId} = renderCodeField({
+  renderCodeField({
     testID: textInputTestId,
     value,
     renderCell,
@@ -68,7 +69,7 @@ it('should invoke renderCell for third cell when isFocused and it empty', () => 
   act(() => {
     // ignore initial render
     renderCell.mockReset();
-    getByTestId(textInputTestId).props.onFocus(onFocusEvent);
+    screen.getByTestId(textInputTestId).props.onFocus(onFocusEvent);
   });
 
   /*

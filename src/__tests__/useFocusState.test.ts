@@ -1,6 +1,6 @@
 import type {NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
+import {act, renderHook} from '@testing-library/react-native';
 
-import {renderHook, act} from '@testing-library/react-hooks';
 import {useFocusState} from '../useFocusState';
 
 const focusEvent = {
@@ -43,9 +43,7 @@ it('should memoize handlers', () => {
 
   const [, initialOnFocus, initialOnBlur] = result.current;
 
-  act(() => {
-    rerender({new: 'props'});
-  });
+  rerender({new: 'props'});
 
   expect(result.current[2]).toBe(initialOnBlur);
   expect(result.current[1]).toBe(initialOnFocus);

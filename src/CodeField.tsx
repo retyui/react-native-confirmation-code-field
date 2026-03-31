@@ -1,18 +1,17 @@
-import type {StyleProp, TextStyle, ViewProps} from 'react-native';
-import {Platform, View, TextInput} from 'react-native';
 import {
   ComponentPropsWithRef,
   ComponentType,
   ElementType,
-  ReactNode,
   ForwardedRef,
+  ReactNode,
 } from 'react';
-import React, {forwardRef} from 'react';
-
-import {getSymbols} from './utils';
-import {useFocusState} from './useFocusState';
+import {forwardRef} from 'react';
+import type {StyleProp, TextStyle, ViewProps} from 'react-native';
+import {Platform, TextInput, View} from 'react-native';
 
 import {styles} from './CodeField.styles';
+import {useFocusState} from './useFocusState';
+import {getSymbols} from './utils';
 
 export interface RenderCellOptions {
   symbol: string;

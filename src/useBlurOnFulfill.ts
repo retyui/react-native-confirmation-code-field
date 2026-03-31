@@ -1,5 +1,5 @@
+import {useEffect, useRef} from 'react';
 import type {TextInput} from 'react-native';
-import {useRef, useEffect} from 'react';
 
 interface Options {
   value?: string;

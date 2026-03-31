@@ -8,12 +8,8 @@ interface Layout {
   yEnd: number;
 }
 
-interface LayoutsMap {
-  [cellIndex: string]: Layout;
-}
-interface OnLayoutsMap {
-  [index: number]: (event: LayoutChangeEvent) => void;
-}
+type LayoutsMap = Record<string, Layout>;
+type OnLayoutsMap = Record<number, (event: LayoutChangeEvent) => void>;
 
 interface Coords {
   locationX: number;

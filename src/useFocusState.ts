@@ -1,8 +1,8 @@
-import {useState, useCallback, useDebugValue} from 'react';
+import {useCallback, useDebugValue, useState} from 'react';
 import type {
-  TextInputProps,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  TextInputProps,
 } from 'react-native';
 
 export function useFocusState(
