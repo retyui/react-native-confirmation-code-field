@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     // <TextInput/> will be rendered above Cells
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     // Hide <TextInput/> to simulate that user will press into a cell
     opacity: 0.015,
     // Each user press into <TextInput/> should always set the cursor on the end of a text value
