@@ -1,5 +1,6 @@
 import React, {useState, Fragment} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import { Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {
   CodeField,

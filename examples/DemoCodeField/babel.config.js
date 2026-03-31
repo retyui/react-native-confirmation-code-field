@@ -1,5 +1,5 @@
 const ReactCompilerConfig = {
-  target: '18',
+  target: '19',
   compilationMode: 'annotation',
   panicThreshold: 'all_errors',
 };

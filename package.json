@@ -14,8 +14,8 @@
     "test": "jest --coverage --silent",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
     "ts": "tsc --noEmit",
-    "build": "rm -rf node_modules/@types/react-native && rm -rf esm && tsc --outDir esm && yarn postbuild",
-    "postbuild": "prettier --write esm/*.js esm/*.d.ts",
+    "build": "rm -rf node_modules/@types/react-native && rm -rf esm && tsc --outDir esm && yarn after-build",
+    "after-build": "prettier --write esm/*.js esm/*.d.ts",
     "docs": "yarn doctoc API.md",
     "prepublishOnly": "yarn docs && yarn build"
   },

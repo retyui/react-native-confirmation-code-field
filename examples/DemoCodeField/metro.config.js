@@ -1,5 +1,5 @@
 const path = require('node:path');
-const {makeMetroConfig} = require('@rnx-kit/metro-config');
+const { makeMetroConfig } = require('@rnx-kit/metro-config');
 module.exports = makeMetroConfig({
   watchFolders: [path.resolve(__dirname, '../..')],
   resolver: {
