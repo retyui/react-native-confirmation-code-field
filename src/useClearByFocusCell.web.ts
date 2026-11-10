@@ -22,7 +22,7 @@ export const useClearByFocusCell = (params: Params) => {
         const locationX = event.clientX - offset.left;
         const locationY = event.clientY - offset.top;
 
-        clearCodeByCoords({locationX, locationY});
+        clearCodeByCoords(locationX, locationY);
       },
     }),
     [clearCodeByCoords],

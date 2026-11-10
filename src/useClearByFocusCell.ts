@@ -13,7 +13,8 @@ export const useClearByFocusCell = (params: Params) => {
   const inputProps = useMemo(
     () => ({
       onPressOut: (event: NativeSyntheticEvent<NativeTouchEvent>): void => {
-        clearCodeByCoords(event.nativeEvent);
+        const {locationX, locationY} = event.nativeEvent;
+        clearCodeByCoords(locationX, locationY);
       },
     }),
     [clearCodeByCoords],
