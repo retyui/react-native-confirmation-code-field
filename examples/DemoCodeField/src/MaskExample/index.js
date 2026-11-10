@@ -29,7 +29,7 @@ const MaskExample = () => {
       textChild = (
         <MaskSymbol
           maskSymbol="❤️"
-          isLastFilledCell={isLastFilledCell({index, value})}>
+          isLastFilledCell={isLastFilledCell(value, index)}>
           {symbol}
         </MaskSymbol>
       );
