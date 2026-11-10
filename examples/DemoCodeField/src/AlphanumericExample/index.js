@@ -5,19 +5,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
 import styles from './styles';
 
 const CELL_COUNT = 6;
-const rootProps = {style: styles.codeFieldRoot};
-
-// Keep letters and digits only, in upper case, so "ab-12 cd" becomes "AB12CD"
-const normalize = (text) => text.replace(/[^a-z0-9]/gi, '').toUpperCase();
 
 const AlphanumericExample = () => {
   const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -28,16 +26,15 @@ const AlphanumericExample = () => {
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Letters and digits</Text>
       <CodeField
-        blurOnFulfill
+        ref={ref}
         {...inputProps}
         value={value}
-        onChangeText={setValue}
+        onChangeText={(text) => setValue(text.toUpperCase())}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
+        rootStyle={styles.codeFieldRoot}
         // The default keyboard is a number pad, switch to the full one for letters
         keyboardType="default"
         autoCapitalize="characters"
-        normalize={normalize}
         renderCell={({index, symbol, isFocused}) => (
           <Text
             key={index}

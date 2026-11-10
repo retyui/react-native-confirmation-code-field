@@ -89,6 +89,7 @@ import {SafeAreaView, Text, StyleSheet} from 'react-native';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
@@ -112,10 +113,10 @@ const styles = StyleSheet.create({
 });
 
 const CELL_COUNT = 6;
-const rootProps = {style: styles.codeFieldRoot};
 
 function App() {
   const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -131,10 +132,8 @@ function App() {
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
-        // Hide the keyboard and verify as soon as every cell is filled
-        blurOnFulfill
-        onFulfill={(code) => console.log('verify', code)}
+        rootStyle={styles.codeFieldRoot}
+        ref={ref}
         testID="my-code-input"
         renderCell={({index, symbol, isFocused}) => (
           <Text

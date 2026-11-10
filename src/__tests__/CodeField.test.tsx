@@ -1,9 +1,4 @@
-import {
-  ComponentProps,
-  createRef,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import {ComponentProps, createRef, forwardRef} from 'react';
 import {Text, TextInput, TextInputProps, View} from 'react-native';
 import {act, render, screen} from '@testing-library/react-native';
 
@@ -40,14 +35,14 @@ it('should spread props to root component', () => {
   expect(screen.getByTestId(id).props.accessible).toEqual(accessible);
 });
 
-it('should extend root component style with RootProps.style', () => {
+it('should extends root component style with passed rootStyle', () => {
   const id = 'root';
-  const style = {backgroundColor: 'black'};
-  const RootProps = {testID: id, style};
+  const rootStyle = {backgroundColor: 'black'};
+  const RootProps = {testID: id};
 
-  renderCodeField({RootProps});
+  renderCodeField({RootProps, rootStyle});
 
-  expect(screen.getByTestId(id).props.style).toEqual([styles.root, style]);
+  expect(screen.getByTestId(id).props.style).toEqual([styles.root, rootStyle]);
 });
 
 it('should render 4 cells', () => {
@@ -151,100 +146,19 @@ describe('onChangeText', () => {
       screen.getByTestId(testID).props.onChangeText(text);
     });
 
-  it('should remove whitespace and dashes and cut to cellCount', () => {
+  it('should pass the text as is', () => {
     const onChangeText = jest.fn();
-    renderCodeField({testID, onChangeText, cellCount: 6});
+    renderCodeField({testID, onChangeText});
 
-    changeText('123 456');
-    changeText('123-4567');
+    changeText('12-3');
 
-    expect(onChangeText.mock.calls).toEqual([['123456'], ['123456']]);
+    expect(onChangeText).toHaveBeenCalledWith('12-3');
   });
 
-  it('should use custom normalize', () => {
-    const onChangeText = jest.fn();
-    const normalize = (text: string) => text.toUpperCase();
-    renderCodeField({testID, onChangeText, normalize});
+  it('should limit the input to cellCount', () => {
+    renderCodeField({testID, cellCount: 6});
 
-    changeText('ab');
-
-    expect(onChangeText).toHaveBeenCalledWith('AB');
-  });
-
-  it('should not set maxLength, so a long paste reaches normalize', () => {
-    renderCodeField({testID});
-
-    expect(screen.getByTestId(testID).props.maxLength).toBeUndefined();
-  });
-});
-
-describe('onFulfill', () => {
-  const testID = 'textInput';
-  const changeText = (text: string) =>
-    act(() => {
-      screen.getByTestId(testID).props.onChangeText(text);
-    });
-
-  it('should be called once the code fills every cell', () => {
-    const onFulfill = jest.fn();
-    renderCodeField({testID, onFulfill, value: '123'});
-
-    changeText('123');
-    expect(onFulfill).not.toHaveBeenCalled();
-
-    changeText('1234');
-    expect(onFulfill).toHaveBeenCalledWith('1234');
-  });
-
-  it('should not be called again when the value is already complete', () => {
-    const onFulfill = jest.fn();
-    renderCodeField({testID, onFulfill, value: '1234'});
-
-    changeText('12345');
-
-    expect(onFulfill).not.toHaveBeenCalled();
-  });
-
-  describe('blurOnFulfill', () => {
-    const blur = jest.fn();
-    const BlurInput = forwardRef<{blur(): void}, TextInputProps>(
-      (props, ref) => {
-        useImperativeHandle(ref, () => ({blur}));
-        return <TextInput {...props} />;
-      },
-    );
-    BlurInput.displayName = 'BlurInput';
-
-    beforeEach(() => blur.mockReset());
-
-    it('should blur the input when enabled', () => {
-      render(
-        <CodeField
-          renderCell={() => null}
-          testID={testID}
-          InputComponent={BlurInput}
-          blurOnFulfill
-        />,
-      );
-
-      changeText('1234');
-
-      expect(blur).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not blur by default', () => {
-      render(
-        <CodeField
-          renderCell={() => null}
-          testID={testID}
-          InputComponent={BlurInput}
-        />,
-      );
-
-      changeText('1234');
-
-      expect(blur).not.toHaveBeenCalled();
-    });
+    expect(screen.getByTestId(testID).props.maxLength).toBe(6);
   });
 });
 

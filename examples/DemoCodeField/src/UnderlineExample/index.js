@@ -11,7 +11,6 @@ import {
 import styles from './styles';
 
 const CELL_COUNT = 4;
-const rootProps = {style: styles.codeFieldRoot};
 
 const UnderlineExample = () => {
   const [value, setValue] = useState('');
@@ -25,12 +24,12 @@ const UnderlineExample = () => {
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Underline example</Text>
       <CodeField
-        // No `blurOnFulfill` here: the field keeps focus so the user can still edit a complete code
+        // No `useBlurOnFulfill` here: the field keeps focus so the user can still edit a complete code
         {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
+        rootStyle={styles.codeFieldRoot}
         textContentType="oneTimeCode"
         renderCell={({
           index,

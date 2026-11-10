@@ -5,6 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
@@ -19,6 +20,7 @@ const CELL_COUNT = 5;
 const UnmaskExample = () => {
   const [enableMask, setEnableMask] = useState(true);
   const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -49,7 +51,7 @@ const UnmaskExample = () => {
       <Text style={styles.title}>Show & Hide Password</Text>
       <View style={styles.fieldRow}>
         <CodeField
-          blurOnFulfill
+          ref={ref}
           {...inputProps}
           value={value}
           onChangeText={setValue}

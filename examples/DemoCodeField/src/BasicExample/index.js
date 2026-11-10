@@ -5,17 +5,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
 import styles from './styles';
 
 const CELL_COUNT = 6;
-const rootProps = {style: styles.codeFieldRoot};
 
 const BasicExample = () => {
   const [value, setValue] = useState('');
-  const [submittedCode, setSubmittedCode] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -30,11 +30,10 @@ const BasicExample = () => {
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
+        rootStyle={styles.codeFieldRoot}
         textContentType="oneTimeCode"
-        // Hide the keyboard and "send" the code once every cell is filled
-        blurOnFulfill
-        onFulfill={setSubmittedCode}
+        // Hide the keyboard once every cell is filled
+        ref={ref}
         // Screen readers focus the invisible input, so give it a label...
         accessibilityLabel="Verification code"
         renderCell={({index, symbol, isFocused}) => (
@@ -50,8 +49,8 @@ const BasicExample = () => {
         )}
       />
       <Text style={styles.status}>
-        {submittedCode && value === submittedCode
-          ? `Verifying ${submittedCode}…`
+        {value.length === CELL_COUNT
+          ? `Verifying ${value}…`
           : ' '}
       </Text>
     </SafeAreaView>

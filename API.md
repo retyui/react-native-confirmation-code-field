@@ -6,10 +6,8 @@
     - [`<CodeField />`](#codefield-)
       - [`cellCount?: number`](#cellcount-number)
       - [`renderCell: (options: RenderCellOptions) => ReactNode`](#rendercell-options-rendercelloptions--reactnode)
-      - [`normalize?: (text: string) => string`](#normalize-text-string--string)
-      - [`onFulfill?: (code: string) => void`](#onfulfill-code-string--void)
-      - [`blurOnFulfill?: boolean`](#bluronfulfill-boolean)
       - [`RootComponent?: ComponentType<any>`](#rootcomponent-componenttypeany)
+      - [`rootStyle?: StyleProp<ViewStyle>`](#rootstyle-stylepropviewstyle)
       - [`RootProps?: ViewProps`](#rootprops-viewprops)
       - [`InputComponent?: ComponentType<any>`](#inputcomponent-componenttypeany)
       - [`textInputStyle?: StyleProp<TextStyle>`](#textinputstyle-styleproptextstyle)
@@ -17,6 +15,7 @@
     - [`<MaskSymbol/>`](#masksymbol)
   - [Hooks](#hooks)
     - [`useClearByFocusCell({value?: string, setValue: (text: string) => void, cellCount: number})`](#useclearbyfocuscellvalue-string-setvalue-text-string--void-cellcount-number)
+    - [`useBlurOnFulfill({value?: string, cellCount: number}): Ref<TextInput>`](#usebluronfulfillvalue-string-cellcount-number-reftextinput)
   - [Accessibility](#accessibility)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -32,7 +31,7 @@ This a base component that render `RootComponent (default: View)` with cells tha
 JSX tree will be next:
 
 ```js
-<RootComponent {...RootProps} style={[{flexDirection: 'row'}, RootProps.style]}>
+<RootComponent {...RootProps} style={[{flexDirection: 'row'}, rootStyle]}>
     {renderCell({index: 0,...})}
     {renderCell({index: 1,...})}
     // ...
@@ -40,7 +39,7 @@ JSX tree will be next:
 </RootComponent>
 ```
 
-Inherits [TextInput Props](https://reactnative.dev/docs/textinput#props), except `style` (use `RootProps.style` to style the root and `textInputStyle` for the invisible input).
+Inherits [TextInput Props](https://reactnative.dev/docs/textinput#props), except `style` (use `rootStyle` to style the root and `textInputStyle` for the invisible input).
 
 Defaults applied to the input (you can override any of them): `keyboardType="number-pad"`, `autoComplete="one-time-code"` (`"sms-otp"` on Android), `submitBehavior="submit"`, `caretHidden`, `autoCorrect={false}`, `spellCheck={false}`.
 
@@ -71,30 +70,17 @@ renderCell={({index, symbol, isFocused, isFieldFocused, isFilled, isLast}) => (
 )}
 ```
 
-#### `normalize?: (text: string) => string`
-
-Cleans up typed, pasted or autofilled text before `onChangeText` is called. The result is always cut to `cellCount` characters (optional, default: removes whitespace and dashes, so `"123 456"` and `"123-456"` become `"123456"`)
-
-```js
-// Letters and digits only, upper case
-<CodeField normalize={(text) => text.replace(/[^a-z0-9]/gi, '').toUpperCase()} />
-```
-
-#### `onFulfill?: (code: string) => void`
-
-Called when a change fills every cell (optional)
-
-#### `blurOnFulfill?: boolean`
-
-Blur the input when a change fills every cell (optional, default: `false`)
-
 #### `RootComponent?: ComponentType<any>`
 
 If you want change root component for example using animations `RootComponent={Animated.View}` (optional, default [`View`](https://reactnative.dev/docs/view))
 
+#### `rootStyle?: StyleProp<ViewStyle>`
+
+Styles for root component (optional)
+
 #### `RootProps?: ViewProps`
 
-Any props that will applied for root component, `RootProps.style` is merged with the default root style (optional)
+Any props that will applied for root component, except `style` (use `rootStyle`) (optional)
 
 #### `InputComponent?: ComponentType<any>`
 
@@ -224,6 +210,42 @@ const App = () => {
           {symbol}
         </Text>
       )}
+    />
+  );
+};
+```
+
+### `useBlurOnFulfill({value?: string, cellCount: number}): Ref<TextInput>`
+
+This hook include a logic to blurring `<TextInput/>` when value fulfilled
+
+You should pass two params:
+
+- `value?: string` - a string value that
+- `cellCount: number`
+
+Returned value will be a TextInput ref that you should pass to `<CodeField/>` component.
+
+And when a value length would equal cellCount will be called `.blur()` method.
+
+It work perfectly with `useClearByFocusCell` hook.
+
+```js
+import {
+  CodeField,
+  useBlurOnFulfill,
+} from 'react-native-confirmation-code-field';
+
+const App = () => {
+  const CELL_COUNT = 4;
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+
+  return (
+    <CodeField
+      ref={ref}
+      value={value}
+      cellCount={CELL_COUNT}
+      //...
     />
   );
 };

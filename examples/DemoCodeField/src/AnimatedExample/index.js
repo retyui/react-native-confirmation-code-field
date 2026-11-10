@@ -10,6 +10,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
@@ -22,7 +23,6 @@ import styles, {
 } from './styles';
 
 const CELL_COUNT = 4;
-const rootProps = {style: styles.codeFieldRoot};
 const source = {
   uri: 'https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png',
 };
@@ -85,6 +85,7 @@ const AnimatedCell = ({symbol, isFilled, isFocused, onLayout}) => {
 
 const AnimatedExample = () => {
   const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -101,12 +102,12 @@ const AnimatedExample = () => {
       </Text>
 
       <CodeField
-        blurOnFulfill
+        ref={ref}
         {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
+        rootStyle={styles.codeFieldRoot}
         textContentType="oneTimeCode"
         accessibilityLabel="Verification code"
         renderCell={({index, symbol, isFilled, isFocused}) => (

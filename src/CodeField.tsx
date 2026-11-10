@@ -6,8 +6,6 @@ import {
   JSX,
   ReactNode,
   Ref,
-  useCallback,
-  useRef,
 } from 'react';
 import type {
   StyleProp,
@@ -19,7 +17,7 @@ import {Platform, TextInput, View} from 'react-native';
 
 import {styles} from './CodeField.styles';
 import {useFocusState} from './useFocusState';
-import {defaultNormalize, getSymbols, mergeRefs} from './utils';
+import {getSymbols} from './utils';
 
 export interface RenderCellOptions {
   symbol: string;
@@ -40,14 +38,9 @@ interface BaseProps extends Omit<TextInputProps, 'style' | 'ref'> {
   renderCell: (options: RenderCellOptions) => ReactNode;
   RootProps?: ViewProps;
   RootComponent?: ComponentType<ViewProps>;
+  rootStyle?: ViewProps['style'];
   textInputStyle?: StyleProp<TextStyle>;
   cellCount?: number;
-  /** Cleans up typed or pasted text before `onChangeText`. Default: removes whitespace and dashes */
-  normalize?: (text: string) => string;
-  /** Called once the code fills every cell */
-  onFulfill?: (code: string) => void;
-  /** Blur the input once the code fills every cell. Default: `false` */
-  blurOnFulfill?: boolean;
 }
 
 export interface Props extends BaseProps {
@@ -77,24 +70,15 @@ export const CodeField: CodeFieldOverridableComponent = ({
   value,
   renderCell,
   cellCount = DEFAULT_CELL_COUNT,
+  rootStyle,
   RootProps,
   RootComponent = View,
   InputComponent = TextInput,
-  normalize = defaultNormalize,
-  onChangeText,
-  onFulfill,
-  blurOnFulfill = false,
   ref,
   ...rest
 }: Props & {InputComponent?: ComponentType<any>}) => {
   'use memo';
   const [isFocused, onFocus, onBlur] = useFocusState(rest.onBlur, rest.onFocus);
-  const inputRef = useRef<TextInput | null>(null);
-  // Keep the callback ref stable, otherwise React re-attaches it on every render
-  const setInputRef = useCallback(
-    (node: TextInput | null) => mergeRefs(inputRef, ref)(node),
-    [ref],
-  );
 
   const code = value || '';
   const activeIndex = code.length;
@@ -111,20 +95,11 @@ export const CodeField: CodeFieldOverridableComponent = ({
     }),
   );
 
-  const handleChangeText = (rawText: string) => {
-    const text = normalize(rawText).slice(0, cellCount);
-    onChangeText?.(text);
-
-    if (text.length === cellCount && text !== value) {
-      if (blurOnFulfill) {
-        inputRef.current?.blur();
-      }
-      onFulfill?.(text);
-    }
-  };
-
   return (
-    <RootComponent {...RootProps} style={[styles.root, RootProps?.style]}>
+    <RootComponent
+      {...RootProps}
+      style={rootStyle ? [styles.root, rootStyle] : styles.root}
+    >
       {cells}
       <InputComponent
         disableFullscreenUI
@@ -136,17 +111,17 @@ export const CodeField: CodeFieldOverridableComponent = ({
         submitBehavior="submit"
         clearButtonMode="never"
         keyboardType="number-pad"
+        maxLength={cellCount}
         underlineColorAndroid="transparent"
         autoComplete={autoComplete}
         {...rest}
         value={value}
-        onChangeText={handleChangeText}
         onBlur={onBlur}
         onFocus={onFocus}
         style={
           textInputStyle ? [styles.textInput, textInputStyle] : styles.textInput
         }
-        ref={setInputRef}
+        ref={ref}
       />
     </RootComponent>
   );

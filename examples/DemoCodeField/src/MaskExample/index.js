@@ -5,6 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
+  useBlurOnFulfill,
   useClearByFocusCell,
   MaskSymbol,
 } from 'react-native-confirmation-code-field';
@@ -12,10 +13,10 @@ import {
 import styles from './styles';
 
 const CELL_COUNT = 6;
-const rootProps = {style: styles.codeFieldRoot};
 
 const MaskExample = () => {
   const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
@@ -50,12 +51,12 @@ const MaskExample = () => {
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Field with custom mask</Text>
       <CodeField
-        blurOnFulfill
+        ref={ref}
         {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        RootProps={rootProps}
+        rootStyle={styles.codeFieldRoot}
         textContentType="oneTimeCode"
         renderCell={renderCell}
       />
