@@ -19,10 +19,10 @@ export const useClearByFocusCell = (params: Params) => {
         const [offset] = event.target.getClientRects() as [
           {left: number; top: number},
         ];
-        const locationX = event.clientX - offset.left;
-        const locationY = event.clientY - offset.top;
-
-        clearCodeByCoords(locationX, locationY);
+        clearCodeByCoords(
+          event.clientX - offset.left,
+          event.clientY - offset.top,
+        );
       },
     }),
     [clearCodeByCoords],

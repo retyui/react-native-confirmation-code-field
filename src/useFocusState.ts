@@ -2,27 +2,27 @@ import {useCallback, useDebugValue, useState} from 'react';
 import type {BlurEvent, FocusEvent, TextInputProps} from 'react-native';
 
 export const useFocusState = (
-  onBlurFromProps?: TextInputProps['onBlur'],
-  onFocusFromProps?: TextInputProps['onFocus'],
+  onBlur?: TextInputProps['onBlur'],
+  onFocus?: TextInputProps['onFocus'],
 ) => {
   'use memo';
 
   const [isFocused, setFocusFlag] = useState(false);
 
-  const onBlur = useCallback(
-    (blurEvent: BlurEvent) => {
+  const handleBlur = useCallback(
+    (e: BlurEvent) => {
       setFocusFlag(false);
-      onBlurFromProps?.(blurEvent);
+      onBlur?.(e);
     },
-    [onBlurFromProps],
+    [onBlur],
   );
 
-  const onFocus = useCallback(
-    (focusEvent: FocusEvent) => {
+  const handleFocus = useCallback(
+    (e: FocusEvent) => {
       setFocusFlag(true);
-      onFocusFromProps?.(focusEvent);
+      onFocus?.(e);
     },
-    [onFocusFromProps],
+    [onFocus],
   );
 
   if (__DEV__) {
@@ -30,5 +30,5 @@ export const useFocusState = (
     useDebugValue(isFocused ? 'Focused' : 'Unfocused');
   }
 
-  return [isFocused, onFocus, onBlur] as const;
+  return [isFocused, handleFocus, handleBlur] as const;
 };

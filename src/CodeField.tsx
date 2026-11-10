@@ -69,21 +69,20 @@ export const CodeField: CodeFieldOverridableComponent = ({
   const [isFocused, onFocus, onBlur] = useFocusState(rest.onBlur, rest.onFocus);
 
   const symbols = getSymbols(value || '', cellCount);
-  const cells = symbols.map((symbol, index, symbols) => {
-    const isFirstEmptySymbol = symbols.indexOf('') === index;
-    return renderCell({
-      index,
-      symbol,
-      isFocused: isFocused && isFirstEmptySymbol,
-    });
-  });
+  const emptyIndex = symbols.indexOf('');
 
   return (
     <RootComponent
       {...RootProps}
       style={rootStyle ? [styles.root, rootStyle] : styles.root}
     >
-      {cells}
+      {symbols.map((symbol, index) =>
+        renderCell({
+          index,
+          symbol,
+          isFocused: isFocused && emptyIndex === index,
+        }),
+      )}
       <InputComponent
         disableFullscreenUI
         // Use `caretHidden={false}` when `value={''}` and user can't paste\copy text because menu doesn't appear

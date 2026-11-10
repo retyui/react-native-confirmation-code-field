@@ -3,15 +3,15 @@ import {useEffect} from 'react';
 export const useInterval = (callback: () => void, delay: number): void => {
   'use memo';
   useEffect(() => {
-    const timer = setInterval(callback, delay);
-    return () => clearInterval(timer);
+    const id = setInterval(callback, delay);
+    return () => clearInterval(id);
   }, [callback, delay]);
 };
 
 export const useTimeout = (callback: () => void, delay: number): void => {
   'use memo';
   useEffect(() => {
-    const timer = setTimeout(callback, delay);
-    return () => clearTimeout(timer);
+    const id = setTimeout(callback, delay);
+    return () => clearTimeout(id);
   }, [callback, delay]);
 };

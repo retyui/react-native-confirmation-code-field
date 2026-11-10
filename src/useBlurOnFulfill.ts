@@ -12,13 +12,13 @@ export const useBlurOnFulfill = <TInput extends TextInput>({
   cellCount,
 }: Options): RefObject<TInput | null> => {
   'use memo';
-  const inputRef = useRef<TInput | null>(null);
+  const ref = useRef<TInput | null>(null);
 
   useEffect(() => {
     if (value?.length === cellCount) {
-      inputRef.current?.blur();
+      ref.current?.blur();
     }
   }, [value, cellCount]);
 
-  return inputRef;
+  return ref;
 };

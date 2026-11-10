@@ -20,11 +20,12 @@ export const MaskSymbol: FC<PropsWithChildren<MaskSymbolProps>> = ({
   'use memo';
   const [visibleFlag, setFlag] = useState(true);
 
-  const toggleVisibility = useCallback(() => {
-    setFlag(false);
-  }, []);
-
-  useTimeout(toggleVisibility, delay);
+  useTimeout(
+    useCallback(() => {
+      setFlag(false);
+    }, []),
+    delay,
+  );
 
   useEffect(() => {
     if (isLastFilledCell) {
