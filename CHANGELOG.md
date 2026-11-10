@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 9.0.1
+
+Fixes:
+- `MaskSymbol` showed a symbol again after it was masked early, when the next symbol was typed within `delay` ([#261](https://github.com/retyui/react-native-confirmation-code-field/pull/261))
+- Mask example called `isLastFilledCell` with wrong arguments, so early masking never worked there
+
 # 9.0.0
 
 🚨 **BREAKING CHANGES:**
