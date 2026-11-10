@@ -40,6 +40,8 @@ export const useClearByFocusCellCommon = (params: Params) => {
   'use memo';
 
   const paramsRef = useRef<Params>(params);
+  // Layouts are never removed: if `cellCount` decreases, removed cells keep their old
+  // positions here, so a press at that spot can still trim the value
   const cellsLayouts = useRef<LayoutsMap>({});
   const callbackRef = useRef<OnLayoutsMap>({});
 
