@@ -5,43 +5,55 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
-  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
 import styles from './styles';
 
 const CELL_COUNT = 6;
+const rootProps = {style: styles.codeFieldRoot};
 
 const BasicExample = () => {
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+  const [submittedCode, setSubmittedCode] = useState('');
+  const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
+    cellCount: CELL_COUNT,
   });
 
   return (
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Basic example</Text>
       <CodeField
-        ref={ref}
-        {...props}
+        {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
+        RootProps={rootProps}
         textContentType="oneTimeCode"
+        // Hide the keyboard and "send" the code once every cell is filled
+        blurOnFulfill
+        onFulfill={setSubmittedCode}
+        // Screen readers focus the invisible input, so give it a label...
+        accessibilityLabel="Verification code"
         renderCell={({index, symbol, isFocused}) => (
           <Text
             key={index}
             style={[styles.cell, isFocused && styles.focusCell]}
-            onLayout={getCellOnLayoutHandler(index)}>
+            onLayout={getCellOnLayoutHandler(index)}
+            // ...and hide the cells, they only draw the input's value
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants">
             {symbol || (isFocused ? <Cursor /> : null)}
           </Text>
         )}
       />
+      <Text style={styles.status}>
+        {submittedCode && value === submittedCode
+          ? `Verifying ${submittedCode}…`
+          : ' '}
+      </Text>
     </SafeAreaView>
   );
 };

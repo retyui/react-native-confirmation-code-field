@@ -16,4 +16,5 @@ export default StyleSheet.create({
   focusCell: {
     borderColor: '#000',
   },
+  status: {marginTop: 16, textAlign: 'center', color: '#00000080'},
 });

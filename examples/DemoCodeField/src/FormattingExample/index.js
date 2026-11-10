@@ -5,34 +5,34 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   CodeField,
   Cursor,
-  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
 import styles from './styles';
 
 const CELL_COUNT = 9;
+const rootProps = {style: styles.codeFieldRoot};
 
 const FormattingExample = () => {
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+  const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
+    cellCount: CELL_COUNT,
   });
 
   return (
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Social Security number</Text>
       <CodeField
-        ref={ref}
-        {...props}
+        blurOnFulfill
+        {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
+        RootProps={rootProps}
         textContentType="oneTimeCode"
+        // Pasting "123-45-6789" works too: dashes are removed by the default `normalize`
         renderCell={({index, symbol, isFocused}) => (
           <Fragment key={index}>
             <Text

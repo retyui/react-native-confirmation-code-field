@@ -1,39 +1,33 @@
 import type {FC, PropsWithChildren, ReactNode} from 'react';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 import {useTimeout} from './useTimer';
+import {DEFAULT_BLINKING_SPEED} from './utils';
 
-export const DEFAULT_BLINKING_SPEED = 500;
-
-interface MaskSymbolProps {
+export interface MaskSymbolProps {
+  /** How long the symbol stays visible before it's masked (ms) */
   delay?: number;
   maskSymbol: ReactNode;
-  isLastFilledCell: boolean;
+  /** Mask right away, without waiting for `delay`. Pass `isPrevFilled` from `renderCell` */
+  masked?: boolean;
 }
 
 export const MaskSymbol: FC<PropsWithChildren<MaskSymbolProps>> = ({
-  isLastFilledCell,
+  masked = false,
   children: symbol,
   maskSymbol,
   delay = DEFAULT_BLINKING_SPEED,
 }) => {
   'use memo';
-  const [visibleFlag, setFlag] = useState(true);
+  const [timedOut, setTimedOut] = useState(false);
 
-  const toggleVisibility = useCallback(() => {
-    setFlag((prev) => !prev);
+  const onTimeout = useCallback(() => {
+    setTimedOut(true);
   }, []);
 
-  useTimeout(toggleVisibility, delay);
+  useTimeout(onTimeout, delay);
 
-  useEffect(() => {
-    if (isLastFilledCell) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFlag(false);
-    }
-  }, [isLastFilledCell]);
-
-  return <>{visibleFlag ? symbol : maskSymbol}</>;
+  return <>{timedOut || masked ? maskSymbol : symbol}</>;
 };
 
 MaskSymbol.displayName = 'MaskSymbol';

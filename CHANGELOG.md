@@ -2,6 +2,58 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 10.0.0
+
+🚨 **BREAKING CHANGES:**
+- `useBlurOnFulfill` removed. Use the new `blurOnFulfill` and `onFulfill` props of `<CodeField/>`
+- `isLastFilledCell` removed. `renderCell` now gets `isPrevFilled`, pass it to `<MaskSymbol masked/>`
+- `<MaskSymbol isLastFilledCell/>` prop renamed to `masked`
+- `useClearByFocusCell` returns an object `{inputProps, getCellOnLayoutHandler}` instead of an array, and requires `cellCount`
+- `rootStyle` prop removed. Use `RootProps.style`, it's now merged with the default root style (before, `rootStyle` silently replaced `RootProps.style`)
+- `maxLength` is no longer set on the input. Text is cut to `cellCount` after `normalize` instead, so pasted codes with spaces or dashes are not truncated
+- `onChangeText` receives normalized text: whitespace and dashes are removed by default. Pass `normalize={(text) => text}` for the old behavior
+- Input defaults: `keyboardType="number-pad"` added, `autoCapitalize="characters"` removed, `blurOnSubmit={false}` replaced with `submitBehavior="submit"`
+
+New:
+- `renderCell` options: `isFieldFocused`, `isFilled`, `isPrevFilled`, `isLast`. `isFieldFocused` stays `true` when the code is complete, so the field can be highlighted
+- `onFulfill`, `blurOnFulfill` and `normalize` props
+- `ref` type follows a custom `InputComponent`
+- `useClearByFocusCell`: a press in a gap between cells clears from the nearest cell
+- `CursorProps` and `MaskSymbolProps` types are exported
+
+Fixes:
+- `useClearByFocusCell` ignored `cellCount` changes and could clear from a cell that no longer exists
+- `useClearByFocusCell` on web reads the position from `currentTarget`, so a click on a nested element works
+- `useFocusState` no longer reads `__DEV__`, which may not be defined on web
+- Mask example passed the wrong arguments to `isLastFilledCell`, so the previous character was never masked early
+
+### Migration from 9.x
+
+```diff
+-import {CodeField, useBlurOnFulfill, useClearByFocusCell, MaskSymbol, isLastFilledCell} from 'react-native-confirmation-code-field';
++import {CodeField, useClearByFocusCell, MaskSymbol} from 'react-native-confirmation-code-field';
+
+-const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+-const [props, getCellOnLayoutHandler] = useClearByFocusCell({value, setValue});
++const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({value, setValue, cellCount: CELL_COUNT});
+
+ <CodeField
+-  ref={ref}
+-  {...props}
+-  rootStyle={styles.root}
++  blurOnFulfill
++  {...inputProps}
++  RootProps={{style: styles.root}}
+-  renderCell={({index, symbol, isFocused}) => (
++  renderCell={({index, symbol, isFocused, isPrevFilled}) => (
+     ...
+-    <MaskSymbol isLastFilledCell={isLastFilledCell(value, index)} maskSymbol="•">
++    <MaskSymbol masked={isPrevFilled} maskSymbol="•">
+```
+
+If you need letters, pass `keyboardType="default"` and `autoCapitalize="characters"`.
+
+
 # 9.0.0
 
 🚨 **BREAKING CHANGES:**

@@ -1,6 +1,6 @@
 [
   {
-    "limit": "3800 B",
+    "limit": "4100 B",
     "path": "esm/*.js"
   }
 ]

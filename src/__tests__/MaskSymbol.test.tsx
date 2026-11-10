@@ -10,7 +10,6 @@ type Props = ComponentProps<typeof MaskSymbol>;
 const requiredProps: Props = {
   children: '',
   maskSymbol: '*',
-  isLastFilledCell: false,
 };
 
 const renderMaskSymbol = (props?: Partial<Props>) =>
@@ -23,10 +22,9 @@ it('should render children by default', () => {
   expect(UNSAFE_getByType(MaskSymbol).children).toEqual([children]);
 });
 
-it('should render maskSymbol when is last filled cell', () => {
+it('should render maskSymbol right away when masked', () => {
   const maskSymbol = '0';
-  const isLastFilledCell = true;
-  const {UNSAFE_getByType} = renderMaskSymbol({maskSymbol, isLastFilledCell});
+  const {UNSAFE_getByType} = renderMaskSymbol({maskSymbol, masked: true});
 
   expect(UNSAFE_getByType(MaskSymbol).children).toEqual([maskSymbol]);
 });

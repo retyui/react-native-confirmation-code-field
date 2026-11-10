@@ -25,10 +25,7 @@ export const useFocusState = (
     [onFocusFromProps],
   );
 
-  if (__DEV__) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDebugValue(isFocused ? 'Focused' : 'Unfocused');
-  }
+  useDebugValue(isFocused ? 'Focused' : 'Unfocused');
 
   return [isFocused, onFocus, onBlur] as const;
 };

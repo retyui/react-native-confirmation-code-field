@@ -3,14 +3,13 @@
 Concept: https://dribbble.com/shots/5476562-Forgot-Password-Verification/attachments
 
 */
-import {Animated, Image,  Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {Animated, Image, Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {
   CodeField,
   Cursor,
-  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
@@ -22,79 +21,75 @@ import styles, {
   NOT_EMPTY_CELL_BG_COLOR,
 } from './styles';
 
-const {Value, Text: AnimatedText} = Animated;
-
 const CELL_COUNT = 4;
+const rootProps = {style: styles.codeFieldRoot};
 const source = {
   uri: 'https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png',
 };
 
-const animationsColor = [...new Array(CELL_COUNT)].map(() => new Value(0));
-const animationsScale = [...new Array(CELL_COUNT)].map(() => new Value(1));
-const animateCell = ({hasValue, index, isFocused}) => {
-  Animated.parallel([
-    Animated.timing(animationsColor[index], {
+// Each cell owns its animated values and animates when its own state changes
+const AnimatedCell = ({symbol, isFilled, isFocused, onLayout}) => {
+  const focusAnimation = useRef(new Animated.Value(0)).current;
+  const fillAnimation = useRef(new Animated.Value(1)).current;
+
+  // Two separate effects: each animation only restarts when its own state changes
+  useEffect(() => {
+    Animated.timing(focusAnimation, {
       useNativeDriver: false,
       toValue: isFocused ? 1 : 0,
       duration: 250,
-    }),
-    Animated.spring(animationsScale[index], {
+    }).start();
+  }, [isFocused, focusAnimation]);
+
+  useEffect(() => {
+    Animated.spring(fillAnimation, {
       useNativeDriver: false,
-      toValue: hasValue ? 0 : 1,
-      duration: hasValue ? 300 : 250,
+      toValue: isFilled ? 0 : 1,
+    }).start();
+  }, [isFilled, fillAnimation]);
+
+  const animatedCellStyle = {
+    backgroundColor: isFilled
+      ? fillAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [NOT_EMPTY_CELL_BG_COLOR, ACTIVE_CELL_BG_COLOR],
+        })
+      : focusAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [DEFAULT_CELL_BG_COLOR, ACTIVE_CELL_BG_COLOR],
+        }),
+    borderRadius: fillAnimation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [CELL_SIZE, CELL_BORDER_RADIUS],
     }),
-  ]).start();
+    transform: [
+      {
+        scale: fillAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.2, 1],
+        }),
+      },
+    ],
+  };
+
+  return (
+    <Animated.Text
+      style={[styles.cell, animatedCellStyle]}
+      onLayout={onLayout}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants">
+      {symbol || (isFocused ? <Cursor /> : null)}
+    </Animated.Text>
+  );
 };
 
 const AnimatedExample = () => {
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+  const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
+    cellCount: CELL_COUNT,
   });
-
-  const renderCell = ({index, symbol, isFocused}) => {
-    const hasValue = Boolean(symbol);
-    const animatedCellStyle = {
-      backgroundColor: hasValue
-        ? animationsScale[index].interpolate({
-            inputRange: [0, 1],
-            outputRange: [NOT_EMPTY_CELL_BG_COLOR, ACTIVE_CELL_BG_COLOR],
-          })
-        : animationsColor[index].interpolate({
-            inputRange: [0, 1],
-            outputRange: [DEFAULT_CELL_BG_COLOR, ACTIVE_CELL_BG_COLOR],
-          }),
-      borderRadius: animationsScale[index].interpolate({
-        inputRange: [0, 1],
-        outputRange: [CELL_SIZE, CELL_BORDER_RADIUS],
-      }),
-      transform: [
-        {
-          scale: animationsScale[index].interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.2, 1],
-          }),
-        },
-      ],
-    };
-
-    // Run animation on next event loop tik
-    // Because we need first return new style prop and then animate this value
-    setTimeout(() => {
-      animateCell({hasValue, index, isFocused});
-    }, 0);
-
-    return (
-      <AnimatedText
-        key={index}
-        style={[styles.cell, animatedCellStyle]}
-        onLayout={getCellOnLayoutHandler(index)}>
-        {symbol || (isFocused ? <Cursor /> : null)}
-      </AnimatedText>
-    );
-  };
 
   return (
     <SafeAreaView style={styles.root}>
@@ -106,15 +101,23 @@ const AnimatedExample = () => {
       </Text>
 
       <CodeField
-        ref={ref}
-        {...props}
+        blurOnFulfill
+        {...inputProps}
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
+        RootProps={rootProps}
         textContentType="oneTimeCode"
-        renderCell={renderCell}
+        accessibilityLabel="Verification code"
+        renderCell={({index, symbol, isFilled, isFocused}) => (
+          <AnimatedCell
+            key={index}
+            symbol={symbol}
+            isFilled={isFilled}
+            isFocused={isFocused}
+            onLayout={getCellOnLayoutHandler(index)}
+          />
+        )}
       />
       <View style={styles.nextButton}>
         <Text style={styles.nextButtonText}>Verify</Text>

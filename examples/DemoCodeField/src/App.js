@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
+import AlphanumericExample from './AlphanumericExample';
 import AnimatedExample from './AnimatedExample';
 import BasicExample from './BasicExample';
 import MaskExample from './MaskExample';
@@ -18,6 +19,7 @@ const App = () => (
     <MaskExample />
     <UnderlineExample />
     <BasicExample />
+    <AlphanumericExample />
   </ScrollView>
 );
 

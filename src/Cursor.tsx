@@ -2,8 +2,8 @@ import type {FC} from 'react';
 import {useCallback, useState} from 'react';
 
 import {useInterval} from './useTimer';
+import {DEFAULT_BLINKING_SPEED} from './utils';
 
-export const DEFAULT_BLINKING_SPEED = 500;
 export const DEFAULT_CURSOR_SYMBOL = '|';
 
 export interface CursorProps {

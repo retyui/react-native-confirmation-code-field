@@ -15,7 +15,7 @@ A simple react-native confirmation code field compatible with iOS, Android.
 
 ### Component features:
 
-- 🔮 Simple and tiny `3.8 KB`. Easy to use;
+- 🔮 Simple and tiny `4.1 KB`. Easy to use;
 - 🚀 React Compiler compatible; 
 
 <img width="516" alt="devtools image" src="https://github.com/user-attachments/assets/208900e7-eb70-411b-93bb-17570a5f3884" />
@@ -84,13 +84,11 @@ You can use a ready-made solution out of the box:
 
 ```tsx
 import React, {useState} from 'react';
-import {SafeAreaView, Text, StyleSheet, Platform} from 'react-native';
-import type {TextInputProps} from 'react-native';
+import {SafeAreaView, Text, StyleSheet} from 'react-native';
 
 import {
   CodeField,
   Cursor,
-  useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 
@@ -114,40 +112,36 @@ const styles = StyleSheet.create({
 });
 
 const CELL_COUNT = 6;
-const autoComplete = Platform.select<TextInputProps['autoComplete']>({
-  android: 'sms-otp',
-  default: 'one-time-code',
-});
+const rootProps = {style: styles.codeFieldRoot};
 
 function App() {
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+  const {inputProps, getCellOnLayoutHandler} = useClearByFocusCell({
     value,
     setValue,
+    cellCount: CELL_COUNT,
   });
 
   return (
     <SafeAreaView style={styles.root}>
       <Text style={styles.title}>Verification</Text>
       <CodeField
-        ref={ref}
-        {...props}
+        {...inputProps}
         // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
         value={value}
         onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        autoComplete={autoComplete}
+        RootProps={rootProps}
+        // Hide the keyboard and verify as soon as every cell is filled
+        blurOnFulfill
+        onFulfill={(code) => console.log('verify', code)}
         testID="my-code-input"
         renderCell={({index, symbol, isFocused}) => (
           <Text
             key={index}
             style={[styles.cell, isFocused && styles.focusCell]}
             onLayout={getCellOnLayoutHandler(index)}>
-            {symbol || (isFocused && <Cursor />)}
+            {symbol || (isFocused ? <Cursor /> : null)}
           </Text>
         )}
       />

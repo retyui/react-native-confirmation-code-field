@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import type {NativeSyntheticEvent, NativeTouchEvent} from 'react-native';
+import type {GestureResponderEvent} from 'react-native';
 
 import type {Params} from './useClearByFocusCell.common';
 import {useClearByFocusCellCommon} from './useClearByFocusCell.common';
@@ -7,17 +7,17 @@ import {useClearByFocusCellCommon} from './useClearByFocusCell.common';
 export const useClearByFocusCell = (params: Params) => {
   'use memo';
 
-  const [clearCodeByCoords, getCellOnLayoutHandler] =
+  const {clearCodeByCoords, getCellOnLayoutHandler} =
     useClearByFocusCellCommon(params);
 
   const inputProps = useMemo(
     () => ({
-      onPressOut: (event: NativeSyntheticEvent<NativeTouchEvent>): void => {
+      onPressOut: (event: GestureResponderEvent): void => {
         clearCodeByCoords(event.nativeEvent);
       },
     }),
     [clearCodeByCoords],
   );
 
-  return [inputProps, getCellOnLayoutHandler] as const;
+  return {inputProps, getCellOnLayoutHandler};
 };
