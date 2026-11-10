@@ -32,6 +32,24 @@ A simple react-native confirmation code field compatible with iOS, Android.
 | --- | --- |
 | [![react-native-confirmation-code-field animated example](https://media.giphy.com/media/huJrqF0YRrNJBTwUmz/giphy.gif)](examples/DemoCodeField/src/AnimatedExample) | [![react-native-confirmation-code-field mask example](https://media.giphy.com/media/L4HHvT9Rwdlcdj59np/giphy.gif)](examples/DemoCodeField/src/MaskExample)<br/>[![react-native-confirmation-code-field unmask example](https://media.giphy.com/media/jslJYqajRARsyANwdf/giphy.gif)](examples/DemoCodeField/src/UnmaskExample)<br/>[![react-native-confirmation-code-field underline example](https://media.giphy.com/media/XEazF64IwELNV8wZge/giphy.gif)](examples/DemoCodeField/src/UnderlineExample)<br/>[![react-native-confirmation-code-field formatting example](https://media.giphy.com/media/Y1TB1fSFtWHAdKSpZY/giphy.gif)](examples/DemoCodeField/src/FormattingExample) |
 
+## Used by
+
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) - crypto wallet and browser for Ethereum
+- [OneKey](https://github.com/OneKeyHQ/app-monorepo) - open source crypto wallet
+- [Yosemite Crew](https://github.com/YosemiteCrew/Yosemite-Crew) - open source operating system for animal health
+- [Ever Teams](https://github.com/ever-co/ever-teams) - work and productivity platform
+- [THU Info](https://github.com/thu-info-community/thu-info-app) - Tsinghua University campus app
+- [DeFiChain Wallet](https://github.com/BirthdayResearch/defichain-wallet) - DeFiChain light wallet
+- [Ice Network](https://github.com/ice-blockchain/mobile-app) - ice coin mining app
+- [Mapeo Mobile](https://github.com/digidem/mapeo-mobile) - monitor and document the world around you
+- [BC Wallet](https://github.com/bcgov/bc-wallet-mobile) - Government of British Columbia wallet for verifiable credentials
+- [Ambire Wallet](https://github.com/AmbireTech/extension) - Web3 wallet for browser and mobile
+- [Locomotion](https://github.com/Autofleet/locomotion) - open source rider app by Autofleet
+- [SubWallet](https://github.com/Koniverse/SubWallet-Mobile) - wallet for Polkadot, Substrate and Ethereum
+- [Spot the Station](https://github.com/nasa/spotthestation) - NASA app for spotting the International Space Station
+- [Elrax](https://github.com/elrax/elrax) - video crowdfunding platform
+- [Hylo](https://github.com/Hylozoic/hylo) - community coordination platform
+
 ## Install
 
 ```sh
