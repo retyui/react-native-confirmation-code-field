@@ -40,3 +40,25 @@ it('should render maskSymbol after timeout', async () => {
 
   expect(UNSAFE_getByType(MaskSymbol).children).toEqual([maskSymbol]);
 });
+
+it('should keep maskSymbol after timeout when masked early', async () => {
+  const maskSymbol = '0';
+  const timeout = 100;
+  const {UNSAFE_getByType, rerender} = renderMaskSymbol({
+    maskSymbol,
+    delay: timeout,
+  });
+
+  // The next symbol is typed before the timeout fires
+  rerender(
+    <MaskSymbol
+      {...requiredProps}
+      maskSymbol={maskSymbol}
+      delay={timeout}
+      isLastFilledCell={true}
+    />,
+  );
+  await delay(timeout + 50);
+
+  expect(UNSAFE_getByType(MaskSymbol).children).toEqual([maskSymbol]);
+});

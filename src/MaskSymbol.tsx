@@ -21,7 +21,7 @@ export const MaskSymbol: FC<PropsWithChildren<MaskSymbolProps>> = ({
   const [visibleFlag, setFlag] = useState(true);
 
   const toggleVisibility = useCallback(() => {
-    setFlag((prev) => !prev);
+    setFlag(false);
   }, []);
 
   useTimeout(toggleVisibility, delay);

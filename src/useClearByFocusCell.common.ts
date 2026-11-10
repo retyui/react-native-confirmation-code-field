@@ -11,12 +11,11 @@ interface Layout {
 type LayoutsMap = Record<string, Layout>;
 type OnLayoutsMap = Record<number, (event: LayoutChangeEvent) => void>;
 
-interface Coords {
-  locationX: number;
-  locationY: number;
-}
-
-const findIndex = ({locationX, locationY}: Coords, map: LayoutsMap): number => {
+const findIndex = (
+  locationX: number,
+  locationY: number,
+  map: LayoutsMap,
+): number => {
   for (const index in map) {
     const layout = map[index];
     if (
@@ -40,6 +39,8 @@ export const useClearByFocusCellCommon = (params: Params) => {
   'use memo';
 
   const paramsRef = useRef<Params>(params);
+  // Layouts are never removed: if `cellCount` decreases, removed cells keep their old
+  // positions here, so a press at that spot can still trim the value
   const cellsLayouts = useRef<LayoutsMap>({});
   const callbackRef = useRef<OnLayoutsMap>({});
 
@@ -47,14 +48,17 @@ export const useClearByFocusCellCommon = (params: Params) => {
     paramsRef.current = params;
   }, [params]);
 
-  const clearCodeByCoords = useCallback((coords: Coords): void => {
-    const index = findIndex(coords, cellsLayouts.current);
-    if (index !== -1) {
-      const {value, setValue} = paramsRef.current;
-      const text = (value || '').slice(0, index);
-      setValue(text);
-    }
-  }, []);
+  const clearCodeByCoords = useCallback(
+    (locationX: number, locationY: number): void => {
+      const index = findIndex(locationX, locationY, cellsLayouts.current);
+      if (index !== -1) {
+        const {value, setValue} = paramsRef.current;
+        const text = (value || '').slice(0, index);
+        setValue(text);
+      }
+    },
+    [],
+  );
 
   const getCellOnLayoutHandler = useCallback((index: number) => {
     if (!callbackRef.current[index]) {
