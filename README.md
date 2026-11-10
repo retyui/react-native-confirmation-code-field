@@ -34,21 +34,20 @@ A simple react-native confirmation code field compatible with iOS, Android.
 
 ## Used by
 
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) - crypto wallet and browser for Ethereum
-- [OneKey](https://github.com/OneKeyHQ/app-monorepo) - open source crypto wallet
-- [Yosemite Crew](https://github.com/YosemiteCrew/Yosemite-Crew) - open source operating system for animal health
-- [Ever Teams](https://github.com/ever-co/ever-teams) - work and productivity platform
-- [THU Info](https://github.com/thu-info-community/thu-info-app) - Tsinghua University campus app
-- [DeFiChain Wallet](https://github.com/BirthdayResearch/defichain-wallet) - DeFiChain light wallet
-- [Ice Network](https://github.com/ice-blockchain/mobile-app) - ice coin mining app
-- [Mapeo Mobile](https://github.com/digidem/mapeo-mobile) - monitor and document the world around you
-- [BC Wallet](https://github.com/bcgov/bc-wallet-mobile) - Government of British Columbia wallet for verifiable credentials
-- [Ambire Wallet](https://github.com/AmbireTech/extension) - Web3 wallet for browser and mobile
-- [Locomotion](https://github.com/Autofleet/locomotion) - open source rider app by Autofleet
-- [SubWallet](https://github.com/Koniverse/SubWallet-Mobile) - wallet for Polkadot, Substrate and Ethereum
-- [Spot the Station](https://github.com/nasa/spotthestation) - NASA app for spotting the International Space Station
-- [Elrax](https://github.com/elrax/elrax) - video crowdfunding platform
-- [Hylo](https://github.com/Hylozoic/hylo) - community coordination platform
+| App | GitHub ⭐ | Google Play installs | App Store ratings |
+| --- | ---: | ---: | ---: |
+| [MetaMask](https://github.com/MetaMask/metamask-mobile) - crypto wallet and browser for Ethereum | 3.1k | 10M+ | 76.7k |
+| [Spot the Station](https://github.com/nasa/spotthestation) - NASA app for spotting the International Space Station | 41 | 500K+ | 10.8k |
+| [SubWallet](https://github.com/Koniverse/SubWallet-Mobile) - wallet for Polkadot, Substrate and Ethereum | 43 | 500K+ | 828 |
+| [OneKey](https://github.com/OneKeyHQ/app-monorepo) - open source crypto wallet | 2.5k | 100K+ | 681 |
+| [BC Wallet](https://github.com/bcgov/bc-wallet-mobile) - Government of British Columbia wallet for verifiable credentials | 86 | 10K+ | 33 (Canada) |
+| [Ambire Wallet](https://github.com/AmbireTech/extension) - Web3 wallet for browser and mobile | 72 | 10K+ | 6 |
+| [Mapeo](https://github.com/digidem/mapeo-mobile) - monitor and document the world around you | 98 | 5K+ | - |
+| [Hylo](https://github.com/Hylozoic/hylo) - community coordination platform | 34 | 5K+ | 11 |
+| [Ever Teams](https://github.com/ever-co/ever-teams) - work and productivity platform | 606 | 100+ | - |
+| [Yosemite Crew](https://github.com/YosemiteCrew/Yosemite-Crew) - open source operating system for animal health | 2k | 50+ | 1 (Germany) |
+
+<sub>Sorted by Google Play installs. Numbers as of November 2026. The App Store doesn't publish download counts, so the number of ratings is shown instead (US store unless noted).</sub>
 
 ## Install
 
