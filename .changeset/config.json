@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "retyui/react-native-confirmation-code-field" }
+  ],
+  "commit": false,
+  "access": "public",
+  "baseBranch": "master"
+}
