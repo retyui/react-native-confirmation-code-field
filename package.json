@@ -7,6 +7,9 @@
     "esm",
     "!__tests__"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "ci": "yarn ts && yarn lint && yarn test && yarn build && yarn size",
     "size": "size-limit",
@@ -17,7 +20,10 @@
     "build": "rm -rf node_modules/@types/react-native && rm -rf esm && tsc --outDir esm && yarn after-build",
     "after-build": "prettier --write esm/*.js esm/*.d.ts",
     "docs": "yarn doctoc API.md",
-    "prepublishOnly": "yarn docs && yarn build"
+    "prepublishOnly": "yarn docs && yarn build",
+    "changeset": "changeset",
+    "version-packages": "changeset version && yarn install --mode=update-lockfile",
+    "release": "yarn build && changeset publish"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
@@ -36,6 +42,8 @@
     "@types/react": "^19.2.14"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
     "@react-native/babel-preset": "^0.84.1",
     "@react-native/eslint-config": "^0.84.1",

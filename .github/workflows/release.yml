@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: corepack enable
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - run: yarn install --immutable
+
+      - name: Create release PR or publish to npm
+        id: changesets
+        uses: changesets/action@v2
+        with:
+          version-script: yarn version-packages
+          publish-script: yarn release
+          commit-message: 'chore: version packages'
+          pr-title: 'chore: version packages'
+          create-github-releases: false
+          push-git-tags: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YARN_NPM_PUBLISH_PROVENANCE: 'true'
+
+      # Tags are the plain version (no `v` prefix), matching existing tags like `9.0.1`.
+      - name: Create GitHub release
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          PREV=$(gh release view --json tagName -q .tagName 2>/dev/null || true)
+
+          # Pull the `## <version>` section out of CHANGELOG.md (stops at the next `#`/`##` heading)
+          awk -v h="## $VERSION" '$0 == h { f = 1; next } f && /^##? / { exit } f' CHANGELOG.md > notes.md
+
+          if [ -n "$PREV" ]; then
+            {
+              echo
+              echo "**Full Changelog**: https://github.com/${GITHUB_REPOSITORY}/compare/${PREV}...${VERSION}"
+              echo
+              echo "**npm diff**: https://npmfs.com/compare/react-native-confirmation-code-field/${PREV}/${VERSION}"
+            } >> notes.md
+          fi
+
+          gh release create "$VERSION" --target "$GITHUB_SHA" --title "$VERSION" --notes-file notes.md
